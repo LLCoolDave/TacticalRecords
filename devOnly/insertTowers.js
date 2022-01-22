@@ -3,7 +3,7 @@ import { towers } from '../src/scripts/wsproxy';
 import prisma from '../lib/prisma';
 
 export default async function fetchTower(req, res) {
-  const towerInsertions = _.map(towers, (val, key) => ({
+  const towerInsertions = _.map(towers, (val) => ({
     id: val.id,
     fullName: val.fullName,
     slot: val.slot,

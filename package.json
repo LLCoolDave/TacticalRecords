@@ -9,8 +9,11 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@auth0/auth0-spa-js": "^1.19.4",
     "@prisma/client": "^3.8.1",
     "core-js": "^3.6.5",
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^2.0.5",
     "lodash": "^4.17.21",
     "prisma": "^3.8.1",
     "vue": "^3.0.0",

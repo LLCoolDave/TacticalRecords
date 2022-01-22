@@ -1,13 +1,18 @@
-import { makeRequest } from './connection';
+import _ from 'lodash';
+import { makeRequest, makeSecuredRequest } from './connection';
 import { players } from './wsproxy';
 
 export async function fetchTowers() {
   return makeRequest('/api/towers');
 }
 
+export async function fetchProfile() {
+  return makeSecuredRequest('/api/profile');
+}
+
 export async function fetchTower(towerId) {
   const towers = await fetchTowers();
-  return towers[towerId];
+  return _.find(towers, ['id', towerId]);
 }
 
 export function fetchRecord(player, tower) {

@@ -2,6 +2,7 @@
   <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/towers">Towers</router-link>
+    <login-status/>
   </div>
   <router-view/>
 </template>

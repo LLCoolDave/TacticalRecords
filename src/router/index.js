@@ -3,6 +3,8 @@ import Towers from '../views/Towers.vue';
 import Tower from '../views/Tower.vue';
 import Home from '../views/Home.vue';
 import Player from '../views/Player.vue';
+import Profile from '../views/Profile.vue';
+import { authenticationGuard } from '../scripts/auth0';
 
 const routes = [
   {
@@ -14,6 +16,12 @@ const routes = [
     path: '/towers',
     name: 'Towers',
     component: Towers,
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
+    beforeEnter: authenticationGuard,
   },
   {
     path: '/tower/:id',
