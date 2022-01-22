@@ -1,0 +1,88 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model Threshold {
+  id        Int    @id @default(autoincrement())
+  tower     Tower  @relation(fields: [towerId], references: [id])
+  towerId   String @unique
+  bronze    Int?
+  silver    Int?
+  gold      Int?
+  platinum  Int?
+  diamond   Int?
+  moon      Int?
+  overscore Int
+}
+
+model Clear {
+  id         Int    @id @default(autoincrement())
+  tower      Tower  @relation(fields: [towerId], references: [id])
+  towerId    String
+  level      Int
+  difficulty Int?
+  volume     Int?
+}
+
+model Tower {
+  id              String     @id @unique
+  fullName        String
+  slot            Int        @unique
+  chapter         Int
+  ingameId        Int?       @unique
+  hasMysticGate   Boolean
+  hasLastInflator Boolean
+  thresholds      Threshold?
+  clears          Clear[]
+  runs            Run[]
+}
+
+model Player {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  runs Run[]
+}
+
+model ResourceUse {
+  id       Int  @id @default(autoincrement())
+  run      Run  @relation(fields: [runId], references: [id])
+  runId    Int  @unique
+  atk      Int?
+  def      Int?
+  hp       Int?
+  bronze   Int?
+  silver   Int?
+  gold     Int?
+  platinum Int?
+  diamond  Int?
+  moon     Int?
+}
+
+model Run {
+  id           Int          @id @default(autoincrement())
+  player       Player       @relation(fields: [playerId], references: [id])
+  playerId     Int
+  tower        Tower        @relation(fields: [towerId], references: [id])
+  towerId      String
+  time         DateTime     @updatedAt
+  score        Int
+  pure         Boolean
+  impure       Boolean
+  mysticGate   Boolean
+  lastInflator Boolean
+  hp           Int?
+  atk          Int?
+  def          Int?
+  hpMulti      Int?
+  expMulti     Int?
+  resourceUse  ResourceUse?
+  sunstones    Int
+}

@@ -1,10 +1,12 @@
-import { towers, players } from './wsproxy';
+import { makeRequest } from './connection';
+import { players } from './wsproxy';
 
-export function fetchTowers() {
-  return towers;
+export async function fetchTowers() {
+  return makeRequest('/api/towers');
 }
 
-export function fetchTower(towerId) {
+export async function fetchTower(towerId) {
+  const towers = await fetchTowers();
   return towers[towerId];
 }
 

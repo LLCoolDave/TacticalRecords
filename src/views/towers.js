@@ -7,8 +7,8 @@ export default {
     // this should probably be vuex
     towers: {},
   }),
-  created() {
-    const allTowers = fetchTowers();
+  async created() {
+    const allTowers = await fetchTowers();
     _.each(allTowers, (val) => {
       this.towers[val.id] = val;
     });

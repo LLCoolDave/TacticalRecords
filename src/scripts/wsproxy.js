@@ -619,7 +619,7 @@ export const towers = {
     id: 'dawn',
     fullName: 'Dawn Tactical palace',
     ingameId: null,
-    slot: 14,
+    slot: 27,
     chapter: 4,
     unlocks: {
       mysticGate: false,

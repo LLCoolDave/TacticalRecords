@@ -10,10 +10,10 @@ export default {
   }),
   props: ['id'],
   async created() {
-    this.towers = fetchTowers();
+    this.towers = await fetchTowers();
     this.name = this.id; // TODO player metadata
-    _.each(this.towers, (val, key) => {
-      this.records[key] = fetchRecord(this.id, key);
+    _.each(this.towers, (val) => {
+      this.records[val.id] = fetchRecord(this.id, val.id);
     });
   },
 };

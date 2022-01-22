@@ -17,9 +17,9 @@ export function getMaxMedal(towerData) {
   let medal = null;
   let threshold = 0;
   _.each(medalNames, (name) => {
-    if (towerData.medals[name] !== undefined) {
+    if (towerData.thresholds[name]) {
       medal = name;
-      threshold = towerData.medals[name];
+      threshold = towerData.thresholds[name];
     }
   });
   return { name: medal, threshold };
@@ -29,8 +29,9 @@ export function calcRewards(score, towerData, pure = false) {
   let medal = null;
   let sunstones = 0;
   let toNext = 0;
-  _.each(towerData.medals, (threshold, name) => {
-    if (score >= threshold) medal = name;
+  _.each(towerData.thresholds, (threshold, name) => {
+    if (name === 'overscore') return; // bit ugly, but since we store medals and overscores in the same array...
+    if (threshold && score >= threshold) medal = name;
   });
   const maxMedal = getMaxMedal(towerData);
 
@@ -39,13 +40,13 @@ export function calcRewards(score, towerData, pure = false) {
   /* If we are above the max medal, can overscore */
   if (medal === maxMedal.name) {
     const overscore = score - maxMedal.threshold;
-    const overscoreStones = Math.floor(overscore / towerData.overscore);
+    const overscoreStones = Math.floor(overscore / towerData.thresholds.overscore);
     sunstones += overscoreStones;
     /* calc gap to next sunstone */
-    toNext = towerData.overscore * (overscoreStones + 1) - overscore;
+    toNext = towerData.thresholds.overscore * (overscoreStones + 1) - overscore;
   } else {
     /* calc gap to next medal */
-    toNext = towerData.medals[medalNames[_.indexOf(medalNames, medal) + 1]] - score;
+    toNext = towerData.thresholds[medalNames[_.indexOf(medalNames, medal) + 1]] - score;
   }
 
   return { medal, sunstones, toNext };

@@ -7,6 +7,6 @@ export default {
   }),
   props: ['id'],
   async created() {
-    this.towerData = fetchTower(this.id);
+    this.towerData = await fetchTower(this.id);
   },
 };
