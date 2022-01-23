@@ -12,14 +12,14 @@
   <div class="stats">
     Final Stats:
     <div>
-      ATK {{this.runData.atk}}
-      DEF {{this.runData.def}}
-      HP {{this.runData.hp}}
+      <stat-icon stat="atk"/> {{this.runData.atk}}
+      <stat-icon stat="def"/> {{this.runData.def}}
+      <stat-icon stat="hp"/> {{this.runData.hp}}
     </div>
     <div>
-      LVL {{this.runData.lvl}}
-      HP% {{this.runData.hpMulti}}
-      EXP% {{this.runData.expMulti}}
+      <stat-icon stat="lvl"/> {{this.runData.level}}
+      <stat-icon stat="hpmulti"/> {{this.runData.hpMulti}}%
+      <stat-icon stat="expmulti"/> {{this.runData.expMulti}}%
     </div>
   </div>
   <div class="resources">
@@ -30,9 +30,9 @@
     <div class="sunstones">
       <img src="../assets/sunstone.png">{{this.runData.resourceUse.sunstones}}
       (
-        ATK: {{this.runData.resourceUse.atk}}
-        DEF: {{this.runData.resourceUse.def}}
-        HP: {{this.runData.resourceUse.hp}}
+        <stat-icon stat="atk"/> {{this.runData.resourceUse.atk}}
+        <stat-icon stat="def"/> {{this.runData.resourceUse.def}}
+        <stat-icon stat="hp"/> {{this.runData.resourceUse.hp}}
         )
     </div>
     <div class="medals">

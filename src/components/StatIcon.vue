@@ -3,14 +3,14 @@
 </template>
 
 <script>
-import { getMedalURI } from '../scripts/resources';
+import { getStatURI } from '../scripts/resources';
 
 export default {
-  name: 'MedalIcon',
-  props: ['medal'],
+  name: 'StatIcon',
+  props: ['stat'],
   computed: {
     iconRef() {
-      return getMedalURI(this.medal);
+      return getStatURI(this.stat);
     },
   },
 };

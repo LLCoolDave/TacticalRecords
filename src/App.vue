@@ -1,12 +1,20 @@
 <template>
+<div id="main">
   <div id="nav">
-    <router-link to="/records">Records</router-link> |
-    <router-link to="/players">Players</router-link> |
-    <router-link to="/towers">Towers</router-link>
-    <router-link to="/run/new" v-if="this.$store.state.userProfile"> | Submit Run</router-link>
-    <login-status/>
+    <div id="links">
+      <router-link to="/records">Records</router-link> |
+      <router-link to="/players">Players</router-link> |
+      <router-link to="/towers">Towers</router-link>
+      <router-link to="/run/new" v-if="this.$store.state.userProfile"> | Submit Run</router-link>
+    </div>
+    <div id="status">
+      <login-status/>
+    </div>
   </div>
-  <router-view/>
+  <div id="body">
+    <router-view/>
+  </div>
+</div>
 </template>
 
 <script>
@@ -34,10 +42,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background: #bebbbb;
 }
 
 #nav {
   padding: 30px;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 #nav a {
@@ -45,7 +58,27 @@ export default {
   color: #2c3e50;
 }
 
+a, a:visited {
+  color: blue;
+}
+
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+#main  {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  height: 100%;
+}
+
+body {
+  margin: 0px;
 }
 </style>

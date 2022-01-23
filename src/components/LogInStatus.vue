@@ -1,8 +1,10 @@
 <template>
   <div class="loginStatus" v-if="!$auth.state.loading">
-    <router-link to="/profile" v-if="profile"><img :src="pfp" v-if="pfp" width="24" height="24"/>{{ name }}</router-link>
-    <LogoutButton v-if="$auth.state.isAuthenticated" />
-    <LoginButton v-else />
+    <div v-if="profile"><player-display :player="player" :route="'/profile'"/></div>
+    <div>
+      <LogoutButton v-if="$auth.state.isAuthenticated" />
+      <LoginButton v-else />
+    </div>
   </div>
 </template>
 
@@ -18,15 +20,17 @@ export default {
     profile() {
       return this.$store.state.userProfile;
     },
-    pfp() {
-      return this.profile?.player?.pfp;
-    },
-    name() {
-      return this.profile?.player?.name;
+    player() {
+      return this.profile?.player;
     },
   },
 };
 </script>
 
-<style lang="scss">
+<style scoped>
+.loginStatus {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 </style>

@@ -15,14 +15,14 @@
   <div class="stats">
     Final Stats:
     <div>
-      ATK <input type="number" v-model="atk" min="0" max="1000000">
-      DEF <input type="number" v-model="def" min="0" max="1000000">
-      HP <input type="number" v-model="hp" min="0" max="1000000000">
+      <stat-icon stat="atk"/> <input type="number" v-model="atk" min="0" max="1000000">
+      <stat-icon stat="def"/> <input type="number" v-model="def" min="0" max="1000000">
+      <stat-icon stat="hp"/> <input type="number" v-model="hp" min="0" max="1000000000">
     </div>
     <div>
-      LVL <input type="number" v-model="lvl" min="0" max="500">
-      HP% <input type="number" v-model="hpMulti" min="0" max="100000">
-      EXP% <input type="number" v-model="expMulti" min="0" max="100000">
+      <stat-icon stat="lvl"/> <input type="number" v-model="lvl" min="0" max="500">
+      <stat-icon stat="hpmulti"/> <input type="number" v-model="hpMulti" min="0" max="100000">
+      <stat-icon stat="expmulti"/> <input type="number" v-model="expMulti" min="0" max="100000">
     </div>
   </div>
   <div class="resources">
@@ -33,9 +33,9 @@
     <div class="sunstones">
       <img src="../assets/sunstone.png">
       <input type="number" v-model="resourcesUsed.sunstones" min="0" max="100000" @change="calcSunstonesUsed"> (
-        ATK: <input type="number" v-model="resourcesUsed.atk" min="0" max="100000" @change="calcSunstonesUsed">
-        DEF: <input type="number" v-model="resourcesUsed.def" min="0" max="100000" @change="calcSunstonesUsed">
-        HP: <input type="number" v-model="resourcesUsed.hp" min="0" max="100000" @change="calcSunstonesUsed">
+        <stat-icon stat="atk"/> <input type="number" v-model="resourcesUsed.atk" min="0" max="100000" @change="calcSunstonesUsed">
+        <stat-icon stat="def"/> <input type="number" v-model="resourcesUsed.def" min="0" max="100000" @change="calcSunstonesUsed">
+        <stat-icon stat="hp"/> <input type="number" v-model="resourcesUsed.hp" min="0" max="100000" @change="calcSunstonesUsed">
         )
     </div>
     <div class="medals">

@@ -1,19 +1,19 @@
 <template>
   <div class="records" v-if="hasLoaded">
-    <table>
+    <table class="table">
     <tr>
-      <th>Tower</th>
-      <th>Impure</th>
-      <th>Pure</th>
+      <th class="element">Tower</th>
+      <th class="element">Impure</th>
+      <th class="element">Pure</th>
     </tr>
     <tr v-for="tower in towers" :key="tower.id">
-      <td><router-link :to="'/tower/' + tower.id">{{tower.fullName}}</router-link></td>
-      <td>
+      <td class="element"><router-link :to="'/tower/' + tower.id">{{tower.fullName}}</router-link></td>
+      <td class="element">
         <router-link :to="'/run/' + impureRecords[tower.id].id" v-if="tower.id in impureRecords">
           <player-score :score="impureRecords[tower.id].score" :player="impureRecords[tower.id].player" :pure="false" :towerData="tower"/>
         </router-link>
       </td>
-      <td>
+      <td class="element">
         <router-link :to="'/run/' + pureRecords[tower.id].id" v-if="tower.id in pureRecords">
           <player-score :score="pureRecords[tower.id].score" :player="pureRecords[tower.id].player" :pure="true" :towerData="tower"/>
         </router-link>
@@ -26,5 +26,21 @@
 <script src="./records.js">
 </script>
 
-<style lang="scss">
+<style scoped>
+.records {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.table {
+  height: 100%;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.element {
+  border: 1px solid black;
+  padding: 8px;
+}
 </style>
