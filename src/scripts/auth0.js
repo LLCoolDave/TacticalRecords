@@ -160,12 +160,10 @@ export const authenticationGuard = (to, from, next) => {
     return guardAction();
   }
 
-  watch(() => authService.state.loading, (loading) => {
+  return watch(() => authService.state.loading, (loading) => {
     if (loading === false) {
       return guardAction();
     }
     return null;
-  });
-
-  return null;
+  })();
 };

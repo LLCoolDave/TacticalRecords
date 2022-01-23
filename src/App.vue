@@ -1,11 +1,31 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
+    <router-link to="/records">Records</router-link> |
+    <router-link to="/players">Players</router-link> |
     <router-link to="/towers">Towers</router-link>
+    <router-link to="/run/new" v-if="this.$store.state.userProfile"> | Submit Run</router-link>
     <login-status/>
   </div>
   <router-view/>
 </template>
+
+<script>
+import { watch } from 'vue';
+import { AuthState } from './scripts/auth0';
+
+export default {
+  name: 'App',
+  created() {
+    watch(() => AuthState.isAuthenticated, (isAuthenticated) => {
+      if (isAuthenticated === true) {
+        this.$store.dispatch('loadProfile');
+      }
+      return null;
+    });
+    this.$store.dispatch('fetchTowers');
+  },
+};
+</script>
 
 <style>
 #app {

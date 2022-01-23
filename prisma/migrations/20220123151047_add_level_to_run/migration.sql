@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Run` ADD COLUMN `level` INTEGER NULL;

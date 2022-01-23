@@ -1,6 +1,6 @@
 <template>
   <div class="score">
-    {{score.toLocaleString()}} <medal-icon :medal="medal"/> <img src="../assets/sunstone.png">{{sunstones}}
+    <i v-if="!hideScore">{{score.toLocaleString()}}</i><medal-icon :medal="medal"/> <img src="../assets/sunstone.png">{{sunstones}}
   </div>
 </template>
 
@@ -9,7 +9,7 @@ import { calcRewards } from '../scripts/tower';
 
 export default {
   name: 'Score',
-  props: ['score', 'towerData', 'pure'],
+  props: ['score', 'towerData', 'pure', 'hideScore'],
   computed: {
     rewards() {
       return calcRewards(this.score, this.towerData, this.pure);

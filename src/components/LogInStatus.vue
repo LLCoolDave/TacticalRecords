@@ -1,6 +1,6 @@
 <template>
   <div class="loginStatus" v-if="!$auth.state.loading">
-    <router-link to="/profile" v-if="$auth.state.isAuthenticated">{{ $auth.state.user.name }}</router-link>
+    <router-link to="/profile" v-if="profile"><img :src="pfp" v-if="pfp" width="24" height="24"/>{{ name }}</router-link>
     <LogoutButton v-if="$auth.state.isAuthenticated" />
     <LoginButton v-else />
   </div>
@@ -14,6 +14,17 @@ export default {
   name: 'LogInStatus',
   inject: ['$auth'],
   components: { LogoutButton, LoginButton },
+  computed: {
+    profile() {
+      return this.$store.state.userProfile;
+    },
+    pfp() {
+      return this.profile?.player?.pfp;
+    },
+    name() {
+      return this.profile?.player?.name;
+    },
+  },
 };
 </script>
 

@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import TowerScore from './components/TowerScore.vue';
+import PlayerScore from './components/PlayerScore.vue';
 import MedalIcon from './components/MedalIcon.vue';
 import LogInStatus from './components/LogInStatus.vue';
 
@@ -30,5 +31,6 @@ app.use(Auth0Plugin, {
 app.component('tower-score', TowerScore);
 app.component('medal-icon', MedalIcon);
 app.component('login-status', LogInStatus);
+app.component('player-score', PlayerScore);
 
 app.mount('#app');

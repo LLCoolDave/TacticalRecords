@@ -1,12 +1,20 @@
-import { fetchTower } from '../scripts/api';
+import { fetchTowerRuns } from '../scripts/api';
 
 export default {
   name: 'TowerView',
-  data: () => ({
-    towerData: {},
-  }),
   props: ['id'],
+  data: () => ({
+    pureRuns: [],
+    impureRuns: [],
+  }),
+  computed: {
+    towerData() {
+      return this.$store.state.towers?.[this.id];
+    },
+  },
   async created() {
-    this.towerData = await fetchTower(this.id);
+    const towerRuns = await fetchTowerRuns(this.id);
+    this.pureRuns = towerRuns.filter((run) => (run.pure));
+    this.impureRuns = towerRuns.filter((run) => (run.impure));
   },
 };

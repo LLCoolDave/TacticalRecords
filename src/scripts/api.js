@@ -1,6 +1,7 @@
 import _ from 'lodash';
-import { makeRequest, makeSecuredRequest } from './connection';
-import { players } from './wsproxy';
+import {
+  makeRequest, makeSecuredRequest, makeSecuredPutRequest, makeSecuredPostRequest, makeSecuredDeleteRequest,
+} from './connection';
 
 export async function fetchTowers() {
   return makeRequest('/api/towers');
@@ -15,23 +16,38 @@ export async function fetchTower(towerId) {
   return _.find(towers, ['id', towerId]);
 }
 
-export function fetchRecord(player, tower) {
-  const playerRecords = players?.[player].records?.[tower];
-  if (playerRecords) {
-    /* do some calculations */
-    let impure = 0;
-    let pure = 0;
+export async function updateProfile(changes) {
+  return makeSecuredPutRequest('/api/profile', changes);
+}
 
-    if (playerRecords?.impure) impure = playerRecords.impure;
-    if (playerRecords?.pure) {
-      pure = playerRecords.pure;
-      if (pure > impure) impure = pure;
-    }
-    if (playerRecords?.mysticGate) {
-      if (playerRecords.mysticGate > pure) pure = playerRecords.mysticGate;
-    }
+export async function updateRun(id, data) {
+  return makeSecuredPutRequest(`/api/runs/${id}`, data);
+}
 
-    return { impure, pure };
-  }
-  return undefined;
+export async function deleteRun(id) {
+  return makeSecuredDeleteRequest(`/api/runs/${id}`);
+}
+
+export async function postRun(data) {
+  return makeSecuredPostRequest('/api/runs/', data);
+}
+
+export async function fetchRun(id) {
+  return makeRequest(`/api/runs/${id}`);
+}
+
+export async function fetchGlobalRecords() {
+  return makeRequest('/api/records');
+}
+
+export async function fetchPlayerRecords(id) {
+  return makeRequest(`/api/records/player/${id}`);
+}
+
+export async function fetchPlayers() {
+  return makeRequest('/api/players');
+}
+
+export async function fetchTowerRuns(id) {
+  return makeRequest(`/api/runs/tower/${id}`);
 }

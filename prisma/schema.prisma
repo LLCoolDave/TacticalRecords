@@ -45,25 +45,65 @@ model Tower {
   runs            Run[]
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id           Int     @id @default(autoincrement())
+  role         Role    @default(USER)
+  authPassword String? @unique
+  authDiscord  String? @unique
+  authGoogle   String? @unique
+  player       Player?
+
+  @@index([authDiscord, authGoogle, authPassword])
+}
+
 model Player {
-  id   Int    @id @default(autoincrement())
-  name String @unique
-  runs Run[]
+  id        Int     @id
+  user      User    @relation(fields: [id], references: [id])
+  name      String  @unique
+  pfp       String? @db.Text
+  sunstones Int     @default(0)
+  bronze    Int     @default(0)
+  silver    Int     @default(0)
+  gold      Int     @default(0)
+  platinum  Int     @default(0)
+  diamond   Int     @default(0)
+  moon      Int     @default(0)
+  runs      Run[]
+
+  @@index([sunstones])
 }
 
 model ResourceUse {
-  id       Int  @id @default(autoincrement())
-  run      Run  @relation(fields: [runId], references: [id])
-  runId    Int  @unique
-  atk      Int?
-  def      Int?
-  hp       Int?
-  bronze   Int?
-  silver   Int?
-  gold     Int?
-  platinum Int?
-  diamond  Int?
-  moon     Int?
+  id        Int  @id @default(autoincrement())
+  run       Run  @relation(fields: [runId], references: [id])
+  runId     Int  @unique
+  atk       Int?
+  def       Int?
+  hp        Int?
+  sunstones Int  @default(0)
+  bronze    Int?
+  silver    Int?
+  gold      Int?
+  platinum  Int?
+  diamond   Int?
+  moon      Int?
+
+  @@index([sunstones, runId])
+}
+
+enum Medal {
+  NONE
+  BRONZE
+  SILVER
+  GOLD
+  PLATINUM
+  DIAMOND
+  MOON
 }
 
 model Run {
@@ -73,6 +113,8 @@ model Run {
   tower        Tower        @relation(fields: [towerId], references: [id])
   towerId      String
   time         DateTime     @updatedAt
+  comment      String?      @db.Text
+  screenshot   String?      @db.Text
   score        Int
   pure         Boolean
   impure       Boolean
@@ -83,6 +125,15 @@ model Run {
   def          Int?
   hpMulti      Int?
   expMulti     Int?
+  level        Int?
   resourceUse  ResourceUse?
   sunstones    Int
+  medal        Medal
+
+  @@index([playerId, towerId, score, sunstones, medal])
+}
+
+model CacheValid {
+  id          String   @id
+  lastUpdated DateTime @updatedAt
 }

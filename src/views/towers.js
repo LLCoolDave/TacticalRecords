@@ -1,16 +1,10 @@
 import _ from 'lodash';
-import { fetchTowers } from '../scripts/api';
 
 export default {
   name: 'TowersView',
-  data: () => ({
-    // this should probably be vuex
-    towers: {},
-  }),
-  async created() {
-    const allTowers = await fetchTowers();
-    _.each(allTowers, (val) => {
-      this.towers[val.id] = val;
-    });
+  computed: {
+    towers() {
+      return _.map(this.$store.state.towerOrder, (id) => this.$store.state.towers?.[id]);
+    },
   },
 };

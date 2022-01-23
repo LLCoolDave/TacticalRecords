@@ -1,24 +1,21 @@
 import _ from 'lodash';
-import { fetchPlayerRecords } from '../scripts/api';
+import { fetchGlobalRecords } from '../scripts/api';
 
 export default {
-  name: 'PlayerView',
+  name: 'RecordsView',
   data: () => ({
     hasLoaded: false,
-    player: null,
     pureRecords: null,
     impureRecords: null,
   }),
-  props: ['id'],
   async created() {
-    const playerRecords = await fetchPlayerRecords(this.id);
-    this.player = playerRecords.player;
-    this.pureRecords = playerRecords.pure.reduce((obj, item) => {
+    const globalRecords = await fetchGlobalRecords();
+    this.pureRecords = globalRecords.pure.reduce((obj, item) => {
       // eslint-disable-next-line no-param-reassign
       obj[item.towerId] = item;
       return obj;
     }, {});
-    this.impureRecords = playerRecords.impure.reduce((obj, item) => {
+    this.impureRecords = globalRecords.impure.reduce((obj, item) => {
       // eslint-disable-next-line no-param-reassign
       obj[item.towerId] = item;
       return obj;
