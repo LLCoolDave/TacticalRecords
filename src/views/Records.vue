@@ -15,7 +15,7 @@
       </td>
       <td>
         <router-link :to="'/run/' + pureRecords[tower.id].id" v-if="tower.id in pureRecords">
-          <player-score :score="pureRecords[tower.id].score" :player="impureRecords[tower.id].player" :pure="true" :towerData="tower"/>
+          <player-score :score="pureRecords[tower.id].score" :player="pureRecords[tower.id].player" :pure="true" :towerData="tower"/>
         </router-link>
       </td>
     </tr>
