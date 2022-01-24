@@ -26,5 +26,8 @@ export default {
     towers() {
       return _.map(this.$store.state.towerOrder, (id) => this.$store.state.towers?.[id]);
     },
+    stoneTotals() {
+      return { pure: _.reduce(this.pureRecords, (a, b) => a + b.sunstones, 0), impure: _.reduce(this.impureRecords, (a, b) => a + b.sunstones, 0) };
+    },
   },
 };

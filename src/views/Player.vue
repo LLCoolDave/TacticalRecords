@@ -3,12 +3,7 @@
     <div class="name"><img :src="player?.pfp" v-if="player?.pfp" width="32" height="32"/> {{ player?.name }}</div>
     <div class="meta">
       <tn-icon icon="sunstone"/>{{player.sunstones}}
-      <tn-icon icon="bronze" v-for="index in player.bronze" :key="index"/>
-      <tn-icon icon="silver" v-for="index in player.silver" :key="index"/>
-      <tn-icon icon="gold" v-for="index in player.gold" :key="index"/>
-      <tn-icon icon="platinum" v-for="index in player.platinum" :key="index"/>
-      <tn-icon icon="diamond" v-for="index in player.diamond" :key="index"/>
-      <tn-icon icon="moon" v-for="index in player.moon" :key="index"/>
+      <medal-row :medals="player"/>
     </div>
     <div class="tables">
       <table class="table">

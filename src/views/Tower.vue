@@ -1,6 +1,18 @@
 <template>
   <div class="tower">
     <div class="name">{{towerData?.fullName}}</div>
+    <div class="towerThresholds" v-if="towerData">
+      <table>
+        <tr v-for="(value, icon) in thresholds" :key="icon">
+          <td class="rightAlign">
+            <tn-icon :icon="icon" size="large"/>
+          </td>
+          <td class="rightAlign">
+            {{value}}
+          </td>
+        </tr>
+      </table>
+    </div>
     <div class="tables">
       <table class="table">
       <tr>
@@ -50,5 +62,10 @@
 .element {
   border: 1px solid black;
   padding: 8px;
+}
+.towerThresholds {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 </style>

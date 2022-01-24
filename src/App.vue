@@ -5,7 +5,7 @@
       <router-link to="/records">Records</router-link> |
       <router-link to="/players">Players</router-link> |
       <router-link to="/towers">Towers</router-link>
-      <router-link to="/run/new" v-if="this.$store.state.userProfile"> | Submit Run</router-link>
+      <template v-if="this.$store.state.userProfile"> | <router-link to="/run/new" >Submit Run</router-link></template>
     </div>
     <div id="status">
       <login-status/>

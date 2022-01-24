@@ -7,6 +7,7 @@ import PlayerScore from './components/PlayerScore.vue';
 import PlayerDisplay from './components/PlayerDisplay.vue';
 import TNIcon from './components/TNIcon.vue';
 import LogInStatus from './components/LogInStatus.vue';
+import MedalRow from './components/MedalRow.vue';
 
 import { Auth0Plugin } from './scripts/auth0';
 
@@ -34,5 +35,6 @@ app.component('tn-icon', TNIcon);
 app.component('login-status', LogInStatus);
 app.component('player-score', PlayerScore);
 app.component('player-display', PlayerDisplay);
+app.component('medal-row', MedalRow);
 
 app.mount('#app');

@@ -1,5 +1,5 @@
 <template>
-  <div class="score">
+  <div class="center">
     <tn-icon icon="mysticgate" size="small" v-if="runData?.mysticGate"/>
     <template v-if="showScore">{{`${this.runData?.score || 0}`.toLocaleString()}}</template>
     <tn-icon :icon="medal.toLowerCase()" size="small"/>
@@ -40,5 +40,11 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped>
+.center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
 </style>

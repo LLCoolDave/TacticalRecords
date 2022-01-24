@@ -1,5 +1,5 @@
 <template>
-  <div class="score">
+  <div class="align">
     <player-display :player="player"/>
     <tower-score v-bind="$props"/>
   </div>
@@ -16,5 +16,11 @@ export default
 };
 </script>
 
-<style lang="scss">
+<style scoped>
+.align {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 </style>

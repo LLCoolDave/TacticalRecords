@@ -1,10 +1,16 @@
 <template>
   <div class="records" v-if="hasLoaded">
+    <div>Total: <tn-icon icon="sunstone"/>{{stoneTotals.pure + stoneTotals.impure}}</div>
     <table class="table">
     <tr>
       <th class="element">Tower</th>
       <th class="element">Impure</th>
       <th class="element">Pure</th>
+    </tr>
+    <tr>
+      <td class="element">Totals:</td>
+      <td class="element"><tn-icon icon="sunstone"/>{{stoneTotals.impure}}</td>
+      <td class="element"><tn-icon icon="sunstone"/>{{stoneTotals.pure}}</td>
     </tr>
     <tr v-for="tower in towers" :key="tower.id">
       <td class="element"><router-link :to="'/tower/' + tower.id">{{tower.fullName}}</router-link></td>
@@ -29,15 +35,15 @@
 <style scoped>
 .records {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  width: 100%;
   height: 100%;
 }
 .table {
   height: 100%;
   border: 1px solid black;
   border-collapse: collapse;
+  margin: auto;
 }
 .element {
   border: 1px solid black;

@@ -11,13 +11,18 @@ export default async function fetchTowerRuns(req, res) {
           where: {
             towerId: tower,
           },
-          orderBy: [{ sunstones: 'desc' }, { resourceUse: { sunstones: 'asc' } }],
+          orderBy: [{ sunstones: 'desc' }, { resourceUse: { sunstones: 'asc' } }, { score: 'desc' }],
           include: {
             player: {
               select: {
                 id: true,
                 name: true,
                 pfp: true,
+              },
+            },
+            resourceUse: {
+              select: {
+                sunstones: true,
               },
             },
           },

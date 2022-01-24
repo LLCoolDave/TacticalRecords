@@ -1,5 +1,5 @@
 <template>
-<div v-if="hasLoaded">
+<div v-if="hasLoaded" class="wrapper">
   <div class="player">
     <img :src="player?.pfp" v-if="player?.pfp" width="32" height="32"/> {{ player?.name }}
   </div>
@@ -22,8 +22,8 @@
     </div>
     <div>
       <tn-icon icon="lvl"/> <input type="number" v-model="lvl" min="0" max="500">
-      <tn-icon icon="hpmulti"/> <input type="number" v-model="hpMulti" min="0" max="100000">
-      <tn-icon icon="expmulti"/> <input type="number" v-model="expMulti" min="0" max="100000">
+      <tn-icon icon="crown"/> <input type="number" v-model="hpMulti" min="0" max="100000">
+      <tn-icon icon="feather"/> <input type="number" v-model="expMulti" min="0" max="100000">
     </div>
   </div>
   <div class="resources">
@@ -46,19 +46,68 @@
       <tn-icon icon="moon"/><input type="number" v-model="resourcesUsed.moon" min="0" max="20">
     </div>
   </div>
-  <div class="comment">Comment: <textarea cols="80" rows="8" v-model="comment"/></div>
+  <div class="comment">Comment: <div><textarea cols="80" rows="8" v-model="comment"/></div></div>
   <div class="screenshot">
-    ClearScreenshot: <input type="text" v-model="screenshot" size="40" maxlength="400">
-    <img :src="screenshot" v-if="screenshot" width="640" height="480"/>
+    Clear Screenshot: <input type="text" v-model="screenshot" size="40" maxlength="400">
+    <div>
+      <img :src="screenshot" v-if="screenshot" width="640" height="480"/>
+    </div>
   </div>
-
-  <div><input type="button" @click="submit" :value="buttonText" :disabled="!canSubmit"/></div>
-  <div v-if="isEdit"><input type="button" @click="deleteCurrentRun" value="Delete Run" :disabled="isUpdating"/> Are you sure? <input type="checkbox" v-model="deleteConfirm"/></div>
+  <div class="buttons">
+    <div><input type="button" @click="submit" :value="buttonText" :disabled="!canSubmit"/></div>
+    <div v-if="isEdit"><input type="button" @click="deleteCurrentRun" value="Delete Run" :disabled="isUpdating"/> Are you sure? <input type="checkbox" v-model="deleteConfirm"/></div>
+  </div>
 </div>
 </template>
 
 <script src="./runedit.js">
 </script>
 
-<style lang="scss">
+<style scoped>
+.wrapper {
+  display: grid;
+  grid-template-areas: 'name screenshot'
+                       'tower screenshot'
+                       'score screenshot'
+                       'stats screenshot'
+                       'resources screenshot'
+                       'comment screenshot'
+                       'buttons buttons';
+  justify-content: center;
+}
+
+.player {
+  grid-area: name;
+}
+
+.tower {
+  grid-area: tower;
+}
+
+.score {
+  grid-area: score;
+}
+
+.stats {
+  grid-area: stats;
+}
+
+.resources {
+  grid-area: resources;
+}
+
+.screenshot {
+  grid-area: screenshot;
+}
+
+.buttons {
+  grid-area: buttons;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.comment {
+  grid-area: comment;
+}
 </style>
