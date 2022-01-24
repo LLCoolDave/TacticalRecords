@@ -10,12 +10,12 @@
       <td class="element"><router-link :to="'/tower/' + tower.id">{{tower.fullName}}</router-link></td>
       <td class="element">
         <router-link :to="'/run/' + impureRecords[tower.id].id" v-if="tower.id in impureRecords">
-          <player-score :score="impureRecords[tower.id].score" :player="impureRecords[tower.id].player" :pure="false" :towerData="tower"/>
+          <player-score :runData="impureRecords[tower.id]" :player="impureRecords[tower.id].player" :pure="false" :towerData="tower"/>
         </router-link>
       </td>
       <td class="element">
         <router-link :to="'/run/' + pureRecords[tower.id].id" v-if="tower.id in pureRecords">
-          <player-score :score="pureRecords[tower.id].score" :player="pureRecords[tower.id].player" :pure="true" :towerData="tower"/>
+          <player-score :runData="pureRecords[tower.id]" :player="pureRecords[tower.id].player" :towerData="tower"/>
         </router-link>
       </td>
     </tr>

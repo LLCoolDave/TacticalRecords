@@ -2,13 +2,13 @@
   <div class="player" v-if="hasLoaded">
     <div class="name"><img :src="player?.pfp" v-if="player?.pfp" width="32" height="32"/> {{ player?.name }}</div>
     <div class="meta">
-      <img src="../assets/sunstone.png"/>{{player.sunstones}}
-      <medal-icon medal="bronze" v-for="index in player.bronze" :key="index"/>
-      <medal-icon medal="silver" v-for="index in player.silver" :key="index"/>
-      <medal-icon medal="gold" v-for="index in player.gold" :key="index"/>
-      <medal-icon medal="platinum" v-for="index in player.platinum" :key="index"/>
-      <medal-icon medal="diamond" v-for="index in player.diamond" :key="index"/>
-      <medal-icon medal="moon" v-for="index in player.moon" :key="index"/>
+      <tn-icon icon="sunstone"/>{{player.sunstones}}
+      <tn-icon icon="bronze" v-for="index in player.bronze" :key="index"/>
+      <tn-icon icon="silver" v-for="index in player.silver" :key="index"/>
+      <tn-icon icon="gold" v-for="index in player.gold" :key="index"/>
+      <tn-icon icon="platinum" v-for="index in player.platinum" :key="index"/>
+      <tn-icon icon="diamond" v-for="index in player.diamond" :key="index"/>
+      <tn-icon icon="moon" v-for="index in player.moon" :key="index"/>
     </div>
     <div class="tables">
       <table class="table">
@@ -21,12 +21,12 @@
         <td class="element"><router-link :to="'/tower/' + tower.id">{{tower.fullName}}</router-link></td>
         <td class="element">
           <router-link :to="'/run/' + impureRecords[tower.id].id" v-if="tower.id in impureRecords">
-            <tower-score :score="impureRecords[tower.id].score" :pure="false" :towerData="tower"/>
+            <tower-score :runData="impureRecords[tower.id]" :towerData="tower"/>
           </router-link>
         </td>
         <td class="element">
           <router-link :to="'/run/' + pureRecords[tower.id].id" v-if="tower.id in pureRecords">
-            <tower-score :score="pureRecords[tower.id].score" :pure="true" :towerData="tower"/>
+            <tower-score :runData="pureRecords[tower.id]" :towerData="tower"/>
           </router-link>
         </td>
       </tr>

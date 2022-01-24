@@ -1,7 +1,7 @@
 <template>
   <div class="score">
     <player-display :player="player"/>
-    <tower-score :score="score" :towerData="towerData" :pure="pure"/>
+    <tower-score v-bind="$props"/>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default
 {
   components: { PlayerDisplay },
   name: 'PlayerScore',
-  props: ['score', 'towerData', 'pure', 'player'],
+  props: ['runData', 'towerData', 'player', 'pure'],
 };
 </script>
 

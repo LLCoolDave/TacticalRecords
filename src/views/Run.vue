@@ -7,41 +7,38 @@
     {{ this.tower.fullName }}
   </div>
   <div class="score">
-    <tower-score v-if="tower" :score="this.runData.score" :pure="this.runData.pure" :towerData="tower"/>
+    <tower-score v-if="tower" :runData="this.runData" :towerData="tower" :hideStonesUsed="true"/>
   </div>
   <div class="stats">
     Final Stats:
     <div>
-      <stat-icon stat="atk"/> {{this.runData.atk}}
-      <stat-icon stat="def"/> {{this.runData.def}}
-      <stat-icon stat="hp"/> {{this.runData.hp}}
+      <tn-icon icon="atk"/> {{this.runData.atk}}
+      <tn-icon icon="def"/> {{this.runData.def}}
+      <tn-icon icon="hp"/> {{this.runData.hp}}
     </div>
     <div>
-      <stat-icon stat="lvl"/> {{this.runData.level}}
-      <stat-icon stat="hpmulti"/> {{this.runData.hpMulti}}%
-      <stat-icon stat="expmulti"/> {{this.runData.expMulti}}%
+      <tn-icon icon="lvl"/> {{this.runData.level}}
+      <tn-icon icon="crown"/> {{this.runData.hpMulti}}%
+      <tn-icon icon="feather"/> {{this.runData.expMulti}}%
     </div>
   </div>
   <div class="resources">
     Used resources:
-    <div class="modifiers">
-      <div class="mysticGate" v-if="tower.HasMysticGate">MysticGate: {{this.runData.mysticGate}}</div>
-    </div>
     <div class="sunstones">
-      <img src="../assets/sunstone.png">{{this.runData.resourceUse.sunstones}}
+      <tn-icon icon="sunwisher"/>{{this.runData.resourceUse.sunstones}}
       (
-        <stat-icon stat="atk"/> {{this.runData.resourceUse.atk}}
-        <stat-icon stat="def"/> {{this.runData.resourceUse.def}}
-        <stat-icon stat="hp"/> {{this.runData.resourceUse.hp}}
+        <tn-icon icon="atk"/> {{this.runData.resourceUse.atk}}
+        <tn-icon icon="def"/> {{this.runData.resourceUse.def}}
+        <tn-icon icon="hp"/> {{this.runData.resourceUse.hp}}
         )
     </div>
     <div class="medals">
-      <medal-icon medal="bronze"/>{{this.runData.resourceUse.bronze}}
-      <medal-icon medal="silver"/>{{this.runData.resourceUse.silver}}
-      <medal-icon medal="gold"/>{{this.runData.resourceUse.gold}}
-      <medal-icon medal="platinum"/>{{this.runData.resourceUse.platinum}}
-      <medal-icon medal="diamond"/>{{this.runData.resourceUse.diamond}}
-      <medal-icon medal="moon"/>{{this.runData.resourceUse.moon}}
+      <tn-icon icon="bronze"/>{{this.runData.resourceUse.bronze}}
+      <tn-icon icon="silver"/>{{this.runData.resourceUse.silver}}
+      <tn-icon icon="gold"/>{{this.runData.resourceUse.gold}}
+      <tn-icon icon="platinum"/>{{this.runData.resourceUse.platinum}}
+      <tn-icon icon="diamond"/>{{this.runData.resourceUse.diamond}}
+      <tn-icon icon="moon"/>{{this.runData.resourceUse.moon}}
     </div>
   </div>
   <div class="comment">Comment: {{this.runData.comment}}</div>

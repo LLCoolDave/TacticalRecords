@@ -1,6 +1,10 @@
 <template>
   <div class="score">
-    <i v-if="!hideScore">{{score.toLocaleString()}}</i><medal-icon :medal="medal"/> <img src="../assets/sunstone.png">{{sunstones}}
+    <tn-icon icon="mysticgate" size="small" v-if="runData?.mysticGate"/>
+    <template v-if="showScore">{{`${this.runData?.score || 0}`.toLocaleString()}}</template>
+    <tn-icon :icon="medal.toLowerCase()" size="small"/>
+    <tn-icon icon="sunstone" size="small"/>{{sunstones}}
+    <template v-if="showStonesUsed"><tn-icon icon="sunwisher" size="small"/>{{stonesused}}</template>
   </div>
 </template>
 
@@ -9,16 +13,28 @@ import { calcRewards } from '../scripts/tower';
 
 export default {
   name: 'Score',
-  props: ['score', 'towerData', 'pure', 'hideScore'],
+  props: ['runData', 'towerData', 'hideScore', 'pure', 'hideStonesUsed'],
   computed: {
     rewards() {
-      return calcRewards(this.score, this.towerData, this.pure);
+      return calcRewards(this.runData?.score || 0, this.towerData, this.calcPure);
     },
     medal() {
-      return this.rewards.medal;
+      return this.runData?.medal || this.rewards.medal;
     },
     sunstones() {
-      return this.rewards.sunstones;
+      return this.runData?.sunstones || this.rewards.sunstones;
+    },
+    stonesused() {
+      return this.runData?.resourceUse?.sunstones;
+    },
+    showScore() {
+      return this.runData?.score && !this.hideScore;
+    },
+    calcPure() {
+      return this.pure != null ? this.pure : this.runData?.pure || false;
+    },
+    showStonesUsed() {
+      return this.stonesused != null && !this.hideStonesUsed;
     },
   },
 };

@@ -11,11 +11,7 @@ export default async function fetchTowerRuns(req, res) {
           where: {
             towerId: tower,
           },
-          orderBy: [
-            {
-              score: 'desc',
-            },
-          ],
+          orderBy: [{ sunstones: 'desc' }, { resourceUse: { sunstones: 'asc' } }],
           include: {
             player: {
               select: {

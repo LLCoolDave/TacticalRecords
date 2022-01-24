@@ -9,7 +9,7 @@
       <tr v-for="run in impureRuns" :key="run.id">
         <td class="element">
           <router-link :to="'/run/' + run.id">
-            <player-score :score="run.score" :player="run.player" :pure="false" :towerData="towerData"/>
+            <player-score :runData="run" :player="run.player" :pure="false" :towerData="towerData"/>
           </router-link>
         </td>
       </tr>
@@ -21,7 +21,7 @@
       <tr v-for="run in pureRuns" :key="run.id">
         <td class="element">
           <router-link :to="'/run/' + run.id">
-            <player-score :score="run.score" :player="run.player" :pure="true" :towerData="towerData"/>
+            <player-score :runData="run" :player="run.player" :towerData="towerData"/>
           </router-link>
         </td>
       </tr>

@@ -148,6 +148,9 @@ export default {
     canSubmit() {
       return this.towerId && this.player && this.score > 0 && !this.isUpdating;
     },
+    rewards() {
+      return this.tower ? calcRewards(this.score || 0, this.tower, this.isPure) : null;
+    },
   },
   watch: {
     towerHasMysticGate(newValue) {

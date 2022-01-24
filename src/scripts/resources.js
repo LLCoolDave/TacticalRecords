@@ -1,14 +1,25 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
-import _ from 'lodash';
-import { medalNames, statNames } from './tower';
+export const iconMap = {
+  bronze: 'medalBronze',
+  silver: 'medalSilver',
+  gold: 'medalGold',
+  platinum: 'medalPlatinum',
+  diamond: 'medalDiamond',
+  moon: 'medalMoon',
+  atk: 'iconATK',
+  def: 'iconDEF',
+  hp: 'iconHP',
+  lvl: 'iconLVL',
+  crown: 'iconHPMULTI',
+  feather: 'iconEXPMULTI',
+  sunstone: 'sunstone',
+  sunwisher: 'sunwisher',
+  mysticgate: 'mysticgate',
+};
 
-export function getMedalURI(medal) {
-  if (_.indexOf(medalNames, medal) >= 0) return require(`../assets/medal${_.upperFirst(medal)}.png`);
-  return null;
-}
-
-export function getStatURI(stat) {
-  if (_.indexOf(statNames, stat) >= 0) return require(`../assets/icon${_.upperCase(stat)}.png`);
+export function getIconURL(icon) {
+  const filebase = iconMap?.[icon];
+  if (filebase) return require(`../assets/${filebase}.png`);
   return null;
 }
