@@ -19,10 +19,10 @@ export default {
       return calcRewards(this.runData?.score || 0, this.towerData, this.calcPure);
     },
     medal() {
-      return this.runData?.medal || this.rewards.medal;
+      return this.rewards.medal || 'NONE';
     },
     sunstones() {
-      return this.runData?.sunstones || this.rewards.sunstones;
+      return this.rewards.sunstones;
     },
     stonesused() {
       return this.runData?.resourceUse?.sunstones;
