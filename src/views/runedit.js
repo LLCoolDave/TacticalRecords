@@ -80,7 +80,7 @@ export default {
         hpMulti: this.hpMulti,
         expMulti: this.expMulti,
         sunstones: rewards.sunstones,
-        medal: rewards.medal.toUpperCase(),
+        medal: rewards.medal ? rewards.medal.toUpperCase() : 'NONE',
         resourceUse: this.resourcesUsed,
       };
     },
