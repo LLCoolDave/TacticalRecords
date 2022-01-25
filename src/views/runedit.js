@@ -2,6 +2,7 @@ import {
   updateRun, postRun, fetchRun, deleteRun,
 } from '../scripts/api';
 import { calcRewards } from '../scripts/tower';
+import { uploadScreenshot, parseScreenshot } from '../scripts/processScreenshot';
 
 export default {
   name: 'RunEdit',
@@ -33,6 +34,7 @@ export default {
     expMulti: 100,
     comment: '',
     screenshot: '',
+    processingImage: false,
   }),
   props: ['id'],
   methods: {
@@ -83,6 +85,16 @@ export default {
         medal: rewards.medal ? rewards.medal.toUpperCase() : 'NONE',
         resourceUse: this.resourcesUsed,
       };
+    },
+    async uploadScreenshot(e) {
+      this.processingImage = true;
+      e.preventDefault();
+      const file = e.dataTransfer?.files?.[0];
+      let imgurl = uploadScreenshot(file);
+      let parsedData = parseScreenshot(file);
+      [imgurl, parsedData] = await Promise.all([imgurl, parsedData]);
+      if (imgurl) this.screenshot = imgurl;
+      this.processingImage = false;
     },
   },
   async created() {
@@ -150,6 +162,9 @@ export default {
     },
     rewards() {
       return this.tower ? calcRewards(this.score || 0, this.tower, this.isPure) : null;
+    },
+    showUpload() {
+      return !this.screenshot && !this.processingImage;
     },
   },
   watch: {

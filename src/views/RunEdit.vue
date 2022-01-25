@@ -52,6 +52,9 @@
     <div>
       <img :src="screenshot" v-if="screenshot" width="640" height="480"/>
     </div>
+    <div class="upload" v-if="showUpload" width="640" height="480" @dragover.prevent @drop="uploadScreenshot">
+      Drop screenshot to upload.
+    </div>
   </div>
   <div class="buttons">
     <div><input type="button" @click="submit" :value="buttonText" :disabled="!canSubmit"/></div>
@@ -109,5 +112,11 @@
 
 .comment {
   grid-area: comment;
+}
+
+.upload {
+  width: 640px;
+  height: 480px;
+  background: lightgreen;
 }
 </style>
