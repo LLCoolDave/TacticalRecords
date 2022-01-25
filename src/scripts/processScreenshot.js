@@ -8,8 +8,10 @@ const pixelOffsets = {
     lvl: [525, 20, 3],
     lvlold: [482, 16, 3], // This has changed position recently(!!)
     lvloldfrozen: [500, 16, 3], // ...
-    hp: [485, 36, 9],
-    hpmulti: [576, 36, 5],
+    hp: [485, 43, 9],
+    hpmulti: [576, 43, 5],
+    hpbar: [485, 36, 9],
+    hpmultibar: [576, 36, 5],
     atk: [515, 68, 6],
     atkold: [515, 67, 6],
     def: [515, 92, 6],
@@ -175,9 +177,9 @@ export async function parseScreenshot(file) {
     lvl: numbers.lvl || numbers.lvlold || numbers.lvloldfrozen || 1,
     atk: Math.max(numbers.atk, numbers.atkold), // some numbers match in both offsets, but the correct one is almost guaranteed to be larger
     def: Math.max(numbers.def, numbers.defold),
-    hp: numbers.hp || 0,
+    hp: Math.max(numbers.hp, numbers.hpbar) || 0,
     stonesused: numbers.stonesused || 0,
-    hpMulti: numbers.hpmulti || 100,
+    hpMulti: Math.max(numbers.hpmulti, numbers.hpmultibar) || 100,
     expMulti: numbers.expmulti || 100,
     mysticgate,
   };
