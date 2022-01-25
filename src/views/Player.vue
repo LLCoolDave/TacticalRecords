@@ -16,7 +16,7 @@
         <td class="element"><router-link :to="'/tower/' + tower.id">{{tower.fullName}}</router-link></td>
         <td class="element">
           <router-link :to="'/run/' + impureRecords[tower.id].id" v-if="tower.id in impureRecords">
-            <tower-score :runData="impureRecords[tower.id]" :towerData="tower"/>
+            <tower-score :runData="impureRecords[tower.id]" :towerData="tower" :pure="false" />
           </router-link>
         </td>
         <td class="element">
