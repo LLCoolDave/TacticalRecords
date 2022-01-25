@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {
   updateRun, postRun, fetchRun, deleteRun,
 } from '../scripts/api';
@@ -90,11 +91,45 @@ export default {
       this.processingImage = true;
       e.preventDefault();
       const file = e.dataTransfer?.files?.[0];
+      await this.processFile(file);
+      this.processingImage = false;
+    },
+    async pasteScreenshot(e) {
+      this.processingImage = true;
+      e.preventDefault();
+      if (e.clipboardData.types.includes('text/plain')) {
+        this.screenshot = e.clipboardData.getData('text/plain');
+      } else {
+        let screenshot;
+        _.each(e.clipboardData.items, (item) => {
+          if (item.type.indexOf('image') !== -1) {
+            screenshot = item.getAsFile();
+          }
+        });
+        if (screenshot) await this.processFile(screenshot);
+      }
+      this.processingImage = false;
+    },
+    async processFile(file) {
       let imgurl = uploadScreenshot(file);
-      let parsedData = parseScreenshot(file);
+      let parsedData = await parseScreenshot(file);
       [imgurl, parsedData] = await Promise.all([imgurl, parsedData]);
       if (imgurl) this.screenshot = imgurl;
-      this.processingImage = false;
+      this.hp = parsedData.hp;
+      this.score = parsedData.score;
+      this.mysticGate = parsedData.mysticgate;
+      this.atk = parsedData.atk;
+      this.def = parsedData.def;
+      this.lvl = parsedData.lvl;
+      this.hpMulti = parsedData.hpMulti;
+      this.expMulti = parsedData.expMulti;
+      this.resourcesUsed.sunstones = parsedData.stonesused;
+      this.resourcesUsed.bronze = parsedData.medals?.bronze || 0;
+      this.resourcesUsed.silver = parsedData.medals?.silver || 0;
+      this.resourcesUsed.gold = parsedData.medals?.gold || 0;
+      this.resourcesUsed.platinum = parsedData.medals?.platinum || 0;
+      this.resourcesUsed.diamond = parsedData.medals?.diamond || 0;
+      this.resourcesUsed.moon = parsedData.medals?.moon || 0;
     },
   },
   async created() {

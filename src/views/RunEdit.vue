@@ -48,7 +48,7 @@
   </div>
   <div class="comment">Comment: <div><textarea cols="80" rows="8" v-model="comment"/></div></div>
   <div class="screenshot">
-    Clear Screenshot: <input type="text" v-model="screenshot" size="40" maxlength="400">
+    Clear Screenshot: <input type="text" v-model="screenshot" size="40" maxlength="400" @paste="pasteScreenshot" placeholder="Paste image to upload">
     <div>
       <img :src="screenshot" v-if="screenshot" width="640" height="480"/>
     </div>
