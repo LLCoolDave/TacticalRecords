@@ -6,7 +6,7 @@
           <player-display v-if="player" :player="player"/>
         </div>
         <div class="tower">
-          {{ this.tower?.fullName }}
+          <router-link :to="'/run/' + this.tower?.id">{{ this.tower?.fullName }}</router-link>
         </div>
       </div>
       <div class="edit" v-if="canEdit">

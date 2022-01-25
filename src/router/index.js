@@ -7,6 +7,7 @@ import Profile from '../views/Profile.vue';
 import RunEdit from '../views/RunEdit.vue';
 import Players from '../views/Players.vue';
 import Run from '../views/Run.vue';
+import Compare from '../views/Compare.vue';
 import { authenticationGuard } from '../scripts/auth0';
 
 const routes = [
@@ -66,6 +67,30 @@ const routes = [
     name: 'NewRun',
     component: RunEdit,
     beforeEnter: authenticationGuard,
+  },
+  {
+    path: '/compare/:playerId/:compareId',
+    name: 'ComparePlayers',
+    component: Compare,
+    props: (route) => ({ playerId: route.params.playerId, compareId: route.params.compareId, mode: 'player' }),
+  },
+  {
+    path: '/compare/:playerId/records',
+    name: 'CompareRecords',
+    component: Compare,
+    props: (route) => ({ playerId: route.params.playerId, compareId: null, mode: 'records' }),
+  },
+  {
+    path: '/compare/:playerId/sunstones/:compareId',
+    name: 'CompareSunstones',
+    component: Compare,
+    props: (route) => ({ playerId: route.params.playerId, compareId: route.params.compareId, mode: 'sunstones' }),
+  },
+  {
+    path: '/compare/:playerId/progress',
+    name: 'CompareMetaProgress',
+    component: Compare,
+    props: (route) => ({ playerId: route.params.playerId, compareId: null, mode: 'meta' }),
   },
 ];
 

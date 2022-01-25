@@ -5,6 +5,10 @@
       <tn-icon icon="sunstone"/>{{player.sunstones}}
       <medal-row :medals="player"/>
     </div>
+    <div class="compare">
+      <div class="margin"><router-link :to="'/compare/' +player.id  + '/records'">Compare to Records</router-link></div>
+      <div class="margin"><router-link :to="'/compare/' +player.id  + '/progress'">Compare to Meta Progress</router-link></div>
+    </div>
     <div class="tables">
       <table class="table">
       <tr>
@@ -50,5 +54,13 @@
 .element {
   border: 1px solid black;
   padding: 8px;
+}
+.compare {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.margin {
+  margin: 10px;
 }
 </style>

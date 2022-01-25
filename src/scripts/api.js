@@ -44,6 +44,10 @@ export async function fetchPlayerRecords(id) {
   return makeRequest(`/api/records/player/${id}`);
 }
 
+export async function fetchMetaRecords(sunstones) {
+  return makeRequest(`/api/records/sunstones/${sunstones}`);
+}
+
 export async function fetchPlayers() {
   return makeRequest('/api/players');
 }

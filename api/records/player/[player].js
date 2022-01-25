@@ -7,7 +7,7 @@ export default async function fetchPlayerRecords(req, res) {
   switch (method) {
     case 'GET':
       try {
-        const [impureRecords, pureRecords, playerInfo] = await getRecords(player);
+        const [impureRecords, pureRecords, playerInfo] = await getRecords({ player });
         res.json({ impure: impureRecords, pure: pureRecords, player: playerInfo });
       } catch (e) {
         console.error('Request error', e);
