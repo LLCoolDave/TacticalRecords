@@ -5,6 +5,7 @@
         <div class="player">
           <player-display v-if="player" :player="player"/>
         </div>
+        <div>&nbsp;&nbsp;&nbsp;</div>
         <div class="tower">
           <router-link :to="'/run/' + this.tower?.id">{{ this.tower?.fullName }}</router-link>
         </div>
@@ -18,11 +19,11 @@
         <tower-score v-if="tower" :runData="this.runData" :towerData="tower" :hideStonesUsed="true"/>
       </div>
       <div class="sunstones">
-        <tn-icon icon="sunwisher"/>{{this.runData.resourceUse.sunstones}}
+        <tn-icon icon="sunwisher"/><span class="scoreFont">{{this.runData.resourceUse.sunstones}}</span>
         (
-          <tn-icon icon="atk"/> {{this.runData.resourceUse.atk}}
-          <tn-icon icon="def"/> {{this.runData.resourceUse.def}}
-          <tn-icon icon="hp"/> {{this.runData.resourceUse.hp}}
+          <tn-icon icon="atk"/><span class="atkFont"> {{this.runData.resourceUse.atk}}</span>
+          <tn-icon icon="def"/><span class="defFont"> {{this.runData.resourceUse.def}}</span>
+          <tn-icon icon="hp"/><span class="hpFont"> {{this.runData.resourceUse.hp}}</span>
           )
       </div>
       <div class="medals">
@@ -30,12 +31,12 @@
       </div>
     </div>
     <div class="statBlock">
-      <div class="atk"><tn-icon icon="atk"/> {{this.runData.atk}}</div>
-      <div class="def"><tn-icon icon="def"/> {{this.runData.def}}</div>
-      <div class="hp"><tn-icon icon="hp"/> {{this.runData.hp}}</div>
-      <div class="level"><tn-icon icon="lvl"/> {{this.runData.level}}</div>
-      <div class="hpmulti"><tn-icon icon="crown"/> {{this.runData.hpMulti}}%</div>
-      <div class="expmulti"><tn-icon icon="feather"/> {{this.runData.expMulti}}%</div>
+      <div class="atk"><tn-icon icon="atk"/><span class="atkFont"> {{this.runData.atk}}</span></div>
+      <div class="def"><tn-icon icon="def"/><span class="defFont"> {{this.runData.def}}</span></div>
+      <div class="hp"><tn-icon icon="hp"/><span class="hpFont"> {{this.runData.hp}}</span></div>
+      <div class="level"><tn-icon icon="lvl"/><span class="expMultiFont"> {{this.runData.level}}</span></div>
+      <div class="hpmulti"><tn-icon icon="crown"/><span class="hpMultiFont"> {{this.runData.hpMulti}}%</span></div>
+      <div class="expmulti"><tn-icon icon="feather"/><span class="expMultiFont"> {{this.runData.expMulti}}%</span></div>
     </div>
     <div class="comment">
       <pre>{{this.runData.comment}}</pre>
@@ -69,7 +70,7 @@
 
 .comment {
   grid-area: comment;
-  background: grey;
+  background: rgb(79, 119, 228);
 }
 
 .screenshot {

@@ -1,5 +1,6 @@
 <template>
 <div id="main">
+  <link rel="preload" as="font" href="./IBM-Plex-Sans-Condensed-Bold.ttf.woff" type="font/woff" crossorigin="anonymous">
   <div id="nav">
     <div id="links">
       <router-link to="/records">Records</router-link> |
@@ -41,8 +42,9 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  background: #bebbbb;
+  color: #EEEEEE;
+  -webkit-text-stroke: 0.2px black;
+  background: linear-gradient(190deg, #0D3B4B, #060F24, #04165C);
 }
 
 #nav {
@@ -55,11 +57,11 @@ export default {
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
 }
 
 a, a:visited {
-  color: blue;
+  color: #FFFF96;
+  text-decoration: none;
 }
 
 #nav a.router-link-exact-active {
@@ -81,4 +83,89 @@ a, a:visited {
 body {
   margin: 0px;
 }
+
+@font-face {
+  font-family: "IBM-Plex";
+  font-style: normal;
+  font-display: auto;
+  src: local("IBM-Plex-Sans-Condensed-Bold"), url("/IBM-Plex-Sans-Condensed-Bold.ttf.woff") format("woff");
+}
+
+.scoreFont {
+  font-family: "IBM-Plex";
+  font-size: 20px;
+  background: linear-gradient(180deg, #ffff23, #ff2323);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  -webkit-text-stroke: 0.6px black;
+}
+
+.rewardFont {
+  font-family: "IBM-Plex";
+  font-size: 20px;
+  background: linear-gradient(180deg, #ffea36, #c39b00);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  -webkit-text-stroke: 0.6px black;
+}
+
+.hpFont {
+  font-family: "IBM-Plex";
+  font-size: 20px;
+  background: linear-gradient(180deg, #F4FFBE, #5AFF5A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  -webkit-text-stroke: 0.6px black;
+}
+
+.hpMultiFont {
+  font-family: "IBM-Plex";
+  font-size: 20px;
+  background: linear-gradient(180deg, #66FF66, #6699FF);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  -webkit-text-stroke: 0.6px black;
+}
+
+.atkFont {
+  font-family: "IBM-Plex";
+  font-size: 20px;
+  background: linear-gradient(180deg, #FFD7D7, #FF7373);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  -webkit-text-stroke: 0.6px black;
+}
+
+.defFont {
+  font-family: "IBM-Plex";
+  font-size: 20px;
+  background: linear-gradient(180deg, #BEFFFF, #5A91FF);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  -webkit-text-stroke: 0.6px black;
+}
+
+.expMultiFont {
+  font-family: "IBM-Plex";
+  font-size: 20px;
+  background: linear-gradient(180deg, #FFFFBE, #FFFF5A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  -webkit-text-stroke: 0.6px black;
+}
+
 </style>

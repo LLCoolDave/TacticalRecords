@@ -9,21 +9,21 @@
     </select>
   </div>
   <div class="score">
-    Score: <input type="number" v-model="score" min="0" max="999999999999">
+    Score: <input type="number" v-model="score" min="0" max="999999999999" class="input scoreFont">
     <tn-icon :icon="this.rewards?.medal?.toLowerCase()" size="small"/>
-    <tn-icon icon="sunstone" size="small"/>{{this.rewards?.sunstones}}
+    <tn-icon icon="sunstone" size="small"/><span class="rewardFont">{{this.rewards?.sunstones}}</span>
   </div>
   <div class="stats">
     Final Stats:
     <div>
-      <tn-icon icon="atk"/> <input type="number" v-model="atk" min="0" max="1000000">
-      <tn-icon icon="def"/> <input type="number" v-model="def" min="0" max="1000000">
-      <tn-icon icon="hp"/> <input type="number" v-model="hp" min="0" max="1000000000">
+      <tn-icon icon="atk"/> <input type="number" v-model="atk" min="0" max="1000000" class="input atkFont">
+      <tn-icon icon="def"/> <input type="number" v-model="def" min="0" max="1000000" class="input defFont">
+      <tn-icon icon="hp"/> <input type="number" v-model="hp" min="0" max="1000000000" class="input hpFont">
     </div>
     <div>
-      <tn-icon icon="lvl"/> <input type="number" v-model="lvl" min="0" max="500">
-      <tn-icon icon="crown"/> <input type="number" v-model="hpMulti" min="0" max="100000">
-      <tn-icon icon="feather"/> <input type="number" v-model="expMulti" min="0" max="100000">
+      <tn-icon icon="lvl"/> <input type="number" v-model="lvl" min="0" max="500" class="input expMultiFont">
+      <tn-icon icon="crown"/> <input type="number" v-model="hpMulti" min="0" max="100000" class="input hpMultiFont">
+      <tn-icon icon="feather"/> <input type="number" v-model="expMulti" min="0" max="100000" class="input expMultiFont">
     </div>
   </div>
   <div class="resources">
@@ -32,18 +32,18 @@
       <div class="mysticGate" v-if="towerHasMysticGate"><tn-icon icon="mysticgate"/> <input type="checkbox" v-model="mysticGate"/></div>
     </div>
     <div class="sunstones">
-      <tn-icon icon="sunwisher"/> <input type="number" v-model="resourcesUsed.sunstones" min="0" max="100000" @change="calcSunstonesUsed"> (
-      <tn-icon icon="atk"/> <input type="number" v-model="resourcesUsed.atk" min="0" max="100000" @change="calcSunstonesUsed">
-      <tn-icon icon="def"/> <input type="number" v-model="resourcesUsed.def" min="0" max="100000" @change="calcSunstonesUsed">
-      <tn-icon icon="hp"/> <input type="number" v-model="resourcesUsed.hp" min="0" max="100000" @change="calcSunstonesUsed"> )
+      <tn-icon icon="sunwisher"/> <input type="number" v-model="resourcesUsed.sunstones" min="0" max="100000" @change="calcSunstonesUsed" class="input scoreFont"> (
+      <tn-icon icon="atk"/> <input type="number" v-model="resourcesUsed.atk" min="0" max="100000" @change="calcSunstonesUsed" class="input atkFont">
+      <tn-icon icon="def"/> <input type="number" v-model="resourcesUsed.def" min="0" max="100000" @change="calcSunstonesUsed" class="input defFont">
+      <tn-icon icon="hp"/> <input type="number" v-model="resourcesUsed.hp" min="0" max="100000" @change="calcSunstonesUsed" class="input hpFont"> )
     </div>
     <div class="medals">
-      <tn-icon icon="bronze"/><input type="number" v-model="resourcesUsed.bronze" min="0" max="20">
-      <tn-icon icon="silver"/><input type="number" v-model="resourcesUsed.silver" min="0" max="20">
-      <tn-icon icon="gold"/><input type="number" v-model="resourcesUsed.gold" min="0" max="20">
-      <tn-icon icon="platinum"/><input type="number" v-model="resourcesUsed.platinum" min="0" max="20">
-      <tn-icon icon="diamond"/><input type="number" v-model="resourcesUsed.diamond" min="0" max="20">
-      <tn-icon icon="moon"/><input type="number" v-model="resourcesUsed.moon" min="0" max="20">
+      <tn-icon icon="bronze"/><input type="number" v-model="resourcesUsed.bronze" min="0" max="20" class="input rewardFont">
+      <tn-icon icon="silver"/><input type="number" v-model="resourcesUsed.silver" min="0" max="20" class="input rewardFont">
+      <tn-icon icon="gold"/><input type="number" v-model="resourcesUsed.gold" min="0" max="20" class="input rewardFont">
+      <tn-icon icon="platinum"/><input type="number" v-model="resourcesUsed.platinum" min="0" max="20" class="input rewardFont">
+      <tn-icon icon="diamond"/><input type="number" v-model="resourcesUsed.diamond" min="0" max="20" class="input rewardFont">
+      <tn-icon icon="moon"/><input type="number" v-model="resourcesUsed.moon" min="0" max="20" class="input rewardFont">
     </div>
   </div>
   <div class="comment">Comment: <div><textarea cols="80" rows="8" v-model="comment"/></div></div>
@@ -117,6 +117,10 @@
 .upload {
   width: 640px;
   height: 480px;
-  background: lightgreen;
+  background: rgb(79, 119, 228);
+}
+
+.input {
+  border: none;
 }
 </style>

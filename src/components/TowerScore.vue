@@ -1,10 +1,10 @@
 <template>
   <div class="center">
     <tn-icon icon="mysticgate" size="small" v-if="runData?.mysticGate"/>
-    <template v-if="showScore">{{`${this.runData?.score || 0}`.toLocaleString()}}</template>
+    <span class="scoreFont" v-if="showScore">{{`${this.runData?.score || 0}`.toLocaleString()}}</span>
     <tn-icon :icon="medal.toLowerCase()" size="small"/>
-    <tn-icon icon="sunstone" size="small"/>{{sunstones}}
-    <template v-if="showStonesUsed"><tn-icon icon="sunwisher" size="small"/>{{stonesused}}</template>
+    <tn-icon icon="sunstone" size="small"/><span class="rewardFont">{{sunstones}}</span>
+    <template v-if="showStonesUsed"><tn-icon icon="sunwisher" size="small"/><span class="scoreFont">{{stonesused}}</span></template>
   </div>
 </template>
 

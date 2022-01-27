@@ -2,7 +2,7 @@
   <div class="player" v-if="hasLoaded">
     <div class="name"><img :src="player?.pfp" v-if="player?.pfp" width="32" height="32"/> {{ player?.name }}</div>
     <div class="meta">
-      <tn-icon icon="sunstone"/>{{player.sunstones}}
+      <tn-icon icon="sunstone"/><span class="rewardFont large">{{player.sunstones}}</span>
       <medal-row :medals="player"/>
     </div>
     <div class="compare">
@@ -62,5 +62,8 @@
 }
 .margin {
   margin: 10px;
+}
+.large {
+  font-size: 30px;
 }
 </style>

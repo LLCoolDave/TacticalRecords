@@ -8,7 +8,7 @@
             <tn-icon :icon="icon" size="large"/>
           </td>
           <td class="rightAlign">
-            {{value}}
+            <span class="scoreFont">{{value}}</span>
           </td>
         </tr>
       </table>
