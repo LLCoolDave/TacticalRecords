@@ -3,22 +3,23 @@
     <div class="name">{{towerData?.fullName}}</div>
     <div class="towerThresholds" v-if="towerData">
       <table>
-        <tr v-for="(value, icon) in thresholds" :key="icon">
+        <tr v-for="entry in thresholds" :key="entry.icon">
           <td class="rightAlign">
-            <tn-icon :icon="icon" size="large"/>
+            <tn-icon :icon="entry.icon" size="normal"/>
           </td>
           <td class="rightAlign">
-            <span class="scoreFont">{{value}}</span>
+            <span class="scoreFont">{{entry.value}}</span>
           </td>
         </tr>
       </table>
     </div>
+    <div><input type="checkbox" v-model="personalRecords"/>Show only Personal Bests</div>
     <div class="tables">
       <table class="table">
       <tr>
         <th class="element">Impure</th>
       </tr>
-      <tr v-for="run in impureRuns" :key="run.id">
+      <tr v-for="run in impureRunsDisplay" :key="run.id">
         <td class="element">
           <router-link :to="'/run/' + run.id">
             <player-score :runData="run" :player="run.player" :pure="false" :towerData="towerData"/>
@@ -30,7 +31,7 @@
       <tr>
         <th class="element">Pure</th>
       </tr>
-      <tr v-for="run in pureRuns" :key="run.id">
+      <tr v-for="run in pureRunsDisplay" :key="run.id">
         <td class="element">
           <router-link :to="'/run/' + run.id">
             <player-score :runData="run" :player="run.player" :towerData="towerData"/>

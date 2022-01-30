@@ -1,5 +1,7 @@
-import { reactive, watch } from 'vue';
+import { reactive } from 'vue';
 import createAuth0Client from '@auth0/auth0-spa-js';
+// eslint-disable-next-line import/no-cycle
+// import router from '../router';
 
 /** Define a default action to perform after authentication */
 const DEFAULT_REDIRECT_CALLBACK = () => window.history.replaceState({}, document.title, window.location.pathname);
@@ -141,29 +143,4 @@ export const Auth0Plugin = {
   install(app, options) {
     app.provide('$auth', useAuth0(options));
   },
-};
-
-export const authenticationGuard = (to, from, next) => {
-  const authService = getInstance();
-
-  const guardAction = () => {
-    if (authService.state.isAuthenticated) {
-      return next();
-    }
-
-    authService.loginWithRedirect({ appState: { targetUrl: to.fullPath } });
-    return null;
-  };
-
-  // If the Auth0Plugin has loaded already, check the authentication state
-  if (!authService.state.loading) {
-    return guardAction();
-  }
-
-  return watch(() => authService.state.loading, (loading) => {
-    if (loading === false) {
-      return guardAction();
-    }
-    return null;
-  })();
 };

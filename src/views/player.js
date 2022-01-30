@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { fetchPlayerRecords } from '../scripts/api';
+import { fetchPlayerRecords, fetchMostRecentRuns } from '../scripts/api';
 
 export default {
   name: 'PlayerView',
@@ -8,6 +8,7 @@ export default {
     player: null,
     pureRecords: null,
     impureRecords: null,
+    latest: [],
   }),
   props: ['id'],
   async created() {
@@ -23,7 +24,17 @@ export default {
       obj[item.towerId] = item;
       return obj;
     }, {});
+    fetchMostRecentRuns({ player: this.id, count: 30 }).then((runs) => { this.latest = runs; });
     this.hasLoaded = true;
+  },
+  methods: {
+    towerById(id) {
+      return this.$store.state.towers?.[id];
+    },
+    formatDate(time) {
+      const date = new Date(time);
+      return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric', day: 'numeric' });
+    },
   },
   computed: {
     towers() {

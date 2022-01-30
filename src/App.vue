@@ -4,6 +4,7 @@
   <div id="nav">
     <div id="links">
       <router-link to="/records">Records</router-link> |
+      <router-link to="/latest">Most Recent Runs</router-link> |
       <router-link to="/players">Players</router-link> |
       <router-link to="/towers">Towers</router-link>
       <template v-if="this.$store.state.userProfile"> | <router-link to="/run/new" >Submit Run</router-link></template>
@@ -45,6 +46,7 @@ export default {
   color: #EEEEEE;
   -webkit-text-stroke: 0.2px black;
   background: linear-gradient(190deg, #0D3B4B, #060F24, #04165C);
+  background-attachment:fixed;
 }
 
 #nav {
@@ -94,7 +96,7 @@ body {
 .scoreFont {
   font-family: "IBM-Plex";
   font-size: 20px;
-  background: linear-gradient(180deg, #ffff23, #ff2323);
+  background: linear-gradient(180deg, #ffff23 25%, #FF7B23, #ff2323 75%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -105,7 +107,7 @@ body {
 .rewardFont {
   font-family: "IBM-Plex";
   font-size: 20px;
-  background: linear-gradient(180deg, #ffea36, #c39b00);
+  background: linear-gradient(180deg, #ffea36 25%, #EAC20E, #c39b00 75%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -116,7 +118,7 @@ body {
 .hpFont {
   font-family: "IBM-Plex";
   font-size: 20px;
-  background: linear-gradient(180deg, #F4FFBE, #5AFF5A);
+  background: linear-gradient(180deg, #F4FFBE 25%, #ACFF82, #5AFF5A 75%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -127,7 +129,7 @@ body {
 .hpMultiFont {
   font-family: "IBM-Plex";
   font-size: 20px;
-  background: linear-gradient(180deg, #66FF66, #6699FF);
+  background: linear-gradient(180deg, #66FF66 25%, #66FFFF, #6699FF 75%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -138,7 +140,7 @@ body {
 .atkFont {
   font-family: "IBM-Plex";
   font-size: 20px;
-  background: linear-gradient(180deg, #FFD7D7, #FF7373);
+  background: linear-gradient(180deg, #FFD7D7 25%, #FFAFAF, #FF7373 75%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -149,7 +151,7 @@ body {
 .defFont {
   font-family: "IBM-Plex";
   font-size: 20px;
-  background: linear-gradient(180deg, #BEFFFF, #5A91FF);
+  background: linear-gradient(180deg, #BEFFFF 25%, #96E3FF, #5A91FF 75%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -160,7 +162,7 @@ body {
 .expMultiFont {
   font-family: "IBM-Plex";
   font-size: 20px;
-  background: linear-gradient(180deg, #FFFFBE, #FFFF5A);
+  background: linear-gradient(180deg, #FFFFBE 25%, #FFFF82, #FFFF5A 75%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

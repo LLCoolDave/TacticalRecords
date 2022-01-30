@@ -1,17 +1,20 @@
-import prisma from '../../../lib/prisma';
+import prisma from '../../lib/prisma';
 
-export default async function fetchTowerRuns(req, res) {
+export default async function fetchLatestRuns(req, res) {
   const { method } = req;
-  const { tower } = req.query;
+  const queryFilter = {};
+  if (req.query?.player) {
+    queryFilter.playerId = parseInt(req.query.player, 10);
+  }
+  const count = parseInt(req.query?.count || '20', 10);
 
   switch (method) {
     case 'GET':
       try {
         const matches = await prisma.run.findMany({
-          where: {
-            towerId: tower,
-          },
-          orderBy: [{ sunstones: 'desc' }, { resourceUse: { sunstones: 'asc' } }, { score: 'desc' }],
+          where: queryFilter,
+          take: count,
+          orderBy: [{ time: 'desc' }],
           include: {
             player: {
               select: {
@@ -26,7 +29,7 @@ export default async function fetchTowerRuns(req, res) {
         res.json(matches);
       } catch (e) {
         console.error('Request error', e);
-        res.status(500).json({ error: `Error fetching runs for tower ${tower}` });
+        res.status(500).json({ error: 'Error fetching latest runs' });
       }
       break;
     default:

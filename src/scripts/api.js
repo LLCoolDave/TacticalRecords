@@ -1,3 +1,4 @@
+import { URLSearchParams } from 'core-js/modules/web.url-search-params';
 import _ from 'lodash';
 import {
   makeRequest, makeSecuredRequest, makeSecuredPutRequest, makeSecuredPostRequest, makeSecuredDeleteRequest,
@@ -42,6 +43,10 @@ export async function fetchGlobalRecords() {
 
 export async function fetchPlayerRecords(id) {
   return makeRequest(`/api/records/player/${id}`);
+}
+
+export async function fetchMostRecentRuns(options = {}) {
+  return makeRequest(`/api/runs/latest?${new URLSearchParams(options)}`);
 }
 
 export async function fetchMetaRecords(sunstones) {

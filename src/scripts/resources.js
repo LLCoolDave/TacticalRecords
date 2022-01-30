@@ -16,6 +16,9 @@ export const iconMap = {
   sunstone: 'sunstone',
   sunwisher: 'sunwisher',
   mysticgate: 'mysticgate',
+  clear1: 'clear1',
+  clear2: 'clear2',
+  clear3: 'clear3',
 };
 
 export function getIconURL(icon) {

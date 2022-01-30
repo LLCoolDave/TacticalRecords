@@ -8,7 +8,41 @@ import RunEdit from '../views/RunEdit.vue';
 import Players from '../views/Players.vue';
 import Run from '../views/Run.vue';
 import Compare from '../views/Compare.vue';
-import { authenticationGuard } from '../scripts/auth0';
+import Latest from '../views/Latest.vue';
+import { getInstance } from '../scripts/auth0';
+
+let router;
+
+function redirectLogin(to) {
+  const authService = getInstance();
+
+  if (authService.state.loading) {
+    setTimeout(redirectLogin, 50, to);
+  } else if (authService.state.isAuthenticated) {
+    router.push(to);
+    console.log(`route to ${to}`);
+  } else {
+    authService.loginWithRedirect({ appState: { targetUrl: to } });
+  }
+}
+
+export const authenticationGuard = (to, from, next) => {
+  const authService = getInstance();
+
+  // If the Auth0Plugin has not loaded yet, redirect to the homepage and push an async handler to check again later
+  if (authService.state.loading) {
+    setTimeout(redirectLogin, 50, to.fullPath);
+    return next('/');
+  }
+
+  // If user is authenticated they may proceed
+  if (authService.state.isAuthenticated) {
+    return next();
+  }
+  // Otherwise open the login page and redirect to homepage
+  authService.loginWithRedirect({ appState: { targetUrl: to.fullPath } });
+  return next('/');
+};
 
 const routes = [
   {
@@ -25,6 +59,11 @@ const routes = [
     path: '/records',
     name: 'Records',
     component: Records,
+  },
+  {
+    path: '/latest',
+    name: 'MostRecent',
+    component: Latest,
   },
   {
     path: '/players',
@@ -94,11 +133,13 @@ const routes = [
   },
 ];
 
-const router = createRouter({
+router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
 
-export default router;
+const expRouter = router;
+
+export default expRouter;
 
 require.context('../assets', false);

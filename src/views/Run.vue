@@ -7,16 +7,17 @@
         </div>
         <div>&nbsp;&nbsp;&nbsp;</div>
         <div class="tower">
-          <router-link :to="'/run/' + this.tower?.id">{{ this.tower?.fullName }}</router-link>
+          <router-link :to="'/tower/' + this.tower?.id">{{ this.tower?.fullName }}</router-link>
         </div>
       </div>
       <div class="edit" v-if="canEdit">
-        <router-link :to="editRoute">Edit Run</router-link>
+        <router-link :to="editRoute"><span class="editButton">Edit Run</span></router-link>
       </div>
     </div>
     <div class="scoreBlock">
       <div class="score">
-        <tower-score v-if="tower" :runData="this.runData" :towerData="tower" :hideStonesUsed="true"/>
+        <tn-icon :icon="clear" v-if="clear"/>
+        <tower-score v-if="tower" :runData="this.runData" :towerData="tower" :hideStonesUsed="true" :hideMedals="true"/>
       </div>
       <div class="sunstones">
         <tn-icon icon="sunwisher"/><span class="scoreFont">{{this.runData.resourceUse.sunstones}}</span>
@@ -39,7 +40,7 @@
       <div class="expmulti"><tn-icon icon="feather"/><span class="expMultiFont"> {{this.runData.expMulti}}%</span></div>
     </div>
     <div class="comment">
-      <pre>{{this.runData.comment}}</pre>
+      <pre v-if="runData.comment" class="commentDisplay">{{this.runData.comment}}</pre>
     </div>
     <div class="screenshot" v-if="this.runData.screenshot">
       <a :href="this.runData.screenshot"><img :src="this.runData.screenshot"  width="640" height="480"/></a>
@@ -70,6 +71,9 @@
 
 .comment {
   grid-area: comment;
+}
+
+.commenDisplay {
   background: rgb(79, 119, 228);
 }
 
@@ -117,12 +121,36 @@
   margin-left: auto;
 }
 
+.editButton{
+  outline: 1px solid #ddd;
+  border: 1px solid #000;
+  border-right: 1px solid #353535;
+  border-bottom: 1px solid #353535;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 5px;
+  background: skyblue;
+  color: black;
+}
+
+.editButton:hover {
+  background: rgb(0, 255, 170);
+  cursor: pointer;
+}
+
 .header {
   grid-area: header;
   display: grid;
   justify-items: center;
   align-items: center;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+.score {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 </style>

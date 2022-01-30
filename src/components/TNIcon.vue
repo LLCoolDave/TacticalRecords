@@ -14,6 +14,7 @@ export default {
     },
     pixels() {
       switch (this.size) {
+        case 'tiny': return 8;
         case 'small': return 16;
         case 'large': return 32;
         default: return 24;

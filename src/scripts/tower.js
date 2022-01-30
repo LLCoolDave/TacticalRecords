@@ -52,3 +52,24 @@ export function calcRewards(score, towerData, pure = false) {
 
   return { medal, sunstones, toNext };
 }
+
+export function calcScores(runData) {
+  const atk = runData?.atk || 0;
+  const def = runData?.def || 0;
+  const hp = runData?.hp || 0;
+  const lvl = runData?.level || 1;
+  return {
+    1: atk * lvl + def * lvl + hp,
+    2: atk * 5 * lvl + def * 5 * lvl + hp,
+    3: atk * 10 * lvl + def * 10 * lvl + hp,
+  };
+}
+
+export function calcClear(runData) {
+  const score = runData?.score || 0;
+  const scores = calcScores(runData);
+  if (scores[1] === score) return 'clear1';
+  if (scores[2] === score) return 'clear2';
+  if (scores[3] === score) return 'clear3';
+  return null;
+}

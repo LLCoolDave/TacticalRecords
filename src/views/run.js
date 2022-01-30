@@ -1,4 +1,5 @@
 import { fetchRun } from '../scripts/api';
+import { calcClear } from '../scripts/tower';
 
 export default {
   name: 'Run',
@@ -31,6 +32,9 @@ export default {
     },
     canEdit() {
       return this.$store.state.userProfile?.role === 'ADMIN' || this.player?.id === this.$store.state.userProfile?.id;
+    },
+    clear() {
+      return calcClear(this.runData);
     },
   },
 };

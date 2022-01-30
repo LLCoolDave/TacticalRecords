@@ -2,7 +2,7 @@ import _ from 'lodash';
 import {
   updateRun, postRun, fetchRun, deleteRun,
 } from '../scripts/api';
-import { calcRewards } from '../scripts/tower';
+import { calcRewards, calcClear } from '../scripts/tower';
 import { uploadScreenshot, parseScreenshot } from '../scripts/processScreenshot';
 
 export default {
@@ -41,17 +41,21 @@ export default {
   methods: {
     async submit() {
       this.isUpdating = true;
-      const updates = this.buildSubmitObject();
-      let response;
-      if (this.isEdit) {
-        response = await updateRun(this.id, updates);
-      } else {
-        response = await postRun(updates);
+      try {
+        const updates = this.buildSubmitObject();
+        let response;
+        if (this.isEdit) {
+          response = await updateRun(this.id, updates);
+        } else {
+          response = await postRun(updates);
+        }
+        const newRunId = response?.id;
+        if (response?.player) this.$store.commit('setPlayerInfo', response.player);
+
+        if (newRunId != null) this.$router.push({ path: `/run/${newRunId}` });
+      } finally {
+        this.isUpdating = false;
       }
-      const newRunId = response?.id;
-      if (response?.player) this.$store.commit('setPlayerInfo', response.player);
-      this.isUpdating = false;
-      if (newRunId != null) this.$router.push({ path: `/run/${newRunId}` });
     },
     async deleteCurrentRun() {
       if (!this.deleteConfirm) return;
@@ -136,7 +140,7 @@ export default {
     if (!this.isEdit) {
       this.hasLoaded = true;
       this.player = this.$store.state.userProfile?.player;
-      this.player.id = this.$store.state.userProfile?.id;
+      if (this.player) this.player.id = this.$store.state.userProfile?.id;
       return;
     }
     const runData = await fetchRun(this.id);
@@ -189,6 +193,9 @@ export default {
     isEdit() {
       return this.id != null;
     },
+    loggedInPlayer() {
+      return this.$store.state.userProfile;
+    },
     towerHasMysticGate() {
       return this.tower?.hasMysticGate;
     },
@@ -201,10 +208,28 @@ export default {
     showUpload() {
       return !this.screenshot && !this.processingImage;
     },
+    clear() {
+      return calcClear({
+        score: this.score,
+        hp: this.hp,
+        atk: this.atk,
+        def: this.def,
+        level: this.lvl,
+      });
+    },
+    scoreHighlight() {
+      return this.clear ? {} : { background: 'orange' };
+    },
   },
   watch: {
     towerHasMysticGate(newValue) {
       if (!newValue) this.mysticGate = false;
+    },
+    loggedInPlayer(newValue) {
+      if (!this.isEdit) {
+        this.player = newValue?.player;
+        if (this.player) this.player.id = newValue?.id;
+      }
     },
   },
 };
