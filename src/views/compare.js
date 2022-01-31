@@ -99,7 +99,7 @@ export default {
     logInterpolate(val, max) {
       if (!max) return 1;
       if (!val) return 0;
-      return this.interpolate(Math.log(Math.abs(val)), Math.log(Math.abs(max)));
+      return this.interpolate(Math.log(Math.abs(val) + 1), Math.log(Math.abs(max) + 1));
     },
   },
   async created() {
@@ -137,7 +137,7 @@ export default {
         ...a,
         [v.id]: {
           pure: (this.playerRecords?.pure?.[v.id]?.sunstones || 0) - (this.comparator?.pure?.[v.id]?.sunstones || 0),
-          impure: (this.playerRecords?.impure?.[v.id]?.sunstones || 0) - (this.comparator?.impure?.[v.id]?.sunstones || 0),
+          impure: (this.playerRecords?.impure?.[v.id]?.impureSunstones || 0) - (this.comparator?.impure?.[v.id]?.impureSunstones || 0),
         },
       }), {});
     },

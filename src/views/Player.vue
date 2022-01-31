@@ -11,49 +11,53 @@
       <div class="margin" v-if="this.$store.state.userProfile?.id && player.id !== this.$store.state.userProfile?.id"><router-link :to="'/compare/' +player.id  + '/' + this.$store.state.userProfile?.id">Compare to Myself</router-link></div>
     </div>
     <div class="tables">
-      <div>
-      Records
-      <table class="table">
-      <tr>
-        <th class="element">Tower</th>
-        <th class="element">Impure</th>
-        <th class="element">Pure</th>
-      </tr>
-      <tr v-for="tower in towers" :key="tower.id">
-        <td class="element"><router-link :to="'/tower/' + tower.id">{{tower.fullName}}</router-link></td>
-        <td class="element">
-          <router-link :to="'/run/' + impureRecords[tower.id].id" v-if="tower.id in impureRecords">
-            <tower-score :runData="impureRecords[tower.id]" :towerData="tower" :pure="false" />
-          </router-link>
-        </td>
-        <td class="element">
-          <router-link :to="'/run/' + pureRecords[tower.id].id" v-if="tower.id in pureRecords">
-            <tower-score :runData="pureRecords[tower.id]" :towerData="tower"/>
-          </router-link>
-        </td>
-      </tr>
-      </table>
+      <div class="wrapper">
+        <div class="leftheader">
+          Records
+        </div>
+        <table class="table lefttable">
+          <tr>
+            <th class="element">Tower</th>
+            <th class="element">Impure</th>
+            <th class="element">Pure</th>
+          </tr>
+          <tr v-for="tower in towers" :key="tower.id">
+            <td class="element"><router-link :to="'/tower/' + tower.id">{{tower.fullName}}</router-link></td>
+            <td class="element">
+              <router-link :to="'/run/' + impureRecords[tower.id].id" v-if="tower.id in impureRecords">
+                <tower-score :runData="impureRecords[tower.id]" :towerData="tower" :pure="false" />
+              </router-link>
+            </td>
+            <td class="element">
+              <router-link :to="'/run/' + pureRecords[tower.id].id" v-if="tower.id in pureRecords">
+                <tower-score :runData="pureRecords[tower.id]" :towerData="tower"/>
+              </router-link>
+            </td>
+          </tr>
+        </table>
       </div>
-      <div>
-      Most Recent Runs
-      <table class="table" v-if="latest">
-        <tr>
-          <th class="element">Tower</th>
-          <th class="element">Score</th>
-          <th class="element">Date</th>
-        </tr>
-        <tr v-for="run in latest" :key="run.id">
-          <td class="element"><router-link :to="'/tower/' + run.towerId">{{towerById(run.towerId).fullName}}</router-link></td>
-          <td class="element">
-            <router-link :to="'/run/' + run.id">
-              <tower-score :runData="run" :towerData="towerById(run.towerId)" :pure="run.pure"/>
-            </router-link>
-          </td>
-          <td class="element">
-            {{formatDate(run.time)}}
-          </td>
-        </tr>
-      </table>
+      <div class="wrapper">
+        <div class="rightheader">
+          Most Recent Runs
+        </div>
+        <table class="table" v-if="latest">
+          <tr>
+            <th class="element">Tower</th>
+            <th class="element">Score</th>
+            <th class="element">Date</th>
+          </tr>
+          <tr v-for="run in latest" :key="run.id">
+            <td class="element"><router-link :to="'/tower/' + run.towerId">{{towerById(run.towerId).fullName}}</router-link></td>
+            <td class="element">
+              <router-link :to="'/run/' + run.id">
+                <tower-score :runData="run" :towerData="towerById(run.towerId)" :pure="run.pure"/>
+              </router-link>
+            </td>
+            <td class="element">
+              {{formatDate(run.time)}}
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>
@@ -63,6 +67,10 @@
 </script>
 
 <style scoped>
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
 .tables {
   display: flex;
   flex-direction: row;
