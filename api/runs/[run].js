@@ -1,5 +1,5 @@
 import prisma from '../../lib/prisma';
-import { updatePlayerStats } from '../../lib/records';
+import { updatePlayerStats, calcImpureStones } from '../../lib/records';
 import { checkJwt, mayEdit, getUserId } from '../../lib/auth';
 
 export default async function fetchRun(req, res) {
@@ -49,6 +49,8 @@ export default async function fetchRun(req, res) {
         const payload = req.body;
         // Inject update statement for referenced table
         payload.resourceUse = { update: req.body.resourceUse };
+        // Calculate impure sunstone value
+        payload.impureSunstones = calcImpureStones(payload);
         await prisma.run.update({
           where: {
             id: run,

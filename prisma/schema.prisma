@@ -107,28 +107,30 @@ enum Medal {
 }
 
 model Run {
-  id           Int          @id @default(autoincrement())
-  player       Player       @relation(fields: [playerId], references: [id])
-  playerId     Int
-  tower        Tower        @relation(fields: [towerId], references: [id])
-  towerId      String
-  time         DateTime     @updatedAt
-  comment      String?      @db.Text
-  screenshot   String?      @db.Text
-  score        Int
-  pure         Boolean
-  impure       Boolean
-  mysticGate   Boolean
-  lastInflator Boolean
-  hp           Int?
-  atk          Int?
-  def          Int?
-  hpMulti      Int?
-  expMulti     Int?
-  level        Int?
-  resourceUse  ResourceUse?
-  sunstones    Int
-  medal        Medal
+  id              Int          @id @default(autoincrement())
+  player          Player       @relation(fields: [playerId], references: [id])
+  playerId        Int
+  tower           Tower        @relation(fields: [towerId], references: [id])
+  towerId         String
+  time            DateTime     @updatedAt
+  comment         String?      @db.Text
+  screenshot      String?      @db.Text
+  score           Int
+  pure            Boolean
+  impure          Boolean
+  mysticGate      Boolean
+  lastInflator    Boolean
+  hp              Int?
+  atk             Int?
+  def             Int?
+  hpMulti         Int?
+  expMulti        Int?
+  level           Int?
+  clear           Int?
+  resourceUse     ResourceUse?
+  sunstones       Int
+  impureSunstones Int          @default(0)
+  medal           Medal
 
   @@index([playerId, towerId, score, sunstones, medal])
 }

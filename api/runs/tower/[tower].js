@@ -7,9 +7,26 @@ export default async function fetchTowerRuns(req, res) {
   switch (method) {
     case 'GET':
       try {
-        const matches = await prisma.run.findMany({
+        const queries = [prisma.run.findMany({
           where: {
             towerId: tower,
+            impure: true,
+          },
+          orderBy: [{ impureSunstones: 'desc' }, { resourceUse: { sunstones: 'asc' } }, { score: 'desc' }],
+          include: {
+            player: {
+              select: {
+                id: true,
+                name: true,
+                pfp: true,
+              },
+            },
+            resourceUse: true,
+          },
+        }), prisma.run.findMany({
+          where: {
+            towerId: tower,
+            pure: true,
           },
           orderBy: [{ sunstones: 'desc' }, { resourceUse: { sunstones: 'asc' } }, { score: 'desc' }],
           include: {
@@ -22,8 +39,10 @@ export default async function fetchTowerRuns(req, res) {
             },
             resourceUse: true,
           },
-        });
-        res.json(matches);
+        })];
+
+        const [impureRecords, pureRecords] = await prisma.$transaction(queries);
+        res.json({ impure: impureRecords, pure: pureRecords });
       } catch (e) {
         console.error('Request error', e);
         res.status(500).json({ error: `Error fetching runs for tower ${tower}` });

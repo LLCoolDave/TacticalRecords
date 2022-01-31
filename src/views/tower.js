@@ -30,7 +30,7 @@ export default {
   },
   async created() {
     const towerRuns = await fetchTowerRuns(this.id);
-    this.pureRuns = towerRuns.filter((run) => (run.pure));
-    this.impureRuns = towerRuns.filter((run) => (run.impure));
+    this.impureRuns = towerRuns.impure;
+    this.pureRuns = towerRuns.pure;
   },
 };

@@ -1,6 +1,6 @@
 import prisma from '../../lib/prisma';
 import { checkJwt, mayEdit, getUserId } from '../../lib/auth';
-import { updatePlayerStats } from '../../lib/records';
+import { updatePlayerStats, calcImpureStones } from '../../lib/records';
 
 export default async function createRun(req, res) {
   const { method } = req;
@@ -23,6 +23,8 @@ export default async function createRun(req, res) {
         const payload = req.body;
         // Inject create statement for referenced table
         payload.resourceUse = { create: req.body.resourceUse };
+        // Calculate impure sunstone value
+        payload.impureSunstones = calcImpureStones(payload);
         const newRun = await prisma.run.create({
           data: payload,
         });
