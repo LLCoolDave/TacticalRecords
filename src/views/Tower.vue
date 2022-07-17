@@ -13,6 +13,11 @@
         </tr>
       </table>
     </div>
+    <div v-if="$store.getters.isAdmin">
+      <router-link :to="`/admin/tower/${id}`">
+        Edit Tower Data
+      </router-link>
+    </div>
     <div><input type="checkbox" v-model="personalRecords"/>Show only Personal Bests</div>
     <div class="tables">
       <table class="table">

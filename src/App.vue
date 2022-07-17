@@ -8,6 +8,7 @@
       <router-link to="/players">Players</router-link> |
       <router-link to="/towers">Towers</router-link>
       <template v-if="this.$store.state.userProfile"> | <router-link to="/run/new" >Submit Run</router-link></template>
+      <template v-if="this.$store.getters.isAdmin"> | <router-link to="/admin" >Admin</router-link></template>
     </div>
     <div id="status">
       <login-status/>

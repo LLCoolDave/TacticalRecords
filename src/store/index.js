@@ -1,5 +1,5 @@
 import { createStore } from 'vuex';
-import { fetchProfile, fetchTowers } from '../scripts/api';
+import { fetchProfile, fetchTowers, forceFetchTowers } from '../scripts/api';
 import { getInstance } from '../scripts/auth0';
 
 export default createStore({
@@ -29,8 +29,13 @@ export default createStore({
       const userProfile = await fetchProfile();
       context.commit('setProfile', userProfile);
     },
-    async fetchTowers(context) {
-      const towers = await fetchTowers();
+    async fetchTowers(context, force = false) {
+      let towers;
+      if (force) {
+        towers = await forceFetchTowers();
+      } else {
+        towers = await fetchTowers();
+      }
       const towerLookup = towers.reduce((obj, item) => {
         // eslint-disable-next-line no-param-reassign
         obj[item.id] = item;
@@ -39,6 +44,11 @@ export default createStore({
       context.commit('setTowers', towerLookup);
       const towerOrder = towers.map((obj) => obj.id);
       context.commit('setTowerOrder', towerOrder);
+    },
+  },
+  getters: {
+    isAdmin(state) {
+      return state.userProfile && state.userProfile.role === 'ADMIN';
     },
   },
   modules: {

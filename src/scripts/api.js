@@ -8,6 +8,16 @@ export async function fetchTowers() {
   return makeRequest('/api/towers');
 }
 
+export async function forceFetchTowers() {
+  const options = {
+    headers: {
+      pragma: 'no-cache',
+      'cache-control': 'no-cache',
+    },
+  };
+  return makeRequest('/api/towers', options);
+}
+
 export async function fetchProfile() {
   return makeSecuredRequest('/api/profile');
 }
@@ -15,6 +25,28 @@ export async function fetchProfile() {
 export async function fetchTower(towerId) {
   const towers = await fetchTowers();
   return _.find(towers, ['id', towerId]);
+}
+
+export async function forceFetchTower(towerId) {
+  const options = {
+    headers: {
+      pragma: 'no-cache',
+      'cache-control': 'no-cache',
+    },
+  };
+  return makeRequest(`/api/towers/${towerId}`, options);
+}
+
+export async function updateTower(id, data) {
+  return makeSecuredPutRequest(`/api/towers/${id}`, data);
+}
+
+export async function newTower(id, data) {
+  return makeSecuredPostRequest(`/api/towers/${id}`, data);
+}
+
+export async function deleteTower(id) {
+  return makeSecuredDeleteRequest(`/api/towers/${id}`);
 }
 
 export async function updateProfile(changes) {

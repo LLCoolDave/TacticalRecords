@@ -9,7 +9,11 @@ import Players from '../views/Players.vue';
 import Run from '../views/Run.vue';
 import Compare from '../views/Compare.vue';
 import Latest from '../views/Latest.vue';
+import Admin from '../views/Admin/Admin.vue';
+import AdminTowers from '../views/Admin/AdminTowers.vue';
+import TowerEdit from '../views/Admin/TowerEdit.vue';
 import { getInstance } from '../scripts/auth0';
+import store from '../store/index';
 
 let router;
 
@@ -39,6 +43,28 @@ export const authenticationGuard = (to, from, next) => {
   if (authService.state.isAuthenticated) {
     return next();
   }
+  // Otherwise open the login page and redirect to homepage
+  authService.loginWithRedirect({ appState: { targetUrl: to.fullPath } });
+  return next('/');
+};
+
+export const adminGuard = (to, from, next) => {
+  const authService = getInstance();
+
+  // If the Auth0Plugin has not loaded yet, redirect to the homepage and push an async handler to check again later
+  if (authService.state.loading) {
+    setTimeout(redirectLogin, 50, to.fullPath);
+    return next('/');
+  }
+
+  // If user is authenticated and admin they may proceed
+  if (authService.state.isAuthenticated) {
+    if (store.getters.isAdmin) {
+      return next();
+    }
+    return next('/');
+  }
+
   // Otherwise open the login page and redirect to homepage
   authService.loginWithRedirect({ appState: { targetUrl: to.fullPath } });
   return next('/');
@@ -130,6 +156,31 @@ const routes = [
     name: 'CompareMetaProgress',
     component: Compare,
     props: (route) => ({ playerId: route.params.playerId, compareId: null, mode: 'meta' }),
+  },
+  {
+    path: '/admin/',
+    name: 'Admin',
+    component: Admin,
+    beforeEnter: adminGuard,
+  },
+  {
+    path: '/admin/towers',
+    name: 'AdminTowers',
+    component: AdminTowers,
+    beforeEnter: adminGuard,
+  },
+  {
+    path: '/admin/tower/:id',
+    name: 'TowerEdit',
+    component: TowerEdit,
+    props: true,
+    beforeEnter: adminGuard,
+  },
+  {
+    path: '/admin/tower/addNewTower',
+    name: 'NewTower',
+    component: TowerEdit,
+    beforeEnter: adminGuard,
   },
 ];
 
