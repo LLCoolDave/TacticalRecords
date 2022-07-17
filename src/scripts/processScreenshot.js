@@ -24,7 +24,7 @@ const pixelOffsets = {
 const magicPixelOffsets = {
   medal: [4, 6],
   mysticgate: [[6, 9], [13, 6]],
-  digit: [[7, 0], [7, 1], [7, 7], [7, 13], [6, 3], [4, 5]],
+  digit: [[7, 0], [2, 1], [7, 7], [7, 13], [6, 3], [4, 5]],
 };
 
 const medalMagicPixels = {
@@ -43,7 +43,7 @@ const charMagicPixels = {
   3: [true, false, true, true, true, true],
   4: [true, false, false, true, false, true],
   5: [true, false, false, false, true, false],
-  6: [false, true, false, false, true, false],
+  6: [false, false, false, false, true, false],
   7: [true, false, true, false, true, false],
   8: [false, true, false, false, true, true],
   9: [false, true, false, false, false, true],
