@@ -1,4 +1,4 @@
-import { URLSearchParams } from 'core-js/modules/web.url-search-params';
+import { URLSearchParams } from 'core-js/modules/web.url-search-params.constructor';
 import _ from 'lodash';
 import {
   makeRequest, makeSecuredRequest, makeSecuredPutRequest, makeSecuredPostRequest, makeSecuredDeleteRequest,
