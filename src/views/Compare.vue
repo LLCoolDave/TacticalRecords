@@ -26,22 +26,30 @@
       <tr v-for="tower in towers" :key="tower.id">
         <td class="element"><router-link :to="'/tower/' + tower.id">{{tower.fullName}}</router-link></td>
         <td class="element">
-          <tower-score v-if="this.playerRecords?.impure?.[tower.id]" :runData="this.playerRecords?.impure?.[tower.id]" :pure="false" :towerData="tower" :hideScore="true" :hideMedals="true"/>
+          <router-link v-if="this.playerRecords?.impure?.[tower.id]" :to="'/run/' + this.playerRecords?.impure?.[tower.id].id">
+            <tower-score :runData="this.playerRecords?.impure?.[tower.id]" :pure="false" :towerData="tower" :hideScore="true" :hideMedals="true"/>
+          </router-link>
         </td>
         <td class="element shadow" :style="gradient(diffs[tower.id].impure)">
           {{diffs[tower.id].impure}}
         </td>
         <td class="element">
-          <tower-score v-if="this.comparator?.impure?.[tower.id]" :runData="this.comparator?.impure?.[tower.id]" :pure="false" :towerData="tower" :hideScore="true" :hideMedals="true"/>
+          <router-link v-if="this.comparator?.impure?.[tower.id]" :to="'/run/' + this.comparator?.impure?.[tower.id].id">
+            <tower-score :runData="this.comparator?.impure?.[tower.id]" :pure="false" :towerData="tower" :hideScore="true" :hideMedals="true"/>
+          </router-link>
         </td>
         <td class="element">
-          <tower-score v-if="this.playerRecords?.pure?.[tower.id]" :runData="this.playerRecords?.pure?.[tower.id]" :pure="true" :towerData="tower" :hideScore="true" :hideMedals="true"/>
+          <router-link v-if="this.playerRecords?.pure?.[tower.id]" :to="'/run/' + this.playerRecords?.pure?.[tower.id].id">
+            <tower-score :runData="this.playerRecords?.pure?.[tower.id]" :pure="true" :towerData="tower" :hideScore="true" :hideMedals="true"/>
+          </router-link>
         </td>
         <td class="element shadow" :style="gradient(diffs[tower.id].pure)">
           {{diffs[tower.id].pure}}
         </td>
         <td class="element">
-          <tower-score v-if="this.comparator?.pure?.[tower.id]" :runData="this.comparator?.pure?.[tower.id]" :pure="true" :towerData="tower" :hideScore="true" :hideMedals="true"/>
+          <router-link v-if="this.comparator?.pure?.[tower.id]" :to="'/run/' + this.comparator?.pure?.[tower.id].id">
+            <tower-score :runData="this.comparator?.pure?.[tower.id]" :pure="true" :towerData="tower" :hideScore="true" :hideMedals="true"/>
+          </router-link>
         </td>
       </tr>
       </table>
