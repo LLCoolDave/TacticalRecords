@@ -25,6 +25,7 @@ export default {
       platinum: 0,
       diamond: 0,
       moon: 0,
+      sun: 0,
     },
     mysticGate: false,
     hp: 0,
@@ -134,6 +135,7 @@ export default {
       this.resourcesUsed.platinum = parsedData.medals?.platinum || 0;
       this.resourcesUsed.diamond = parsedData.medals?.diamond || 0;
       this.resourcesUsed.moon = parsedData.medals?.moon || 0;
+      this.resourcesUsed.sun = parsedData.medals?.sun || 0;
     },
   },
   async created() {
@@ -169,6 +171,7 @@ export default {
     this.resourcesUsed.platinum = runData.resourceUse.platinum;
     this.resourcesUsed.diamond = runData.resourceUse.diamond;
     this.resourcesUsed.moon = runData.resourceUse.moon;
+    this.resourcesUsed.sun = runData.resourceUse.sun;
 
     // populated initial data
     this.hasLoaded = true;
@@ -182,10 +185,10 @@ export default {
     },
     isPure() {
       // There's probably a neater way
-      return this.mysticGate || (this.resourcesUsed.bronze + this.resourcesUsed.silver + this.resourcesUsed.gold + this.resourcesUsed.platinum + this.resourcesUsed.diamond + this.resourcesUsed.moon === 0);
+      return this.mysticGate || (this.resourcesUsed.bronze + this.resourcesUsed.silver + this.resourcesUsed.gold + this.resourcesUsed.platinum + this.resourcesUsed.diamond + this.resourcesUsed.moon + this.resourcesUsed.sun === 0);
     },
     isImpure() {
-      return !this.mysticGate;
+      return !this.mysticGate && !this.towerHasNoImpure;
     },
     towerOrder() {
       return this.$store.state.towerOrder;
@@ -198,6 +201,9 @@ export default {
     },
     towerHasMysticGate() {
       return this.tower?.hasMysticGate;
+    },
+    towerHasNoImpure() {
+      return this.tower?.hasNoImpure;
     },
     canSubmit() {
       return this.towerId && this.player && this.score > 0 && !this.isUpdating;

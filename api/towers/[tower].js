@@ -29,6 +29,7 @@ export default async function fetchTower(req, res) {
                 platinum: true,
                 diamond: true,
                 moon: true,
+                sun: true,
                 overscore: true,
               },
             },

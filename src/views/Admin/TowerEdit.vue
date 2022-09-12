@@ -11,12 +11,15 @@
       InternalId: <input type="text" v-model.number="ingameId" size="2" maxlength="2" class="input">
     </div>
     <div>
-      <tn-icon icon="mysticgate"/> <input type="checkbox" v-model="hasMysticGate"/>
+      <tn-icon icon="mysticgate"/> <input type="checkbox" v-model="hasMysticGate"/> No Impure Scores: <input type="checkbox" v-model="hasNoImpure"/>
     </div>
   </div>
   <div class="thresholds">
     <div class="threhold">
       <tn-icon icon="sunstone"/> <input type="text" v-model.number="thresholds.overscore" size="10" maxlength="10" class="input">
+    </div>
+    <div class="threhold">
+      <tn-icon icon="sun"/> <input type="text" v-model.number="thresholds.sun" size="10" maxlength="10" class="input">
     </div>
     <div class="threhold">
       <tn-icon icon="moon"/> <input type="text" v-model.number="thresholds.moon" size="10" maxlength="10" class="input">

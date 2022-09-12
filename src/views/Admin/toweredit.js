@@ -15,6 +15,7 @@ export default {
     chapter: 0,
     ingameId: null,
     hasMysticGate: false,
+    hasNoImpure: false,
     thresholds: {
       bronze: null,
       silver: null,
@@ -22,6 +23,7 @@ export default {
       platinum: null,
       diamond: null,
       moon: null,
+      sun: null,
       overscore: 0,
     },
     clears: {
@@ -75,6 +77,7 @@ export default {
         chapter: this.chapter,
         ingameId: this.ingameId,
         hasMysticGate: this.hasMysticGate,
+        hasNoImpure: this.hasNoImpure,
         hasLastInflator: false,
         thresholds: _.pickBy(this.thresholds, (value) => value),
         clears: _.filter(_.map(this.clears, (value, key) => ({ level: parseInt(key, 10), volume: value.volume, difficulty: value.difficulty })), (value) => (value.volume && value.difficulty)),
@@ -95,6 +98,7 @@ export default {
     this.chapter = towerData.chapter;
     this.ingameId = towerData.ingameId;
     this.hasMysticGate = towerData.hasMysticGate;
+    this.hasNoImpure = towerData.hasNoImpure;
     this.thresholds = towerData.thresholds;
 
     _.each(towerData.clears, (value) => {

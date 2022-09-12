@@ -27,6 +27,9 @@ export default {
     impureRunsDisplay() {
       return this.personalRecords ? _.uniqBy(this.impureRuns, (run) => run.playerId) : this.impureRuns;
     },
+    hasImpure() {
+      return !this.towerData?.hasNoImpure;
+    },
   },
   async created() {
     const towerRuns = await fetchTowerRuns(this.id);

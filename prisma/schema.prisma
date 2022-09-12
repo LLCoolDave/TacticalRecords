@@ -20,6 +20,7 @@ model Threshold {
   platinum  Int?
   diamond   Int?
   moon      Int?
+  sun       Int?
   overscore Int
 }
 
@@ -40,6 +41,7 @@ model Tower {
   ingameId        Int?       @unique
   hasMysticGate   Boolean
   hasLastInflator Boolean
+  hasNoImpure     Boolean    @default(false)
   thresholds      Threshold?
   clears          Clear[]
   runs            Run[]
@@ -73,6 +75,7 @@ model Player {
   platinum  Int     @default(0)
   diamond   Int     @default(0)
   moon      Int     @default(0)
+  sun       Int     @default(0)
   runs      Run[]
 
   @@index([sunstones])
@@ -92,6 +95,7 @@ model ResourceUse {
   platinum  Int?
   diamond   Int?
   moon      Int?
+  sun       Int?
 
   @@index([sunstones, runId])
 }
@@ -104,6 +108,7 @@ enum Medal {
   PLATINUM
   DIAMOND
   MOON
+  SUN
 }
 
 model Run {

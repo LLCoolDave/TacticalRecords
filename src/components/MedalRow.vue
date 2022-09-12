@@ -6,6 +6,7 @@
     <tn-icon icon="platinum" :size="size" v-for="index in medals?.platinum || 0" :key="index"/>
     <tn-icon icon="diamond" :size="size" v-for="index in medals?.diamond || 0" :key="index"/>
     <tn-icon icon="moon" :size="size" v-for="index in medals?.moon || 0" :key="index"/>
+    <tn-icon icon="sun" :size="size" v-for="index in medals?.sun || 0" :key="index"/>
   </div>
 </template>
 

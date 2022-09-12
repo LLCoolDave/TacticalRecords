@@ -7,6 +7,7 @@ export const iconMap = {
   platinum: 'medalPlatinum',
   diamond: 'medalDiamond',
   moon: 'medalMoon',
+  sun: 'medalSun',
   atk: 'iconATK',
   def: 'iconDEF',
   hp: 'iconHP',

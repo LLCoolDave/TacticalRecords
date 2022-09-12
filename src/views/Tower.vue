@@ -20,7 +20,7 @@
     </div>
     <div><input type="checkbox" v-model="personalRecords"/>Show only Personal Bests</div>
     <div class="tables">
-      <table class="table">
+      <table class="table" v-if="hasImpure">
       <tr>
         <th class="element">Impure</th>
       </tr>

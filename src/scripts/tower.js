@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { fetchTower } from './api';
 
-export const medalNames = ['bronze', 'silver', 'gold', 'platinum', 'diamond', 'moon'];
+export const medalNames = ['bronze', 'silver', 'gold', 'platinum', 'diamond', 'moon', 'sun'];
 export const statNames = ['atk', 'def', 'hp', 'lvl', 'hpmulti', 'expmulti'];
 export const chapterNames = ['Chapter-1', 'Chapter-2', 'Chapter-3', 'Chapter-4', 'Chapter-5', 'Chapter-6', 'Chapter-7', 'Chapter-8', 'Chapter-9', 'Chapter-10', 'Extra Chapter', 'Extra Chapter2', 'Special'];
 
