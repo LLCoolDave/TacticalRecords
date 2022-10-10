@@ -21,10 +21,29 @@ const pixelOffsets = {
   },
 };
 
+const pixelOffsetsNew = {
+  usedString: [9, 143],
+  medals: [104, 136],
+  mysticgate: [65, 97],
+  numbers: {
+    score: [155, 101, 10],
+    lvl: [525, 20, 3],
+    hp: [485, 43, 9],
+    hpmulti: [576, 43, 5],
+    hpbar: [485, 36, 9],
+    hpmultibar: [576, 36, 5],
+    atk: [515, 68, 6],
+    def: [515, 92, 6],
+    expmulti: [576, 117, 5],
+    stonesused: [55, 138, 4],
+  },
+};
+
 const magicPixelOffsets = {
   medal: [4, 6],
   mysticgate: [[6, 9], [13, 6]],
   digit: [[7, 0], [2, 1], [7, 7], [7, 13], [6, 3], [4, 5]],
+  usedString: [[0, 0], [8, 8], [12, 3], [23, 4], [26, 1]],
 };
 
 const medalMagicPixels = {
@@ -83,8 +102,8 @@ function parseMedals(ctx) {
   return _.countBy(medals);
 }
 
-function parseGate(ctx) {
-  const imgData = ctx.getImageData(pixelOffsets.mysticgate[0], pixelOffsets.mysticgate[1], 20, 20);
+function parseGate(ctx, xOff, yOff) {
+  const imgData = ctx.getImageData(xOff, yOff, 20, 20);
   const magicPixel1 = getPixelAt(imgData, magicPixelOffsets.mysticgate[0][0], magicPixelOffsets.mysticgate[0][1], 20);
   const magicPixel2 = getPixelAt(imgData, magicPixelOffsets.mysticgate[1][0], magicPixelOffsets.mysticgate[1][1], 20);
   return pixelIsClose(magicPixel1, mysticGateMagixPixels[0]) && pixelIsClose(magicPixel2, mysticGateMagixPixels[1]);
@@ -110,6 +129,22 @@ function parseNumber(ctx, xoff, yoff, length = 1) {
   }
   if (parsed) return parseInt(parsed, 10);
   return null;
+}
+
+function parseMedalsNew(ctx) {
+  const offsets = pixelOffsetsNew.medals;
+  const medals = {};
+  let medal;
+  let medalCount;
+  for (let i = 0; i < 8; i += 1) {
+    medal = parseMedal(ctx, offsets[0] + 30 * i, offsets[1]);
+    if (medal) {
+      medalCount = parseNumber(ctx, offsets[0] + 30 * i + 6, offsets[1] + 1, 2);
+      medals[medal] = medalCount;
+    }
+  }
+
+  return medals;
 }
 
 function loadFile(file) {
@@ -156,6 +191,20 @@ function drawOntoCanvas(rawFile, ctx) {
   });
 }
 
+function checkScoreLayoutVersion(ctx) {
+  const imgData = ctx.getImageData(pixelOffsetsNew.usedString[0], pixelOffsetsNew.usedString[1], 28, 8);
+
+  const matches = [];
+  let magicPixel;
+  _.each(magicPixelOffsets.usedString, (coords) => {
+    magicPixel = getPixelAt(imgData, coords[0], coords[1], 10);
+    matches.push(pixelIsClose(magicPixel, [6, 6, 6]));
+  });
+  const layoutVersion = matches.every((value) => value) ? 'new' : 'old';
+
+  return layoutVersion;
+}
+
 export async function parseScreenshot(file) {
   const rawFile = await loadFile(file);
 
@@ -166,18 +215,33 @@ export async function parseScreenshot(file) {
   const context = canvas.getContext('2d');
   await drawOntoCanvas(rawFile, context);
 
-  const medals = parseMedals(context);
-  const { numbers } = _.cloneDeep(pixelOffsets);
-  _.each(pixelOffsets.numbers, (value, key) => { numbers[key] = parseNumber(context, ...value); });
-  const mysticgate = parseGate(context);
+  const layoutVersion = checkScoreLayoutVersion(context);
+  let medals;
+  let mysticgate;
+  let numbers;
+
+  if (layoutVersion === 'new') {
+    medals = parseMedalsNew(context);
+    numbers = _.cloneDeep(pixelOffsetsNew).numbers;
+    _.each(pixelOffsetsNew.numbers, (value, key) => { numbers[key] = parseNumber(context, ...value); });
+    mysticgate = parseGate(context, pixelOffsetsNew.mysticgate[0], pixelOffsetsNew.mysticgate[1]);
+  } else {
+    medals = parseMedals(context);
+    numbers = _.cloneDeep(pixelOffsets).numbers;
+    _.each(pixelOffsets.numbers, (value, key) => { numbers[key] = parseNumber(context, ...value); });
+    mysticgate = parseGate(context, pixelOffsets.mysticgate[0], pixelOffsets.mysticgate[1]);
+    numbers.lvl = numbers.lvl || numbers.lvlold || numbers.lvloldfrozen;
+    numbers.atk = Math.max(numbers.atk, numbers.atkold); // some numbers match in both offsets, but the correct one is almost guaranteed to be larger
+    numbers.def = Math.max(numbers.def, numbers.defold);
+  }
 
   const ret = {
     medals,
     score: numbers.score || 0,
-    lvl: numbers.lvl || numbers.lvlold || numbers.lvloldfrozen || 1,
-    atk: Math.max(numbers.atk, numbers.atkold), // some numbers match in both offsets, but the correct one is almost guaranteed to be larger
-    def: Math.max(numbers.def, numbers.defold),
-    hp: Math.max(numbers.hp, numbers.hpbar) || 0,
+    lvl: numbers.lvl || 1,
+    atk: numbers.atk,
+    def: numbers.def,
+    hp: Math.max(numbers.hp, numbers.hpbar) || 0, // some numbers match in both offsets, but the correct one is almost guaranteed to be larger
     stonesused: numbers.stonesused || 0,
     hpMulti: Math.max(numbers.hpmulti, numbers.hpmultibar) || 100,
     expMulti: numbers.expmulti || 100,

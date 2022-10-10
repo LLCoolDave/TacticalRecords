@@ -1,12 +1,26 @@
 <template>
-  <div class="medalrow" :style="columnCss">
-    <tn-icon icon="bronze" :size="size" v-for="index in medals?.bronze || 0" :key="index"/>
-    <tn-icon icon="silver" :size="size" v-for="index in medals?.silver || 0" :key="index"/>
-    <tn-icon icon="gold" :size="size" v-for="index in medals?.gold || 0" :key="index"/>
-    <tn-icon icon="platinum" :size="size" v-for="index in medals?.platinum || 0" :key="index"/>
-    <tn-icon icon="diamond" :size="size" v-for="index in medals?.diamond || 0" :key="index"/>
-    <tn-icon icon="moon" :size="size" v-for="index in medals?.moon || 0" :key="index"/>
-    <tn-icon icon="sun" :size="size" v-for="index in medals?.sun || 0" :key="index"/>
+  <div class="medalrow rewardFont" :style="medalCss">
+    <div v-if="medals?.bronze" >
+      <tn-icon icon="bronze" :size="size"/> {{medals?.bronze}}&nbsp;
+    </div>
+    <div v-if="medals?.silver">
+      <tn-icon icon="silver" :size="size"/> {{medals?.silver}}&nbsp;
+    </div>
+    <div v-if="medals?.gold">
+      <tn-icon icon="gold" :size="size"/> {{medals?.gold}}&nbsp;
+    </div>
+    <div v-if="medals?.platinum">
+      <tn-icon icon="platinum" :size="size"/> {{medals?.platinum}}&nbsp;
+    </div>
+    <div v-if="medals?.diamond">
+      <tn-icon icon="diamond" :size="size"/> {{medals?.diamond}}&nbsp;
+    </div>
+    <div v-if="medals?.moon">
+      <tn-icon icon="moon" :size="size"/> {{medals?.moon}}&nbsp;
+    </div>
+    <div v-if="medals?.sun">
+      <tn-icon icon="sun" :size="size"/> {{medals?.sun}}&nbsp;
+    </div>
   </div>
 </template>
 
@@ -15,11 +29,16 @@ export default {
   name: 'MedalRow',
   props: ['medals', 'size', 'rowLength'],
   computed: {
-    breakPoint() {
-      return this.rowLength || 20;
+    medalCss() {
+      return { fontSize: `${this.fontSize}px` };
     },
-    columnCss() {
-      return `grid-template-columns: repeat(${this.breakPoint}, max-content);`;
+    fontSize() {
+      switch (this.size) {
+        case 'tiny': return 12;
+        case 'small': return 21;
+        case 'large': return 44;
+        default: return 31;
+      }
     },
   },
 };
@@ -27,7 +46,8 @@ export default {
 
 <style scoped>
 .medalrow {
-  display: grid;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
 }
 </style>
