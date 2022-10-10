@@ -62,6 +62,7 @@ export function calcScores(runData) {
     1: atk * lvl + def * lvl + hp,
     2: atk * 5 * lvl + def * 5 * lvl + hp,
     3: atk * 10 * lvl + def * 10 * lvl + hp,
+    4: atk * 10 * lvl + def * 10 * lvl,
   };
 }
 
@@ -71,5 +72,6 @@ export function calcClear(runData) {
   if (scores[1] === score) return 'clear1';
   if (scores[2] === score) return 'clear2';
   if (scores[3] === score) return 'clear3';
+  if (scores[4] === score) return 'clear3noHp';
   return null;
 }

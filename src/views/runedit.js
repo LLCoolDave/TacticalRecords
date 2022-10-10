@@ -79,7 +79,7 @@ export default {
         score: this.score,
         pure: this.isPure,
         impure: this.isImpure,
-        mysticGate: this.mysticGate,
+        mysticGate: this.mysticGate || this.towerHasNoImpure,
         lastInflator: false,
         hp: this.hp,
         atk: this.atk,
@@ -185,7 +185,7 @@ export default {
     },
     isPure() {
       // There's probably a neater way
-      return this.mysticGate || (this.resourcesUsed.bronze + this.resourcesUsed.silver + this.resourcesUsed.gold + this.resourcesUsed.platinum + this.resourcesUsed.diamond + this.resourcesUsed.moon + this.resourcesUsed.sun === 0);
+      return this.mysticGate || this.towerHasNoImpure || (this.resourcesUsed.bronze + this.resourcesUsed.silver + this.resourcesUsed.gold + this.resourcesUsed.platinum + this.resourcesUsed.diamond + this.resourcesUsed.moon + this.resourcesUsed.sun === 0);
     },
     isImpure() {
       return !this.mysticGate && !this.towerHasNoImpure;

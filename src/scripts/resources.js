@@ -20,6 +20,7 @@ export const iconMap = {
   clear1: 'clear1',
   clear2: 'clear2',
   clear3: 'clear3',
+  clear3noHp: 'clear3',
 };
 
 export function getIconURL(icon) {
