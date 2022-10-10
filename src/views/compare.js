@@ -101,32 +101,35 @@ export default {
       if (!val) return 0;
       return this.interpolate(Math.log(Math.abs(val) + 1), Math.log(Math.abs(max) + 1));
     },
+    async updateRecords() {
+      let records = await this.fetchRecords(fetchPlayerRecords, this.playerId);
+      this.player = records.player;
+      this.playerRecords = records.records;
+      switch (this.mode) {
+        case 'player':
+          records = await this.fetchRecords(fetchPlayerRecords, this.compareId);
+          this.otherPlayer = records.player;
+          this.comparator = records.records;
+          break;
+        case 'sunstones':
+          records = await this.fetchRecords(fetchMetaRecords, this.compareId);
+          this.comparator = records.records;
+          break;
+        case 'meta':
+          records = await this.fetchRecords(fetchMetaRecords, this.player.sunstones);
+          this.comparator = records.records;
+          break;
+        case 'records':
+        default:
+          records = await this.fetchRecords(fetchGlobalRecords);
+          this.comparator = records.records;
+          break;
+      }
+      this.hasLoaded = true;
+    },
   },
   async created() {
-    let records = await this.fetchRecords(fetchPlayerRecords, this.playerId);
-    this.player = records.player;
-    this.playerRecords = records.records;
-    switch (this.mode) {
-      case 'player':
-        records = await this.fetchRecords(fetchPlayerRecords, this.compareId);
-        this.otherPlayer = records.player;
-        this.comparator = records.records;
-        break;
-      case 'sunstones':
-        records = await this.fetchRecords(fetchMetaRecords, this.compareId);
-        this.comparator = records.records;
-        break;
-      case 'meta':
-        records = await this.fetchRecords(fetchMetaRecords, this.player.sunstones);
-        this.comparator = records.records;
-        break;
-      case 'records':
-      default:
-        records = await this.fetchRecords(fetchGlobalRecords);
-        this.comparator = records.records;
-        break;
-    }
-    this.hasLoaded = true;
+    await this.updateRecords();
   },
   computed: {
     towers() {
@@ -146,6 +149,14 @@ export default {
     },
     max() {
       return Math.max(..._.map(this.diffs, (tower) => Math.max(tower.pure, tower.impure)));
+    },
+  },
+  watch: {
+    async mode() {
+      this.hasLoaded = false; await this.updateRecords();
+    },
+    async compareId() {
+      this.hasLoaded = false; await this.updateRecords();
     },
   },
 };

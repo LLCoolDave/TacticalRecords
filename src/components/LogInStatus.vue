@@ -1,6 +1,12 @@
 <template>
   <div class="loginStatus" v-if="!$auth.state.loading">
-    <div v-if="profile"><player-display :player="player" :route="'/profile'" showStones="true"/></div>
+    <div v-if="profile">
+      <player-display :player="player" :route="'/profile'" showStones="true"/>
+      <div>Compare:&nbsp;
+        <router-link :to="'/compare/' +profile.id  + '/records'">Records</router-link>&nbsp;-&nbsp;
+        <router-link :to="'/compare/' +profile.id  + '/progress'">Meta</router-link>
+      </div>
+    </div>
     <div class="button">
       <LogoutButton v-if="$auth.state.isAuthenticated" />
       <LoginButton v-else />
