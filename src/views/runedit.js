@@ -18,6 +18,8 @@ export default {
       atk: 0,
       def: 0,
       hp: 0,
+      maxHp: 0,
+      legacyStones: 0,
       sunstones: 0,
       bronze: 0,
       silver: 0,
@@ -66,7 +68,7 @@ export default {
       this.$router.push({ path: '/' });
     },
     calcSunstonesUsed() {
-      const totalStones = this.resourcesUsed.atk + this.resourcesUsed.def + this.resourcesUsed.hp;
+      const totalStones = this.resourcesUsed.atk + this.resourcesUsed.def + this.resourcesUsed.hp + this.resourcesUsed.maxHp + this.resourcesUsed.legacyStones;
       if (totalStones > this.resourcesUsed.sunstones) this.resourcesUsed.sunstones = totalStones;
     },
     buildSubmitObject() {
@@ -128,7 +130,8 @@ export default {
       this.lvl = parsedData.lvl;
       this.hpMulti = parsedData.hpMulti;
       this.expMulti = parsedData.expMulti;
-      this.resourcesUsed.sunstones = parsedData.stonesused;
+      this.resourcesUsed.legacyStones = parsedData?.legacies || 0;
+      this.resourcesUsed.sunstones = parsedData.stonesused + this.resourcesUsed.legacyStones;
       this.resourcesUsed.bronze = parsedData.medals?.bronze || 0;
       this.resourcesUsed.silver = parsedData.medals?.silver || 0;
       this.resourcesUsed.gold = parsedData.medals?.gold || 0;

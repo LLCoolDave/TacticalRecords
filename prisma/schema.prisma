@@ -82,20 +82,23 @@ model Player {
 }
 
 model ResourceUse {
-  id        Int  @id @default(autoincrement())
-  run       Run  @relation(fields: [runId], references: [id])
-  runId     Int  @unique
-  atk       Int?
-  def       Int?
-  hp        Int?
-  sunstones Int  @default(0)
-  bronze    Int?
-  silver    Int?
-  gold      Int?
-  platinum  Int?
-  diamond   Int?
-  moon      Int?
-  sun       Int?
+  id           Int   @id @default(autoincrement())
+  run          Run   @relation(fields: [runId], references: [id])
+  runId        Int   @unique
+  atk          Int?
+  def          Int?
+  hp           Int?
+  maxHp        Int?
+  legacyStones Int?
+  sunstones    Int   @default(0)
+  legacies     Json?
+  bronze       Int?
+  silver       Int?
+  gold         Int?
+  platinum     Int?
+  diamond      Int?
+  moon         Int?
+  sun          Int?
 
   @@index([sunstones, runId])
 }

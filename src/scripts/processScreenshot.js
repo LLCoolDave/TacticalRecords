@@ -23,6 +23,7 @@ const pixelOffsets = {
 
 const pixelOffsetsNew = {
   usedString: [9, 143],
+  legaciesString: [103, 129],
   medals: [104, 136],
   mysticgate: [65, 97],
   numbers: {
@@ -36,6 +37,7 @@ const pixelOffsetsNew = {
     def: [515, 92, 6],
     expmulti: [576, 117, 5],
     stonesused: [55, 138, 4],
+    legacies: [115, 138, 4],
   },
 };
 
@@ -44,6 +46,7 @@ const magicPixelOffsets = {
   mysticgate: [[6, 9], [13, 6]],
   digit: [[7, 0], [2, 1], [7, 7], [7, 13], [6, 3], [4, 5]],
   usedString: [[0, 0], [8, 8], [12, 3], [23, 4], [26, 1]],
+  legaciesString: [[0, 0], [3, 6], [14, 1], [23, 8], [36, 2], [54, 7]],
 };
 
 const medalMagicPixels = {
@@ -192,17 +195,30 @@ function drawOntoCanvas(rawFile, ctx) {
 }
 
 function checkScoreLayoutVersion(ctx) {
-  const imgData = ctx.getImageData(pixelOffsetsNew.usedString[0], pixelOffsetsNew.usedString[1], 28, 8);
+  const imgData = ctx.getImageData(pixelOffsetsNew.usedString[0], pixelOffsetsNew.usedString[1], 28, 9);
 
   const matches = [];
   let magicPixel;
   _.each(magicPixelOffsets.usedString, (coords) => {
-    magicPixel = getPixelAt(imgData, coords[0], coords[1], 10);
+    magicPixel = getPixelAt(imgData, coords[0], coords[1], 28);
     matches.push(pixelIsClose(magicPixel, [6, 6, 6]));
   });
   const layoutVersion = matches.every((value) => value) ? 'new' : 'old';
 
   return layoutVersion;
+}
+
+function hasLegacyStones(ctx) {
+  const imgData = ctx.getImageData(pixelOffsetsNew.legaciesString[0], pixelOffsetsNew.legaciesString[1], 56, 9);
+
+  const matches = [];
+  let magicPixel;
+  _.each(magicPixelOffsets.legaciesString, (coords) => {
+    magicPixel = getPixelAt(imgData, coords[0], coords[1], 56);
+    matches.push(pixelIsClose(magicPixel, [6, 6, 6]));
+  });
+
+  return matches.every((value) => value);
 }
 
 export async function parseScreenshot(file) {
@@ -219,12 +235,14 @@ export async function parseScreenshot(file) {
   let medals;
   let mysticgate;
   let numbers;
+  let hasLegacies = false;
 
   if (layoutVersion === 'new') {
     medals = parseMedalsNew(context);
     numbers = _.cloneDeep(pixelOffsetsNew).numbers;
     _.each(pixelOffsetsNew.numbers, (value, key) => { numbers[key] = parseNumber(context, ...value); });
     mysticgate = parseGate(context, pixelOffsetsNew.mysticgate[0], pixelOffsetsNew.mysticgate[1]);
+    hasLegacies = hasLegacyStones(context);
   } else {
     medals = parseMedals(context);
     numbers = _.cloneDeep(pixelOffsets).numbers;
@@ -243,6 +261,7 @@ export async function parseScreenshot(file) {
     def: numbers.def,
     hp: Math.max(numbers.hp, numbers.hpbar) || 0, // some numbers match in both offsets, but the correct one is almost guaranteed to be larger
     stonesused: numbers.stonesused || 0,
+    legacies: hasLegacies ? numbers?.legacies || 0 : 0,
     hpMulti: Math.max(numbers.hpmulti, numbers.hpmultibar) || 100,
     expMulti: numbers.expmulti || 100,
     mysticgate,
