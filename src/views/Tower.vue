@@ -18,7 +18,7 @@
         Edit Tower Data
       </router-link>
     </div>
-    <div><input type="checkbox" v-model="personalRecords"/>Show only Personal Bests</div>
+    <div><input type="checkbox" v-model="personalRecords"/>Show only Personal Bests <input type="checkbox" v-model="legacyScores"/>Include legacy scores</div>
     <div class="tables">
       <table class="table" v-if="hasImpure">
       <tr>

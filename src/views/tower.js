@@ -8,7 +8,26 @@ export default {
     pureRuns: [],
     impureRuns: [],
     personalRecords: true,
+    legacyScores: false,
   }),
+  methods: {
+    filterToRecords(runs) {
+      return _.uniqBy(runs, (run) => run.playerId);
+    },
+    filterLegacy(runs) {
+      return _.filter(runs, (run) => !run.isLegacy);
+    },
+    filterRuns(runs) {
+      let retRuns = runs;
+      if (!this.legacyScores) {
+        retRuns = this.filterLegacy(retRuns);
+      }
+      if (this.personalRecords) {
+        retRuns = this.filterToRecords(retRuns);
+      }
+      return retRuns;
+    },
+  },
   computed: {
     towerData() {
       return this.$store.state.towers?.[this.id];
@@ -22,10 +41,10 @@ export default {
       return scores;
     },
     pureRunsDisplay() {
-      return this.personalRecords ? _.uniqBy(this.pureRuns, (run) => run.playerId) : this.pureRuns;
+      return this.filterRuns(this.pureRuns);
     },
     impureRunsDisplay() {
-      return this.personalRecords ? _.uniqBy(this.impureRuns, (run) => run.playerId) : this.impureRuns;
+      return this.filterRuns(this.impureRuns);
     },
     hasImpure() {
       return !this.towerData?.hasNoImpure;

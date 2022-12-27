@@ -36,5 +36,8 @@ export default {
     clear() {
       return calcClear(this.runData);
     },
+    legacyRun() {
+      return this.runData?.isLegacy;
+    },
   },
 };

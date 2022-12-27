@@ -1,5 +1,5 @@
 <template>
-  <div v-if="hasLoaded" class="wrapper">
+  <div v-if="hasLoaded" :class="legacyRun ? 'wrapperWithLegacy' : 'wrapper'">
     <div class="header">
       <div class="names">
         <div class="player">
@@ -14,6 +14,7 @@
         <router-link :to="editRoute"><span class="editButton">Edit Run</span></router-link>
       </div>
     </div>
+    <div v-if="legacyRun" class="legacyRunInfo">This run was achieved on an older version of the game.</div>
     <div class="scoreBlock">
       <div class="score">
         <tn-icon :icon="clear" v-if="clear"/>
@@ -63,6 +64,16 @@
   justify-content: center;
 }
 
+.wrapperWithLegacy {
+  display: grid;
+  grid-template-areas: 'header header screenshot screenshot'
+                       'legacyRunInfo legacyRunInfo screenshot screenshot'
+                       'score stats screenshot screenshot'
+                       'score stats screenshot screenshot'
+                       'comment comment screenshot screenshot';
+  justify-content: center;
+}
+
 .names {
   display: flex;
   flex-direction: row;
@@ -75,7 +86,7 @@
   grid-area: comment;
 }
 
-.commenDisplay {
+.commentDisplay {
   background: rgb(79, 119, 228);
 }
 
@@ -153,6 +164,14 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+.legacyRunInfo {
+  text-align: center;
+  font-size: 20px;
+  font-style: italic;
+  color: orange;
+  grid-area: legacyRunInfo;
 }
 
 </style>

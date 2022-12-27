@@ -128,6 +128,7 @@ model Run {
   impure          Boolean
   mysticGate      Boolean
   lastInflator    Boolean
+  isLegacy        Boolean      @default(false)
   hp              Int?
   atk             Int?
   def             Int?
@@ -146,4 +147,12 @@ model Run {
 model CacheValid {
   id          String   @id
   lastUpdated DateTime @updatedAt
+}
+
+model Legacy {
+  id          String @id @unique
+  fullName    String
+  slot        Int    @unique
+  costFlat    Int    @default(0)
+  costPercent Int    @default(0)
 }

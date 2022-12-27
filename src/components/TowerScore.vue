@@ -1,5 +1,5 @@
 <template>
-<div class="columns">
+<div class="columns" :style="bgHighlight">
   <div class="center">
     <tn-icon icon="mysticgate" size="small" v-if="runData?.mysticGate"/>
     <span class="scoreFont" v-if="showScore">{{`${this.runData?.score || 0}`.toLocaleString()}}</span>
@@ -41,6 +41,9 @@ export default {
     },
     showMedalsUsed() {
       return this.runData?.resourceUse != null && !this.hideMedals;
+    },
+    bgHighlight() {
+      return this.runData?.isLegacy ? { background: 'rgba(255, 196, 77, 0.4)' } : {};
     },
   },
 };

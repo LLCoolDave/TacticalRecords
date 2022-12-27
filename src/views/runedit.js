@@ -39,6 +39,7 @@ export default {
     comment: '',
     screenshot: '',
     processingImage: false,
+    legacyRun: false,
   }),
   props: ['id'],
   methods: {
@@ -68,7 +69,7 @@ export default {
       this.$router.push({ path: '/' });
     },
     calcSunstonesUsed() {
-      const totalStones = this.resourcesUsed.atk + this.resourcesUsed.def + this.resourcesUsed.hp + this.resourcesUsed.maxHp + this.resourcesUsed.legacyStones;
+      const totalStones = Number(this.resourcesUsed.atk) + Number(this.resourcesUsed.def) + Number(this.resourcesUsed.hp) + Number(this.resourcesUsed.maxHp) + Number(this.resourcesUsed.legacyStones);
       if (totalStones > this.resourcesUsed.sunstones) this.resourcesUsed.sunstones = totalStones;
     },
     buildSubmitObject() {
@@ -92,6 +93,7 @@ export default {
         sunstones: rewards.sunstones,
         medal: rewards.medal ? rewards.medal.toUpperCase() : 'NONE',
         resourceUse: this.resourcesUsed,
+        isLegacy: this.legacyRun,
       };
     },
     async uploadScreenshot(e) {
@@ -163,18 +165,19 @@ export default {
     this.lvl = runData.level;
     this.comment = runData.comment;
     this.screenshot = runData.screenshot;
+    this.legacyRun = runData.isLegacy;
 
-    this.resourcesUsed.atk = runData.resourceUse.atk;
-    this.resourcesUsed.def = runData.resourceUse.def;
-    this.resourcesUsed.hp = runData.resourceUse.hp;
-    this.resourcesUsed.sunstones = runData.resourceUse.sunstones;
-    this.resourcesUsed.bronze = runData.resourceUse.bronze;
-    this.resourcesUsed.silver = runData.resourceUse.silver;
-    this.resourcesUsed.gold = runData.resourceUse.gold;
-    this.resourcesUsed.platinum = runData.resourceUse.platinum;
-    this.resourcesUsed.diamond = runData.resourceUse.diamond;
-    this.resourcesUsed.moon = runData.resourceUse.moon;
-    this.resourcesUsed.sun = runData.resourceUse.sun;
+    this.resourcesUsed.atk = runData.resourceUse.atk || 0;
+    this.resourcesUsed.def = runData.resourceUse.def || 0;
+    this.resourcesUsed.hp = runData.resourceUse.hp || 0;
+    this.resourcesUsed.sunstones = runData.resourceUse.sunstones || 0;
+    this.resourcesUsed.bronze = runData.resourceUse.bronze || 0;
+    this.resourcesUsed.silver = runData.resourceUse.silver || 0;
+    this.resourcesUsed.gold = runData.resourceUse.gold || 0;
+    this.resourcesUsed.platinum = runData.resourceUse.platinum || 0;
+    this.resourcesUsed.diamond = runData.resourceUse.diamond || 0;
+    this.resourcesUsed.moon = runData.resourceUse.moon || 0;
+    this.resourcesUsed.sun = runData.resourceUse.sun || 0;
 
     // populated initial data
     this.hasLoaded = true;

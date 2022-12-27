@@ -62,7 +62,8 @@
   </div>
   <div class="buttons">
     <div><input type="button" @click="submit" :value="buttonText" :disabled="!canSubmit"/></div>
-    <div v-if="isEdit"><input type="button" @click="deleteCurrentRun" value="Delete Run" :disabled="isUpdating"/> Are you sure? <input type="checkbox" v-model="deleteConfirm"/></div>
+    <div v-if="isEdit"><input type="button" @click="deleteCurrentRun" value="Delete Run" :disabled="isUpdating"/> Confirm Delete? <input type="checkbox" v-model="deleteConfirm"/></div>
+    <div title="Legacy runs are scores achieved in older versions of the game that cannot currently be replicated due to stage or gameplay modifications.">Legacy Run?<input type="checkbox" v-model="legacyRun"/></div>
   </div>
 </div>
 </template>
