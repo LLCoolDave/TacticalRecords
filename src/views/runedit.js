@@ -175,6 +175,7 @@ export default {
     this.resourcesUsed.def = runData.resourceUse.def || 0;
     this.resourcesUsed.hp = runData.resourceUse.hp || 0;
     this.resourcesUsed.sunstones = runData.resourceUse.sunstones || 0;
+    this.resourcesUsed.legacyStones = runData.resourceUse.legacyStones || 0;
     this.resourcesUsed.bronze = runData.resourceUse.bronze || 0;
     this.resourcesUsed.silver = runData.resourceUse.silver || 0;
     this.resourcesUsed.gold = runData.resourceUse.gold || 0;
