@@ -44,7 +44,7 @@ export default async function fetchLegacies(req, res) {
             },
           ],
         });
-        res.setHeader('Cache-Control', 'max-age=60');
+        res.setHeader('Cache-Control', 'max-age=3600');
         res.json(matches);
       } catch (e) {
         console.error('Request error', e);
