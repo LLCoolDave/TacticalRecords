@@ -33,6 +33,9 @@
       <div class="medals">
         <medal-row :medals="this.runData.resourceUse" size="small"/>
       </div>
+      <div class="legacies" v-if="runData.mysticGate">
+        <legacy-row :modifiable="false" :legacies="usedLegacies"/>
+      </div>
     </div>
     <div class="statBlock">
       <div class="atk"><tn-icon icon="atk"/><span class="atkFont"> {{this.runData.atk}}</span></div>

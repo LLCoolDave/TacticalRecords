@@ -6,8 +6,12 @@ import TowerScore from './components/TowerScore.vue';
 import PlayerScore from './components/PlayerScore.vue';
 import PlayerDisplay from './components/PlayerDisplay.vue';
 import TNIcon from './components/TNIcon.vue';
+import LegacyIcon from './components/LegacyIcon.vue';
 import LogInStatus from './components/LogInStatus.vue';
 import MedalRow from './components/MedalRow.vue';
+import LegacyEdit from './components/LegacyEdit.vue';
+import LegacyButton from './components/LegacyButton.vue';
+import LegacyRow from './components/LegacyRow.vue';
 
 import { Auth0Plugin } from './scripts/auth0';
 
@@ -32,9 +36,13 @@ app.use(Auth0Plugin, {
 
 app.component('tower-score', TowerScore);
 app.component('tn-icon', TNIcon);
+app.component('legacy-icon', LegacyIcon);
 app.component('login-status', LogInStatus);
 app.component('player-score', PlayerScore);
 app.component('player-display', PlayerDisplay);
 app.component('medal-row', MedalRow);
+app.component('legacy-edit', LegacyEdit);
+app.component('legacy-button', LegacyButton);
+app.component('legacy-row', LegacyRow);
 
 app.mount('#app');

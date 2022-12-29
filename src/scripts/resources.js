@@ -30,3 +30,19 @@ export function getIconURL(icon) {
   if (filebase) return require(`../assets/${filebase}.png`);
   return null;
 }
+
+export const legacyIconMap = {
+  bell: 'bell',
+  solarMattock: 'solarMattock',
+  guardian: 'guardian',
+  medicine: 'medicine',
+  moonGate: 'moonGate',
+  solarGate: 'solarGate',
+  summerDrop: 'summerDrop',
+};
+
+export function getLegacyIconURL(icon) {
+  const filebase = legacyIconMap?.[icon];
+  if (filebase) return require(`../assets/legacy/${filebase}.png`);
+  return null;
+}

@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Legacy` ADD COLUMN `max` INTEGER NOT NULL DEFAULT 1;

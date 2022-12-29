@@ -28,6 +28,7 @@ export default {
       diamond: 0,
       moon: 0,
       sun: 0,
+      legacies: {},
     },
     mysticGate: false,
     hp: 0,
@@ -142,6 +143,9 @@ export default {
       this.resourcesUsed.moon = parsedData.medals?.moon || 0;
       this.resourcesUsed.sun = parsedData.medals?.sun || 0;
     },
+    async updateLegacyUseCount(newCount) {
+      this.resourcesUsed.legacies[newCount.id] = newCount.count;
+    },
   },
   async created() {
     if (!this.isEdit) {
@@ -178,6 +182,7 @@ export default {
     this.resourcesUsed.diamond = runData.resourceUse.diamond || 0;
     this.resourcesUsed.moon = runData.resourceUse.moon || 0;
     this.resourcesUsed.sun = runData.resourceUse.sun || 0;
+    this.resourcesUsed.legacies = runData.resourceUse.legacies || {};
 
     // populated initial data
     this.hasLoaded = true;
@@ -231,6 +236,9 @@ export default {
     },
     scoreHighlight() {
       return this.clear ? {} : { background: 'orange' };
+    },
+    usedLegacies() {
+      return _.map(this.$store.state?.legacies, (el) => ({ id: el.id, count: this.resourcesUsed.legacies?.[el.id] || 0 }));
     },
   },
   watch: {

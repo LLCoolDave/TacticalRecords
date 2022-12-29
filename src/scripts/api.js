@@ -92,3 +92,21 @@ export async function fetchPlayers() {
 export async function fetchTowerRuns(id) {
   return makeRequest(`/api/runs/tower/${id}`);
 }
+
+export async function fetchLegacies() {
+  return makeRequest('/api/legacies');
+}
+
+export async function forceFetchLegacies() {
+  const options = {
+    headers: {
+      pragma: 'no-cache',
+      'cache-control': 'no-cache',
+    },
+  };
+  return makeRequest('/api/legacies', options);
+}
+
+export async function updateLegacies(id, data) {
+  return makeSecuredPutRequest('/api/legacies', data);
+}

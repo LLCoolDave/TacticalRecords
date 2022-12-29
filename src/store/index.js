@@ -1,11 +1,14 @@
 import { createStore } from 'vuex';
-import { fetchProfile, fetchTowers, forceFetchTowers } from '../scripts/api';
+import {
+  fetchLegacies, fetchProfile, fetchTowers, forceFetchLegacies, forceFetchTowers,
+} from '../scripts/api';
 import { getInstance } from '../scripts/auth0';
 
 export default createStore({
   state: {
     userProfile: null,
     towers: {},
+    legacies: {},
     towerOrder: [],
   },
   mutations: {
@@ -17,6 +20,9 @@ export default createStore({
     },
     setTowers(state, towers) {
       state.towers = towers;
+    },
+    setLegacies(state, legacies) {
+      state.legacies = legacies;
     },
     setTowerOrder(state, order) {
       state.towerOrder = order;
@@ -44,6 +50,20 @@ export default createStore({
       context.commit('setTowers', towerLookup);
       const towerOrder = towers.map((obj) => obj.id);
       context.commit('setTowerOrder', towerOrder);
+    },
+    async fetchLegacies(context, force = false) {
+      let legacies;
+      if (force) {
+        legacies = await forceFetchLegacies();
+      } else {
+        legacies = await fetchLegacies();
+      }
+      const legacyLookup = legacies.reduce((obj, item) => {
+        // eslint-disable-next-line no-param-reassign
+        obj[item.id] = item;
+        return obj;
+      }, {});
+      context.commit('setLegacies', legacyLookup);
     },
   },
   getters: {

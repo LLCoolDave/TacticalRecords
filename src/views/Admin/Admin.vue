@@ -1,6 +1,11 @@
 <template>
   <div class="admin_root">
-    <router-link :to="`/admin/towers`">Edit Tower Data</router-link>
+    <div>
+      <router-link :to="`/admin/towers`">Edit Tower Data</router-link>
+    </div>
+    <div>
+      <router-link :to="`/admin/legacies`">Edit Legacies Data</router-link>
+    </div>
   </div>
 </template>
 

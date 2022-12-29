@@ -34,6 +34,7 @@ export default {
       return null;
     });
     this.$store.dispatch('fetchTowers');
+    this.$store.dispatch('fetchLegacies');
   },
 };
 </script>

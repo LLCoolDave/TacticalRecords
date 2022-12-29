@@ -155,4 +155,5 @@ model Legacy {
   slot        Int    @unique
   costFlat    Int    @default(0)
   costPercent Int    @default(0)
+  max         Int    @default(1)
 }

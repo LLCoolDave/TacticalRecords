@@ -11,6 +11,7 @@ import Compare from '../views/Compare.vue';
 import Latest from '../views/Latest.vue';
 import Admin from '../views/Admin/Admin.vue';
 import AdminTowers from '../views/Admin/AdminTowers.vue';
+import AdminLegacies from '../views/Admin/AdminLegacies.vue';
 import TowerEdit from '../views/Admin/TowerEdit.vue';
 import { getInstance } from '../scripts/auth0';
 import store from '../store/index';
@@ -167,6 +168,12 @@ const routes = [
     path: '/admin/towers',
     name: 'AdminTowers',
     component: AdminTowers,
+    beforeEnter: adminGuard,
+  },
+  {
+    path: '/admin/legacies',
+    name: 'AdminLegacies',
+    component: AdminLegacies,
     beforeEnter: adminGuard,
   },
   {

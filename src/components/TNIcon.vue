@@ -1,15 +1,16 @@
 <template>
-  <img v-if="iconRef" :src="iconRef" :width="pixels" :height="pixels">
+  <img v-if="iconRef" :src="iconRef" :width="pixels" :height="pixels" :title="titleText">
 </template>
 
 <script>
-import { getIconURL } from '../scripts/resources';
+import { getIconURL, getLegacyIconURL } from '../scripts/resources';
 
 export default {
   name: 'TNIcon',
-  props: ['icon', 'size'],
+  props: ['icon', 'size', 'titleText'],
   computed: {
     iconRef() {
+      if (this.icon && this.icon.startsWith('legacy/')) return getLegacyIconURL(this.icon.split('/', 2)[1]);
       return getIconURL(this.icon);
     },
     pixels() {

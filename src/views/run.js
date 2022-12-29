@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { fetchRun } from '../scripts/api';
 import { calcClear } from '../scripts/tower';
 
@@ -38,6 +39,11 @@ export default {
     },
     legacyRun() {
       return this.runData?.isLegacy;
+    },
+    usedLegacies() {
+      let counts = _.map(this.$store.state?.legacies, (el) => ({ id: el.id, count: this.runData?.resourceUse?.legacies?.[el.id] || 0 }));
+      counts = _.filter(counts, (el) => el.count > 0);
+      return counts;
     },
   },
 };
