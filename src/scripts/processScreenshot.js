@@ -44,7 +44,7 @@ const pixelOffsetsNew = {
 const magicPixelOffsets = {
   medal: [5, 2],
   mysticgate: [[6, 9], [13, 6]],
-  digit: [[7, 0], [2, 1], [7, 7], [7, 13], [6, 3], [4, 5]],
+  digit: [[7, 0], [6, 3], [2, 4], [9, 4], [8, 7], [0, 10], [3, 10], [5, 11]],
   usedString: [[0, 0], [8, 8], [12, 3], [23, 4], [26, 1]],
   legaciesString: [[0, 0], [3, 6], [14, 1], [23, 8], [36, 2], [54, 7]],
 };
@@ -60,16 +60,16 @@ const medalMagicPixels = {
 };
 
 const charMagicPixels = {
-  0: [false, true, false, false, false, false],
-  1: [false, false, false, true, true, false],
-  2: [true, false, true, true, false, true],
-  3: [true, false, true, true, true, true],
-  4: [true, false, false, true, false, true],
-  5: [true, false, false, false, true, false],
-  6: [false, false, false, false, true, false],
-  7: [true, false, true, false, true, false],
-  8: [false, true, false, false, true, true],
-  9: [false, true, false, false, false, true],
+  0: [false, false, false, true, false, true, false, false],
+  1: [false, true, false, false, false, false, true, false],
+  2: [true, false, true, false, false, false, false, false],
+  3: [true, true, true, true, false, true, true, false],
+  4: [true, false, true, false, true, false, true, true],
+  5: [true, true, false, false, false, true, false, false],
+  6: [false, true, true, false, true, true, false, false],
+  7: [true, true, false, true, false, false, false, true],
+  8: [false, true, false, true, true, true, true, true],
+  9: [false, false, false, true, true, false, true, false],
 };
 
 const mysticGateMagixPixels = [[255, 165, 133], [142, 255, 102]];
@@ -122,7 +122,7 @@ function parseChar(ctx, xoff, yoff) {
     matches.push(pixelIsClose(magicPixel, [6, 6, 6]));
   });
   let parsedChar = '';
-  _.each(charMagicPixels, (target, char) => { if (matches.every((value, index) => value === target[index])) parsedChar = char; });
+  _.each(charMagicPixels, (target, char) => { if (_.countBy(_.map(target, (value, index) => value === matches[index]))?.true >= 7) parsedChar = char; });
   return parsedChar;
 }
 
