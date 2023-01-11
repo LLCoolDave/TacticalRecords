@@ -48,6 +48,7 @@
       <tn-icon icon="platinum"/><input type="text" v-model.number="resourcesUsed.platinum" size="2" maxlength="2" class="input rewardFont" @focus="if(resourcesUsed.platinum === 0) resourcesUsed.platinum = null;" @focusout="if(!resourcesUsed.platinum) resourcesUsed.platinum = 0;">
       <tn-icon icon="diamond"/><input type="text" v-model.number="resourcesUsed.diamond" size="2" maxlength="2" class="input rewardFont" @focus="if(resourcesUsed.diamond === 0) resourcesUsed.diamond = null;" @focusout="if(!resourcesUsed.diamond) resourcesUsed.diamond = 0;">
       <tn-icon icon="moon"/><input type="text" v-model.number="resourcesUsed.moon" size="2" maxlength="2" class="input rewardFont" @focus="if(resourcesUsed.moon === 0) resourcesUsed.moon = null;" @focusout="if(!resourcesUsed.moon) resourcesUsed.moon = 0;">
+      <tn-icon icon="sun"/><input type="text" v-model.number="resourcesUsed.sun" size="2" maxlength="2" class="input rewardFont" @focus="if(resourcesUsed.sun === 0) resourcesUsed.sun = null;" @focusout="if(!resourcesUsed.sun) resourcesUsed.sun = 0;">
     </div>
     <div class="legacies" v-if="mysticGate || towerHasNoImpure">
       <legacy-row :modifiable="true" :legacies="usedLegacies" @updateCount="updateLegacyUseCount"/>

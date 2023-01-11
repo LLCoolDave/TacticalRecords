@@ -42,7 +42,7 @@ const pixelOffsetsNew = {
 };
 
 const magicPixelOffsets = {
-  medal: [4, 6],
+  medal: [5, 2],
   mysticgate: [[6, 9], [13, 6]],
   digit: [[7, 0], [2, 1], [7, 7], [7, 13], [6, 3], [4, 5]],
   usedString: [[0, 0], [8, 8], [12, 3], [23, 4], [26, 1]],
@@ -50,12 +50,13 @@ const magicPixelOffsets = {
 };
 
 const medalMagicPixels = {
-  bronze: [207, 139, 99],
-  silver: [227, 227, 227],
-  gold: [245, 211, 52],
-  platinum: [245, 245, 244],
-  diamond: [166, 199, 219],
-  moon: [6, 6, 6],
+  bronze: [167, 128, 109],
+  silver: [167, 167, 167],
+  gold: [217, 187, 70],
+  platinum: [175, 140, 72],
+  diamond: [251, 251, 255],
+  moon: [0, 113, 253],
+  sun: [255, 0, 0],
 };
 
 const charMagicPixels = {
