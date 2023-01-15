@@ -39,6 +39,9 @@ export const legacyIconMap = {
   moonGate: 'moonGate',
   solarGate: 'solarGate',
   summerDrop: 'summerDrop',
+  rainbowBadge: 'rainbowBadge',
+  solarElixir: 'solarElixir',
+  sunsetIce: 'sunsetIce',
 };
 
 export function getLegacyIconURL(icon) {
