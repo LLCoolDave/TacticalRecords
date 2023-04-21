@@ -42,6 +42,15 @@ export const legacyIconMap = {
   rainbowBadge: 'rainbowBadge',
   solarElixir: 'solarElixir',
   sunsetIce: 'sunsetIce',
+  fulfilled: 'fulfilled',
+  greenMedicine: 'greenMedicine',
+  lostPrayer: 'lostPrayer',
+  nexusPendant: 'nexusPendant',
+  solarGlory: 'solarGlory',
+  solarWinner: 'solarWinner',
+  solarSwap: 'solarSwap',
+  solarTele: 'solarTele',
+  sunstoneCross: 'sunstoneCross',
 };
 
 export function getLegacyIconURL(icon) {
