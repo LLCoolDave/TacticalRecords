@@ -174,8 +174,11 @@ function calcSourceRect(image) {
   /* This is a lot of pure guesswork, try to find the window as best as we can */
   const scale = Math.floor(width / 640);
   const xoff = Math.floor(width - scale * 640) / 2;
-  /* Asume border is same thickness also at the bottom */
-  const yoff = height - (xoff + scale * 480);
+  /* We asume border is same thickness on all sides */
+  /* Try to see if the screenshot includes the global memo hotbar */
+  const scaledHeight = (height - 2 * xoff) / scale;
+  const memoOffset = (scaledHeight < 500) ? 0 : 24;
+  const yoff = height - (xoff + scale * (480 + memoOffset));
   /* ToDo try to locate window in case of a snipping tool grab that's offcenter */
   return [xoff, yoff, 640 * scale, 480 * scale];
 }
