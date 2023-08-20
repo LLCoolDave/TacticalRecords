@@ -37,7 +37,7 @@ export default {
       const scores = [];
       const towerThresh = this.towerData.thresholds;
       if (towerThresh?.overscore) scores.push({ value: `+${towerThresh.overscore}`, icon: 'sunstone' });
-      _.map(['moon', 'diamond', 'platinum', 'gold', 'silver', 'bronze'], (medal) => { if (towerThresh?.[medal]) scores.push({ value: towerThresh?.[medal], icon: medal }); });
+      _.map(['sun', 'moon', 'diamond', 'platinum', 'gold', 'silver', 'bronze'], (medal) => { if (towerThresh?.[medal]) scores.push({ value: towerThresh?.[medal], icon: medal }); });
       return scores;
     },
     pureRunsDisplay() {
