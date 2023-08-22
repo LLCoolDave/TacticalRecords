@@ -1,14 +1,14 @@
 <template>
-<div class="columns" :style="bgHighlight">
-  <div class="center">
-    <tn-icon icon="mysticgate" size="small" v-if="runData?.mysticGate"/>
-    <span class="scoreFont" v-if="showScore">{{`${this.runData?.score || 0}`.toLocaleString()}}</span>
-    <tn-icon :icon="medal.toLowerCase()" size="small"/>
-    <tn-icon icon="sunstone" size="small"/><span class="rewardFont">{{sunstones}}</span>
-    <template v-if="showStonesUsed"><tn-icon icon="sunwisher" size="small"/><span class="scoreFont">{{stonesused}}</span></template>
+  <div class="columns" :style="bgHighlight">
+    <div class="center">
+      <tn-icon icon="mysticgate" size="small" v-if="runData?.mysticGate" />
+      <span class="scoreFont" v-if="showScore">{{`${this.runData?.score || 0}`.toLocaleString()}}</span>
+      <tn-icon :icon="medal.toLowerCase()" size="small" />
+      <tn-icon icon="sunstone" size="small" /><span class="rewardFont">{{sunstones}}</span>
+      <template v-if="showStonesUsed"><tn-icon icon="sunwisher" size="small" /><span class="scoreFont">{{stonesused}}</span></template>
+    </div>
+    <medal-row v-if="showMedalsUsed" :medals="this.runData?.resourceUse" size="tiny" rowLength="30" />
   </div>
-  <medal-row v-if="showMedalsUsed" :medals="this.runData?.resourceUse" size="tiny" rowLength="30"/>
-</div>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
   <div @click="increment" class="legacyButton" :style="borderColor">
-    <legacy-icon :legacyInfo="legacyInfo" size="medium"/>
+    <legacy-icon :legacyInfo="legacyInfo" size="medium" />
   </div>
 </template>
 

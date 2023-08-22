@@ -1,5 +1,5 @@
 <template>
-  <tn-icon :icon="icon" :titleText="title" :size="size"/>
+  <tn-icon :icon="icon" :titleText="title" :size="size" />
 </template>
 
 <script>

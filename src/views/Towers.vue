@@ -2,7 +2,7 @@
   <div class="towers">
     <div class="tower" v-for="tower in towers" :key="tower.id">
       <router-link :to="`/tower/${tower.id}`">
-      {{tower.fullName}}
+        {{ tower.fullName }}
       </router-link>
     </div>
   </div>
@@ -11,5 +11,4 @@
 <script src="./towers.js">
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

@@ -1,6 +1,6 @@
 <template>
   <tr class="legacy">
-    <td><legacy-icon :legacyInfo="calcLegacyInfo"/></td>
+    <td><legacy-icon :legacyInfo="calcLegacyInfo" /></td>
     <td><input type="text" v-model="id" size="20" maxlength="40" class="input" @change="propUpdate"></td>
     <td><input type="text" v-model="fullName" size="30" maxlength="80" class="input" @change="propUpdate"></td>
     <td><input type="text" v-model.number="slot" size="10" maxlength="20" class="input" @change="propUpdate"></td>

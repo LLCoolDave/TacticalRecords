@@ -1,5 +1,5 @@
 import { reactive } from 'vue';
-import createAuth0Client from '@auth0/auth0-spa-js';
+import { createAuth0Client } from '@auth0/auth0-spa-js';
 // eslint-disable-next-line import/no-cycle
 // import router from '../router';
 

@@ -3,7 +3,7 @@
     <div class="header">
       <div class="names">
         <div class="player">
-          <player-display v-if="player" :player="player"/>
+          <player-display v-if="player" :player="player" />
         </div>
         <div>&nbsp;&nbsp;&nbsp;</div>
         <div class="tower">
@@ -17,39 +17,39 @@
     <div v-if="legacyRun" class="legacyRunInfo">This run was achieved on an older version of the game.</div>
     <div class="scoreBlock">
       <div class="score">
-        <tn-icon :icon="clear" v-if="clear"/>
-        <tower-score v-if="tower" :runData="this.runData" :towerData="tower" :hideStonesUsed="true" :hideMedals="true"/>
+        <tn-icon :icon="clear" v-if="clear" />
+        <tower-score v-if="tower" :runData="this.runData" :towerData="tower" :hideStonesUsed="true" :hideMedals="true" />
       </div>
       <div class="sunstones">
-        <tn-icon icon="sunwisher"/><span class="scoreFont">{{this.runData.resourceUse.sunstones}}</span>
+        <tn-icon icon="sunwisher" /><span class="scoreFont">{{this.runData.resourceUse.sunstones}}</span>
         (
-          <tn-icon icon="atk"/><span class="atkFont"> {{this.runData.resourceUse.atk}}</span>
-          <tn-icon icon="def"/><span class="defFont"> {{this.runData.resourceUse.def}}</span>
-          <tn-icon icon="hp"/><span class="hpFont"> {{this.runData.resourceUse.hp}}</span>
-          <tn-icon icon="maxHp"/><span class="hpFont"> {{this.runData.resourceUse.maxHp || 0}}</span>
-          <template v-if="runData.mysticGate"><tn-icon icon="legacy"/><span class="rewardFont"> {{this.runData.resourceUse.legacyStones || 0}}</span></template>
-          )
+        <tn-icon icon="atk" /><span class="atkFont"> {{this.runData.resourceUse.atk}}</span>
+        <tn-icon icon="def" /><span class="defFont"> {{this.runData.resourceUse.def}}</span>
+        <tn-icon icon="hp" /><span class="hpFont"> {{this.runData.resourceUse.hp}}</span>
+        <tn-icon icon="maxHp" /><span class="hpFont"> {{this.runData.resourceUse.maxHp || 0}}</span>
+        <template v-if="runData.mysticGate"><tn-icon icon="legacy" /><span class="rewardFont"> {{this.runData.resourceUse.legacyStones || 0}}</span></template>
+        )
       </div>
       <div class="medals">
-        <medal-row :medals="this.runData.resourceUse" size="small"/>
+        <medal-row :medals="this.runData.resourceUse" size="small" />
       </div>
       <div class="legacies" v-if="runData.mysticGate">
-        <legacy-row :modifiable="false" :legacies="usedLegacies"/>
+        <legacy-row :modifiable="false" :legacies="usedLegacies" />
       </div>
     </div>
     <div class="statBlock">
-      <div class="atk"><tn-icon icon="atk"/><span class="atkFont"> {{this.runData.atk}}</span></div>
-      <div class="def"><tn-icon icon="def"/><span class="defFont"> {{this.runData.def}}</span></div>
-      <div class="hp"><tn-icon icon="hp"/><span class="hpFont"> {{this.runData.hp}}</span></div>
-      <div class="level"><tn-icon icon="lvl"/><span class="expMultiFont"> {{this.runData.level}}</span></div>
-      <div class="hpmulti"><tn-icon icon="crown"/><span class="hpMultiFont"> {{this.runData.hpMulti}}%</span></div>
-      <div class="expmulti"><tn-icon icon="feather"/><span class="expMultiFont"> {{this.runData.expMulti}}%</span></div>
+      <div class="atk"><tn-icon icon="atk" /><span class="atkFont"> {{this.runData.atk}}</span></div>
+      <div class="def"><tn-icon icon="def" /><span class="defFont"> {{this.runData.def}}</span></div>
+      <div class="hp"><tn-icon icon="hp" /><span class="hpFont"> {{this.runData.hp}}</span></div>
+      <div class="level"><tn-icon icon="lvl" /><span class="expMultiFont"> {{this.runData.level}}</span></div>
+      <div class="hpmulti"><tn-icon icon="crown" /><span class="hpMultiFont"> {{this.runData.hpMulti}}%</span></div>
+      <div class="expmulti"><tn-icon icon="feather" /><span class="expMultiFont"> {{this.runData.expMulti}}%</span></div>
     </div>
     <div class="comment">
       <pre v-if="runData.comment" class="commentDisplay">{{this.runData.comment}}</pre>
     </div>
     <div class="screenshot" v-if="this.runData.screenshot">
-      <a :href="this.runData.screenshot"><img :src="this.runData.screenshot"  width="640" height="480"/></a>
+      <a :href="this.runData.screenshot"><img :src="this.runData.screenshot" width="640" height="480" /></a>
     </div>
   </div>
 </template>

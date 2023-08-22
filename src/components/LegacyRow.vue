@@ -1,6 +1,6 @@
 <template>
   <div class="legacyRow">
-    <legacy-button v-for="legacy in legacies" :id="legacy.id" :key="legacy.id" :usedCount="legacy.count" :modifiable="modifiable" @setCount="updateCount"/>
+    <legacy-button v-for="legacy in legacies" :id="legacy.id" :key="legacy.id" :usedCount="legacy.count" :modifiable="modifiable" @setCount="updateCount" />
   </div>
 </template>
 

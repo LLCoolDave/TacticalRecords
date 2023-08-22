@@ -1,25 +1,25 @@
 <template>
   <div class="medalrow rewardFont" :style="medalCss">
-    <div v-if="medals?.bronze" >
-      <tn-icon icon="bronze" :size="size"/> {{medals?.bronze}}&nbsp;
+    <div v-if="medals?.bronze">
+      <tn-icon icon="bronze" :size="size" /> {{medals?.bronze}}&nbsp;
     </div>
     <div v-if="medals?.silver">
-      <tn-icon icon="silver" :size="size"/> {{medals?.silver}}&nbsp;
+      <tn-icon icon="silver" :size="size" /> {{medals?.silver}}&nbsp;
     </div>
     <div v-if="medals?.gold">
-      <tn-icon icon="gold" :size="size"/> {{medals?.gold}}&nbsp;
+      <tn-icon icon="gold" :size="size" /> {{medals?.gold}}&nbsp;
     </div>
     <div v-if="medals?.platinum">
-      <tn-icon icon="platinum" :size="size"/> {{medals?.platinum}}&nbsp;
+      <tn-icon icon="platinum" :size="size" /> {{medals?.platinum}}&nbsp;
     </div>
     <div v-if="medals?.diamond">
-      <tn-icon icon="diamond" :size="size"/> {{medals?.diamond}}&nbsp;
+      <tn-icon icon="diamond" :size="size" /> {{medals?.diamond}}&nbsp;
     </div>
     <div v-if="medals?.moon">
-      <tn-icon icon="moon" :size="size"/> {{medals?.moon}}&nbsp;
+      <tn-icon icon="moon" :size="size" /> {{medals?.moon}}&nbsp;
     </div>
     <div v-if="medals?.sun">
-      <tn-icon icon="sun" :size="size"/> {{medals?.sun}}&nbsp;
+      <tn-icon icon="sun" :size="size" /> {{medals?.sun}}&nbsp;
     </div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="align">
-    <player-display :player="player"/>
-    <tower-score v-bind="$props"/>
+    <player-display :player="player" />
+    <tower-score v-bind="$props" />
   </div>
 </template>
 

@@ -14,8 +14,8 @@ function HSVtoRGB(h, s, v) {
     case 2: { r = p; g = v; b = t; break; }
     case 3: { r = p; g = q; b = v; break; }
     case 4: { r = t; g = p; b = v; break; }
-    default:
     case 5: { r = v; g = p; b = q; break; }
+    default: { r = v; g = p; b = q; break; }
   }
   return {
     r: Math.round(r * 255),
@@ -35,8 +35,8 @@ function RGBtoHSV(r, g, b) {
     case min: h = 0; break;
     case r: h = (g - b) + d * (g < b ? 6 : 0); h /= 6 * d; break;
     case g: h = (b - r) + d * 2; h /= 6 * d; break;
-    default:
     case b: h = (r - g) + d * 4; h /= 6 * d; break;
+    default: h = (r - g) + d * 4; h /= 6 * d; break;
   }
 
   return {

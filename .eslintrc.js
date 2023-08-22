@@ -1,3 +1,7 @@
+const a11yOff = Object
+  .keys(require('eslint-plugin-vuejs-accessibility').rules)
+  .reduce((acc, rule) => { acc[`vuejs-accessibility/${rule}`] = 'off'; return acc; }, {});
+
 module.exports = {
   root: true,
   env: {
@@ -8,7 +12,7 @@ module.exports = {
     '@vue/airbnb',
   ],
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: '@babel/eslint-parser',
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
@@ -16,5 +20,6 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     'max-len': 'off',
     'vue/max-len': 'off',
+    ...a11yOff,
   },
 };

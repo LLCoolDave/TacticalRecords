@@ -2,13 +2,13 @@
   <div class="towers">
     <div class="tower" v-for="tower in towers" :key="tower.id">
       <router-link :to="`/admin/tower/${tower.id}`">
-      {{tower.fullName}}
+        {{tower.fullName}}
       </router-link>
     </div>
     -----
     <div class="tower">
       <router-link :to="`/admin/tower/addNewTower`">
-      Add new Tower
+        Add new Tower
       </router-link>
     </div>
   </div>

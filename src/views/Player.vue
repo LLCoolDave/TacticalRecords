@@ -1,14 +1,14 @@
 <template>
   <div class="player" v-if="hasLoaded">
-    <div class="name"><img :src="player?.pfp" v-if="player?.pfp" width="32" height="32"/> {{ player?.name }}</div>
+    <div class="name"><img :src="player?.pfp" v-if="player?.pfp" width="32" height="32" /> {{ player?.name }}</div>
     <div class="meta">
-      <tn-icon icon="sunstone"/><span class="rewardFont large">{{player.sunstones}}</span>
-      <medal-row :medals="player"/>
+      <tn-icon icon="sunstone" /><span class="rewardFont large">{{player.sunstones}}</span>
+      <medal-row :medals="player" />
     </div>
     <div class="compare">
-      <div class="margin"><router-link :to="'/compare/' +player.id  + '/records'">Compare to Records</router-link></div>
-      <div class="margin"><router-link :to="'/compare/' +player.id  + '/progress'">Compare to Meta Progress</router-link></div>
-      <div class="margin" v-if="this.$store.state.userProfile?.id && player.id !== this.$store.state.userProfile?.id"><router-link :to="'/compare/' +player.id  + '/' + this.$store.state.userProfile?.id">Compare to Myself</router-link></div>
+      <div class="margin"><router-link :to="'/compare/' + player.id + '/records'">Compare to Records</router-link></div>
+      <div class="margin"><router-link :to="'/compare/' + player.id + '/progress'">Compare to Meta Progress</router-link></div>
+      <div class="margin" v-if="this.$store.state.userProfile?.id && player.id !== this.$store.state.userProfile?.id"><router-link :to="'/compare/' + player.id + '/' + this.$store.state.userProfile?.id">Compare to Myself</router-link></div>
     </div>
     <div class="tables">
       <div class="wrapper">
@@ -30,7 +30,7 @@
             </td>
             <td class="element">
               <router-link :to="'/run/' + pureRecords[tower.id].id" v-if="tower.id in pureRecords">
-                <tower-score :runData="pureRecords[tower.id]" :towerData="tower"/>
+                <tower-score :runData="pureRecords[tower.id]" :towerData="tower" />
               </router-link>
             </td>
           </tr>
@@ -50,7 +50,7 @@
             <td class="element"><router-link :to="'/tower/' + run.towerId">{{towerById(run.towerId).fullName}}</router-link></td>
             <td class="element">
               <router-link :to="'/run/' + run.id">
-                <tower-score :runData="run" :towerData="towerById(run.towerId)" :pure="run.pure"/>
+                <tower-score :runData="run" :towerData="towerById(run.towerId)" :pure="run.pure" />
               </router-link>
             </td>
             <td class="element">

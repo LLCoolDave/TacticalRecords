@@ -1,23 +1,23 @@
 <template>
-<div id="main">
-  <link rel="preload" as="font" href="./IBM-Plex-Sans-Condensed-Bold.ttf.woff" type="font/woff" crossorigin="anonymous">
-  <div id="nav">
-    <div id="links">
-      <router-link to="/records">Records</router-link> |
-      <router-link to="/latest">Most Recent Runs</router-link> |
-      <router-link to="/players">Players</router-link> |
-      <router-link to="/towers">Towers</router-link>
-      <template v-if="this.$store.state.userProfile"> | <router-link to="/run/new" >Submit Run</router-link></template>
-      <template v-if="this.$store.getters.isAdmin"> | <router-link to="/admin" >Admin</router-link></template>
+  <div id="main">
+    <link rel="preload" as="font" href="./IBM-Plex-Sans-Condensed-Bold.ttf.woff" type="font/woff" crossorigin="anonymous">
+    <div id="nav">
+      <div id="links">
+        <router-link to="/records">Records</router-link> |
+        <router-link to="/latest">Most Recent Runs</router-link> |
+        <router-link to="/players">Players</router-link> |
+        <router-link to="/towers">Towers</router-link>
+        <template v-if="this.$store.state.userProfile"> | <router-link to="/run/new">Submit Run</router-link></template>
+        <template v-if="this.$store.getters.isAdmin"> | <router-link to="/admin">Admin</router-link></template>
+      </div>
+      <div id="status">
+        <login-status />
+      </div>
     </div>
-    <div id="status">
-      <login-status/>
+    <div id="body">
+      <router-view />
     </div>
   </div>
-  <div id="body">
-    <router-view/>
-  </div>
-</div>
 </template>
 
 <script>
@@ -48,7 +48,7 @@ export default {
   color: #EEEEEE;
   -webkit-text-stroke: 0.2px black;
   background: linear-gradient(190deg, #0D3B4B, #060F24, #04165C);
-  background-attachment:fixed;
+  background-attachment: fixed;
 }
 
 #nav {
@@ -63,7 +63,8 @@ export default {
   font-weight: bold;
 }
 
-a, a:visited {
+a,
+a:visited {
   color: #FFFF96;
   text-decoration: none;
 }
@@ -72,7 +73,7 @@ a, a:visited {
   color: #42b983;
 }
 
-#main  {
+#main {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -92,7 +93,7 @@ body {
   font-family: "IBM-Plex";
   font-style: normal;
   font-display: auto;
-  src: local("IBM-Plex-Sans-Condensed-Bold"), url("/IBM-Plex-Sans-Condensed-Bold.ttf.woff") format("woff");
+  src: local("IBM-Plex-Sans-Condensed-Bold"), url('~@/assets/fonts/IBM-Plex-Sans-Condensed-Bold.ttf.woff') format("woff");
 }
 
 .scoreFont {
@@ -171,5 +172,4 @@ body {
   display: inline-block;
   -webkit-text-stroke: 0.6px black;
 }
-
 </style>

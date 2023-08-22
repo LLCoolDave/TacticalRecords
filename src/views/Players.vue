@@ -1,15 +1,15 @@
 <template>
   <div class="players">
     <table class="table">
-    <tr v-for="player in players" :key="player.id">
-      <td class="element">
-        <router-link :to="'/player/' + player.id">
-          <div class="name"><img :src="player?.pfp" v-if="player?.pfp" width="32" height="32"/> {{ player?.name }}
-            <tn-icon icon="sunstone" size="normal"/><span class="rewardFont large">{{player.sunstones}}</span>
-          </div>
-        </router-link>
-      </td>
-    </tr>
+      <tr v-for="player in players" :key="player.id">
+        <td class="element">
+          <router-link :to="'/player/' + player.id">
+            <div class="name"><img :src="player?.pfp" v-if="player?.pfp" width="32" height="32" /> {{ player?.name }}
+              <tn-icon icon="sunstone" size="normal" /><span class="rewardFont large">{{player.sunstones}}</span>
+            </div>
+          </router-link>
+        </td>
+      </tr>
     </table>
   </div>
 </template>

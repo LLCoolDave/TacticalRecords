@@ -1,10 +1,10 @@
 <template>
   <div class="loginStatus" v-if="!$auth.state.loading">
     <div v-if="profile">
-      <player-display :player="player" :route="'/profile'" showStones="true"/>
+      <player-display :player="player" :route="'/profile'" showStones="true" />
       <div>Compare:&nbsp;
-        <router-link :to="'/compare/' +profile.id  + '/records'">Records</router-link>&nbsp;-&nbsp;
-        <router-link :to="'/compare/' +profile.id  + '/progress'">Meta</router-link>
+        <router-link :to="'/compare/' + profile.id + '/records'">Records</router-link>&nbsp;-&nbsp;
+        <router-link :to="'/compare/' + profile.id + '/progress'">Meta</router-link>
       </div>
     </div>
     <div class="button">
@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import LoginButton from '@/components/LogInButton.vue';
-import LogoutButton from '@/components/LogOutButton.vue';
+import LoginButton from './LogInButton.vue';
+import LogoutButton from './LogOutButton.vue';
 
 export default {
   name: 'LogInStatus',
