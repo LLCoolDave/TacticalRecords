@@ -34,9 +34,11 @@ export const useAuth0 = ({
   const initAuth = () => {
     createAuth0Client({
       ...options,
-      client_id: options.clientId,
-      audience: options.audience,
-      redirect_uri: redirectUri,
+      clientId: options.clientId,
+      authorizationParams: {
+        audience: options.audience,
+        redirect_uri: redirectUri,
+      },
     }).then(async (auth) => {
       try {
         state.auth0Client = auth;

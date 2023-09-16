@@ -10,7 +10,7 @@ export default {
   inject: ['$auth'],
   methods: {
     logout() {
-      this.$auth.logout({ returnTo: window.location.origin });
+      this.$auth.logout({ logoutParams: { returnTo: window.location.origin } });
     },
   },
 };
@@ -18,16 +18,16 @@ export default {
 
 <style scoped>
 .logout {
-outline: 1px solid #ddd;
-border: 1px solid #000;
-border-right: 1px solid #353535;
-border-bottom: 1px solid #353535;
--webkit-border-radius: 5px;
--moz-border-radius: 5px;
-border-radius: 5px;
-padding: 5px;
-background: skyblue;
-color: black;
+  outline: 1px solid #ddd;
+  border: 1px solid #000;
+  border-right: 1px solid #353535;
+  border-bottom: 1px solid #353535;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 5px;
+  background: skyblue;
+  color: black;
 }
 
 .logout:hover {
