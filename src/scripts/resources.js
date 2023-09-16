@@ -51,6 +51,11 @@ export const legacyIconMap = {
   solarSwap: 'solarSwap',
   solarTele: 'solarTele',
   sunstoneCross: 'sunstoneCross',
+  heavenBlessing: 'heavenBlessing',
+  lunarIce: 'lunarIce',
+  banishment: 'banishment',
+  solarPave: 'solarPave',
+  blazingSpirit: 'blazingSpirit',
 };
 
 export function getLegacyIconURL(icon) {
