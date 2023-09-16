@@ -19,7 +19,7 @@
     "jsonwebtoken": "^9.0.1",
     "jwks-rsa": "^3.0.1",
     "lodash": "^4.17.21",
-    "node-fetch": "^3.3.2",
+    "node-fetch": "^2.7.0",
     "prisma": "^5.1.1",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4",
