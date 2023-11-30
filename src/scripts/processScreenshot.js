@@ -144,6 +144,10 @@ function parseMedalsNew(ctx) {
     medal = parseMedal(ctx, offsets[0] + 30 * i, offsets[1]);
     if (medal) {
       medalCount = parseNumber(ctx, offsets[0] + 30 * i + 6, offsets[1] + 1, 2);
+      if (medal === 'moon') {
+        // Quick fix for moon medal symbol being picked up as a 3
+        medalCount %= 10;
+      }
       medals[medal] = medalCount;
     }
   }

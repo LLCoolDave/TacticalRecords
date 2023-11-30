@@ -56,6 +56,10 @@ export const legacyIconMap = {
   banishment: 'banishment',
   solarPave: 'solarPave',
   blazingSpirit: 'blazingSpirit',
+  auroraBadge: 'auroraBadge',
+  solarBlizzard: 'solarBlizzard',
+  ultraMattock: 'ultraMattock',
+  tempMiracle: 'tempMiracle',
 };
 
 export function getLegacyIconURL(icon) {
