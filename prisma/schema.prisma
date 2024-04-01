@@ -1,13 +1,11 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
-  provider             = "mysql"
-  url                  = env("DATABASE_URL")
-  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
-  referentialIntegrity = "prisma"
+  provider             = "sqlite"
+  url                  = env("TURSO_DATABASE_URL")
 }
 
 model Threshold {
@@ -47,14 +45,9 @@ model Tower {
   runs            Run[]
 }
 
-enum Role {
-  USER
-  ADMIN
-}
-
 model User {
   id           Int     @id @default(autoincrement())
-  role         Role    @default(USER)
+  role         String  @default("USER")
   authPassword String? @unique
   authDiscord  String? @unique
   authGoogle   String? @unique
@@ -67,7 +60,7 @@ model Player {
   id        Int     @id
   user      User    @relation(fields: [id], references: [id])
   name      String  @unique
-  pfp       String? @db.Text
+  pfp       String?
   sunstones Int     @default(0)
   bronze    Int     @default(0)
   silver    Int     @default(0)
@@ -91,7 +84,7 @@ model ResourceUse {
   maxHp        Int?
   legacyStones Int?
   sunstones    Int   @default(0)
-  legacies     Json?
+  legacies     String?
   bronze       Int?
   silver       Int?
   gold         Int?
@@ -103,17 +96,6 @@ model ResourceUse {
   @@index([sunstones, runId])
 }
 
-enum Medal {
-  NONE
-  BRONZE
-  SILVER
-  GOLD
-  PLATINUM
-  DIAMOND
-  MOON
-  SUN
-}
-
 model Run {
   id              Int          @id @default(autoincrement())
   player          Player       @relation(fields: [playerId], references: [id])
@@ -121,8 +103,8 @@ model Run {
   tower           Tower        @relation(fields: [towerId], references: [id])
   towerId         String
   time            DateTime     @updatedAt
-  comment         String?      @db.Text
-  screenshot      String?      @db.Text
+  comment         String?
+  screenshot      String?
   score           Int
   pure            Boolean
   impure          Boolean
@@ -139,7 +121,7 @@ model Run {
   resourceUse     ResourceUse?
   sunstones       Int
   impureSunstones Int          @default(0)
-  medal           Medal
+  medal           String
 
   @@index([playerId, towerId, score, sunstones, medal])
 }

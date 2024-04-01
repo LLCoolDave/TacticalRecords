@@ -13,6 +13,7 @@ export default {
     const runData = await fetchRun(this.id);
     if (!runData) { this.$router.push({ path: '/' }); return; }
     /* Also probably better solution available */
+    runData.resourceUse.legacies = JSON.parse(runData.resourceUse.legacies);
     this.runData = runData;
 
     // populated initial data

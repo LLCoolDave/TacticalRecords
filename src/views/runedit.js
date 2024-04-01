@@ -75,6 +75,8 @@ export default {
     },
     buildSubmitObject() {
       const rewards = calcRewards(this.score, this.tower, this.isPure);
+      const resourceUse = _.cloneDeep(this.resourcesUsed);
+      resourceUse.legacies = JSON.stringify(resourceUse.legacies);
       return {
         playerId: this.player.id,
         towerId: this.towerId,
@@ -93,7 +95,7 @@ export default {
         expMulti: this.expMulti,
         sunstones: rewards.sunstones,
         medal: rewards.medal ? rewards.medal.toUpperCase() : 'NONE',
-        resourceUse: this.resourcesUsed,
+        resourceUse,
         isLegacy: this.legacyRun,
       };
     },
@@ -157,6 +159,7 @@ export default {
     const runData = await fetchRun(this.id);
     if (!runData) { this.$router.push({ path: '/' }); return; }
     /* Also probably better solution available */
+    runData.resourceUse.legacies = JSON.parse(runData.resourceUse.legacies);
     this.towerId = runData.towerId;
     this.player = runData.player;
     this.score = runData.score;
