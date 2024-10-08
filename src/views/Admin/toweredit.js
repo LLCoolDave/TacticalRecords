@@ -15,6 +15,7 @@ export default {
     chapter: 0,
     ingameId: null,
     hasMysticGate: false,
+    hasLastInflator: false,
     hasNoImpure: false,
     thresholds: {
       bronze: null,
@@ -78,7 +79,7 @@ export default {
         ingameId: this.ingameId,
         hasMysticGate: this.hasMysticGate,
         hasNoImpure: this.hasNoImpure,
-        hasLastInflator: false,
+        hasLastInflator: this.hasLastInflator,
         thresholds: _.pickBy(this.thresholds, (value) => value),
         clears: _.filter(_.map(this.clears, (value, key) => ({ level: parseInt(key, 10), volume: value.volume, difficulty: value.difficulty })), (value) => (value.volume && value.difficulty)),
       };
@@ -98,6 +99,7 @@ export default {
     this.chapter = towerData.chapter;
     this.ingameId = towerData.ingameId;
     this.hasMysticGate = towerData.hasMysticGate;
+    this.hasLastInflator = towerData.hasLastInflator;
     this.hasNoImpure = towerData.hasNoImpure;
     this.thresholds = towerData.thresholds;
 

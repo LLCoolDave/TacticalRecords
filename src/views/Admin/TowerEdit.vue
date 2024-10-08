@@ -11,7 +11,7 @@
         InternalId: <input type="text" v-model.number="ingameId" size="2" maxlength="2" class="input">
       </div>
       <div>
-        <tn-icon icon="mysticgate" /> <input type="checkbox" v-model="hasMysticGate" /> No Impure Scores: <input type="checkbox" v-model="hasNoImpure" />
+        <tn-icon icon="mysticgate" /> <input type="checkbox" v-model="hasMysticGate" /> <tn-icon icon="lastinflator" /> <input type="checkbox" v-model="hasLastInflator" /> No Impure Scores: <input type="checkbox" v-model="hasNoImpure" />
       </div>
     </div>
     <div class="thresholds">

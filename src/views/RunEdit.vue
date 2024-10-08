@@ -32,6 +32,7 @@
       Used resources:
       <div class="modifiers">
         <div class="mysticGate" v-if="towerHasMysticGate"><tn-icon icon="mysticgate" /> <input type="checkbox" v-model="mysticGate" /></div>
+        <div class="lastInflator" v-if="towerHasLastInflator"><tn-icon icon="lastinflator" /> <input type="checkbox" v-model="lastInflator" /></div>
       </div>
       <div class="sunstones">
         <tn-icon icon="sunwisher" /> <input type="text" v-model.number="resourcesUsed.sunstones" size="5" maxlength="5" @change="calcSunstonesUsed" class="input scoreFont" @focus="if (resourcesUsed.sunstones === 0) resourcesUsed.sunstones = null;" @focusout="if (!resourcesUsed.sunstones) resourcesUsed.sunstones = 0;"> (
@@ -39,7 +40,7 @@
         <tn-icon icon="def" /> <input type="text" v-model.number="resourcesUsed.def" size="5" maxlength="5" @change="calcSunstonesUsed" class="input defFont" @focus="if (resourcesUsed.def === 0) resourcesUsed.def = null;" @focusout="if (!resourcesUsed.def) resourcesUsed.def = 0;">
         <tn-icon icon="hp" /> <input type="text" v-model.number="resourcesUsed.hp" size="5" maxlength="5" @change="calcSunstonesUsed" class="input hpFont" @focus="if (resourcesUsed.hp === 0) resourcesUsed.hp = null;" @focusout="if (!resourcesUsed.hp) resourcesUsed.hp = 0;">
         <tn-icon icon="maxHp" /> <input type="text" v-model.number="resourcesUsed.maxHp" size="5" maxlength="5" @change="calcSunstonesUsed" class="input hpFont" @focus="if (resourcesUsed.maxHp === 0) resourcesUsed.maxHp = null;" @focusout="if (!resourcesUsed.maxHp) resourcesUsed.maxHp = 0;">
-        <template v-if="mysticGate || towerHasNoImpure"><tn-icon icon="legacy" /> <input type="text" v-model.number="resourcesUsed.legacyStones" size="5" maxlength="5" @change="calcSunstonesUsed" class="input rewardFont" @focus="if (resourcesUsed.legacyStones === 0) resourcesUsed.legacyStones = null;" @focusout="if (!resourcesUsed.legacyStones) resourcesUsed.legacyStones = 0;"></template> )
+        <template v-if="mysticGate || lastInflator || towerHasNoImpure"><tn-icon icon="legacy" /> <input type="text" v-model.number="resourcesUsed.legacyStones" size="5" maxlength="5" @change="calcSunstonesUsed" class="input rewardFont" @focus="if (resourcesUsed.legacyStones === 0) resourcesUsed.legacyStones = null;" @focusout="if (!resourcesUsed.legacyStones) resourcesUsed.legacyStones = 0;"></template> )
       </div>
       <div class="medals">
         <tn-icon icon="bronze" /><input type="text" v-model.number="resourcesUsed.bronze" size="2" maxlength="2" class="input rewardFont" @focus="if (resourcesUsed.bronze === 0) resourcesUsed.bronze = null;" @focusout="if (!resourcesUsed.bronze) resourcesUsed.bronze = 0;">
@@ -50,7 +51,7 @@
         <tn-icon icon="moon" /><input type="text" v-model.number="resourcesUsed.moon" size="2" maxlength="2" class="input rewardFont" @focus="if (resourcesUsed.moon === 0) resourcesUsed.moon = null;" @focusout="if (!resourcesUsed.moon) resourcesUsed.moon = 0;">
         <tn-icon icon="sun" /><input type="text" v-model.number="resourcesUsed.sun" size="2" maxlength="2" class="input rewardFont" @focus="if (resourcesUsed.sun === 0) resourcesUsed.sun = null;" @focusout="if (!resourcesUsed.sun) resourcesUsed.sun = 0;">
       </div>
-      <div class="legacies" v-if="mysticGate || towerHasNoImpure">
+      <div class="legacies" v-if="mysticGate || lastInflator || towerHasNoImpure">
         <legacy-row :modifiable="true" :legacies="usedLegacies" @updateCount="updateLegacyUseCount" />
       </div>
     </div>

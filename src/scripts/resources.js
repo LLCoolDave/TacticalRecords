@@ -23,6 +23,7 @@ export const iconMap = {
   clear2: 'clear2',
   clear3: 'clear3',
   clear3noHp: 'clear3noHp',
+  lastinflator: 'lastInflator',
 };
 
 export function getIconURL(icon) {
@@ -60,10 +61,33 @@ export const legacyIconMap = {
   solarBlizzard: 'solarBlizzard',
   ultraMattock: 'ultraMattock',
   tempMiracle: 'tempMiracle',
+  dotPendant: 'dotPendant',
+  lastBless: 'lastBless',
+  deja: 'deja',
+  omegaMattock: 'omegaMattock',
+  metalWorld: 'metalWorld',
+  modestBless: 'modestBless',
+  summerMemories: 'summerMemories',
 };
 
 export function getLegacyIconURL(icon) {
   const filebase = legacyIconMap?.[icon];
   if (filebase) return require(`../assets/legacy/${filebase}.png`);
+  return null;
+}
+
+export const wildcardIconMap = {
+  faithfulWill: 'faithfulWill',
+  armsOfRealize: 'armsOfRealize',
+  mysticEyes: 'mysticEyes',
+  lightPerception: 'lightPerception',
+  legsOfFreedom: 'legsOfFreedom',
+  magicTail: 'magicTail',
+  twistOfFate: 'twistOfFate',
+};
+
+export function getWildcardIconURL(icon) {
+  const filebase = wildcardIconMap?.[icon];
+  if (filebase) return require(`../assets/wildcard/${filebase}.png`);
   return null;
 }

@@ -31,6 +31,7 @@ export default {
       legacies: {},
     },
     mysticGate: false,
+    lastInflator: false,
     hp: 0,
     atk: 0,
     def: 0,
@@ -86,7 +87,7 @@ export default {
         pure: this.isPure,
         impure: this.isImpure,
         mysticGate: this.mysticGate || this.towerHasNoImpure,
-        lastInflator: false,
+        lastInflator: this.lastInflator,
         hp: this.hp,
         atk: this.atk,
         def: this.def,
@@ -164,6 +165,7 @@ export default {
     this.player = runData.player;
     this.score = runData.score;
     this.mysticGate = runData.mysticGate;
+    this.lastInflator = runData.lastInflator;
     this.hp = runData.hp;
     this.atk = runData.atk;
     this.def = runData.def;
@@ -203,7 +205,7 @@ export default {
       return this.mysticGate || this.towerHasNoImpure || (this.resourcesUsed.bronze + this.resourcesUsed.silver + this.resourcesUsed.gold + this.resourcesUsed.platinum + this.resourcesUsed.diamond + this.resourcesUsed.moon + this.resourcesUsed.sun === 0);
     },
     isImpure() {
-      return !this.mysticGate && !this.towerHasNoImpure;
+      return this.lastInflator || (!this.mysticGate && !this.towerHasNoImpure);
     },
     towerOrder() {
       return this.$store.state.towerOrder;
@@ -216,6 +218,9 @@ export default {
     },
     towerHasMysticGate() {
       return this.tower?.hasMysticGate;
+    },
+    towerHasLastInflator() {
+      return this.tower?.hasLastInflator;
     },
     towerHasNoImpure() {
       return this.tower?.hasNoImpure;
@@ -248,6 +253,9 @@ export default {
   watch: {
     towerHasMysticGate(newValue) {
       if (!newValue) this.mysticGate = false;
+    },
+    towerHasLastInflator(newValue) {
+      if (!newValue) this.lastInflator = false;
     },
     loggedInPlayer(newValue) {
       if (!this.isEdit) {

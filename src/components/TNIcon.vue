@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { getIconURL, getLegacyIconURL } from '../scripts/resources';
+import { getIconURL, getLegacyIconURL, getWildcardIconURL } from '../scripts/resources';
 
 export default {
   name: 'TNIcon',
@@ -11,6 +11,7 @@ export default {
   computed: {
     iconRef() {
       if (this.icon && this.icon.startsWith('legacy/')) return getLegacyIconURL(this.icon.split('/', 2)[1]);
+      if (this.icon && this.icon.startsWith('wildcard/')) return getWildcardIconURL(this.icon.split('/', 2)[1]);
       return getIconURL(this.icon);
     },
     pixels() {

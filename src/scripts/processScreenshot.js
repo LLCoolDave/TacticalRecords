@@ -242,6 +242,8 @@ export async function parseScreenshot(file) {
   const layoutVersion = checkScoreLayoutVersion(context);
   let medals;
   let mysticgate;
+  // ToDo find a way to parse this automatically
+  const lastinflator = false;
   let numbers;
   let hasLegacies = false;
 
@@ -273,6 +275,7 @@ export async function parseScreenshot(file) {
     hpMulti: Math.max(numbers.hpmulti, numbers.hpmultibar) || 100,
     expMulti: numbers.expmulti || 100,
     mysticgate,
+    lastinflator,
   };
   return ret;
 }

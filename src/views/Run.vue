@@ -27,13 +27,13 @@
         <tn-icon icon="def" /><span class="defFont"> {{this.runData.resourceUse.def}}</span>
         <tn-icon icon="hp" /><span class="hpFont"> {{this.runData.resourceUse.hp}}</span>
         <tn-icon icon="maxHp" /><span class="hpFont"> {{this.runData.resourceUse.maxHp || 0}}</span>
-        <template v-if="runData.mysticGate"><tn-icon icon="legacy" /><span class="rewardFont"> {{this.runData.resourceUse.legacyStones || 0}}</span></template>
+        <template v-if="runData.mysticGate || runData.lastInflator"><tn-icon icon="legacy" /><span class="rewardFont"> {{this.runData.resourceUse.legacyStones || 0}}</span></template>
         )
       </div>
       <div class="medals">
         <medal-row :medals="this.runData.resourceUse" size="small" />
       </div>
-      <div class="legacies" v-if="runData.mysticGate">
+      <div class="legacies" v-if="runData.mysticGate || runData.lastInflator">
         <legacy-row :modifiable="false" :legacies="usedLegacies" />
       </div>
     </div>

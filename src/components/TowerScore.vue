@@ -2,6 +2,7 @@
   <div class="columns" :style="bgHighlight">
     <div class="center">
       <tn-icon icon="mysticgate" size="small" v-if="runData?.mysticGate" />
+      <tn-icon icon="lastinflator" size="small" v-if="runData?.lastInflator" />
       <span class="scoreFont" v-if="showScore">{{`${this.runData?.score || 0}`.toLocaleString()}}</span>
       <tn-icon :icon="medal.toLowerCase()" size="small" />
       <tn-icon icon="sunstone" size="small" /><span class="rewardFont">{{sunstones}}</span>
