@@ -20,6 +20,6 @@ export default {
 .legacyRow {
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(16, max-content);
+  grid-template-columns: repeat(18, max-content);
 }
 </style>
