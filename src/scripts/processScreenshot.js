@@ -36,8 +36,8 @@ const pixelOffsetsNew = {
     atk: [515, 68, 6],
     def: [515, 92, 6],
     expmulti: [576, 117, 5],
-    stonesused: [55, 138, 4],
-    legacies: [115, 138, 4],
+    stonesused: [45, 138, 5],
+    legacies: [105, 138, 5],
   },
 };
 
@@ -175,16 +175,15 @@ function loadFile(file) {
 function calcSourceRect(image) {
   const width = image.naturalWidth;
   const height = image.naturalHeight;
+  let extendedScreen = false;
+  /* Try to find the features from the image to extract the pixel scale */
+  if ((height * 2 === width) || (height * 40 === width * 21)) {
+    extendedScreen = true;
+  }
   /* This is a lot of pure guesswork, try to find the window as best as we can */
-  const scale = Math.floor(width / 640);
-  const xoff = Math.floor(width - scale * 640) / 2;
-  /* We asume border is same thickness on all sides */
-  /* Try to see if the screenshot includes the global memo hotbar */
-  const scaledHeight = (height - 2 * xoff) / scale;
-  const memoOffset = (scaledHeight < 500) ? 0 : 24;
-  const yoff = height - (xoff + scale * (480 + memoOffset));
+  const scale = Math.floor(width / (extendedScreen ? 960 : 640));
   /* ToDo try to locate window in case of a snipping tool grab that's offcenter */
-  return [xoff, yoff, 640 * scale, 480 * scale];
+  return [0, 0, 640 * scale, 480 * scale];
 }
 
 function drawOntoCanvas(rawFile, ctx) {

@@ -59,7 +59,7 @@
     <div class="screenshot">
       Clear Screenshot: <input type="text" v-model="screenshot" size="40" maxlength="400" @paste="pasteScreenshot" placeholder="Paste image to upload">
       <div>
-        <img :src="screenshot" v-if="screenshot" width="640" height="480" />
+        <img :src="screenshot" v-if="screenshot" width="640" />
       </div>
       <div class="upload" v-if="showUpload" width="640" height="480" @dragover.prevent @drop="uploadScreenshot">
         Drop screenshot to upload.

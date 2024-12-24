@@ -49,7 +49,7 @@
       <pre v-if="runData.comment" class="commentDisplay">{{this.runData.comment}}</pre>
     </div>
     <div class="screenshot" v-if="this.runData.screenshot">
-      <a :href="this.runData.screenshot"><img :src="this.runData.screenshot" width="640" height="480" /></a>
+      <a :href="this.runData.screenshot"><img :src="this.runData.screenshot" width="640" /></a>
     </div>
   </div>
 </template>

@@ -68,6 +68,8 @@ export const legacyIconMap = {
   metalWorld: 'metalWorld',
   modestBless: 'modestBless',
   summerMemories: 'summerMemories',
+  blueMedicine: 'blueMedicine',
+  shiningKey: 'shiningKey',
 };
 
 export function getLegacyIconURL(icon) {

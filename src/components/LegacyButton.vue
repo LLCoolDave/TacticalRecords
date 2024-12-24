@@ -1,6 +1,7 @@
 <template>
-  <div @click="increment" class="legacyButton" :style="borderColor">
+  <div @click.ctrl="increment" @click.exact="toggle" class="legacyButton" :style="borderColor">
     <legacy-icon :legacyInfo="legacyInfo" size="medium" />
+    <div v-if="currentCount > 1" class="countOverlay">{{ currentCount }}</div>
   </div>
 </template>
 
@@ -23,7 +24,12 @@ export default {
   methods: {
     async increment() {
       if (!this.modifiable) return;
-      this.currentCount = (this.currentCount + 1) % (this.legacyInfo.max + 1);
+      this.currentCount += 1;
+      this.$emit('setCount', { id: this.id, count: this.currentCount });
+    },
+    async toggle() {
+      if (!this.modifiable) return;
+      this.currentCount = this.currentCount ? 0 : 1;
       this.$emit('setCount', { id: this.id, count: this.currentCount });
     },
   },
@@ -38,5 +44,18 @@ export default {
   border: 2px solid #000;
   padding: 1px;
   margin: 1px;
+  position: relative;
+}
+
+.countOverlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-family: "IBM-Plex";
+  font-size: 24px;
+  color: white;
+  display: inline-block;
+  -webkit-text-stroke: 1.2px black;
+  user-select: none;
 }
 </style>
