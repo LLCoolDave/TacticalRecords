@@ -70,6 +70,10 @@ export const legacyIconMap = {
   summerMemories: 'summerMemories',
   blueMedicine: 'blueMedicine',
   shiningKey: 'shiningKey',
+  contBadge: 'contBadge',
+  heroEmblem: 'heroEmblem',
+  knightEmblem: 'knightEmblem',
+  solarMirror: 'solarMirror',
 };
 
 export function getLegacyIconURL(icon) {
