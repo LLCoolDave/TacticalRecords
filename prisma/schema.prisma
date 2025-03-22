@@ -105,13 +105,13 @@ model Run {
   time            DateTime     @updatedAt
   comment         String?
   screenshot      String?
-  score           Int
+  score           Float
   pure            Boolean
   impure          Boolean
   mysticGate      Boolean
   lastInflator    Boolean
   isLegacy        Boolean      @default(false)
-  hp              Int?
+  hp              Float?
   atk             Int?
   def             Int?
   hpMulti         Int?
