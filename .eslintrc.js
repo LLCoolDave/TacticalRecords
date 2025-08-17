@@ -20,6 +20,7 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     'max-len': 'off',
     'vue/max-len': 'off',
+    'linebreak-style': 0,
     ...a11yOff,
   },
 };
