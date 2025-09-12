@@ -202,7 +202,7 @@ export default {
     },
     isPure() {
       // There's probably a neater way
-      return this.mysticGate || this.towerHasNoImpure || (this.resourcesUsed.bronze + this.resourcesUsed.silver + this.resourcesUsed.gold + this.resourcesUsed.platinum + this.resourcesUsed.diamond + this.resourcesUsed.moon + this.resourcesUsed.sun === 0);
+      return this.mysticGate || this.towerHasNoImpure || ((this.resourcesUsed.bronze + this.resourcesUsed.silver + this.resourcesUsed.gold + this.resourcesUsed.platinum + this.resourcesUsed.diamond + this.resourcesUsed.moon + this.resourcesUsed.sun === 0) && !this.lastInflator);
     },
     isImpure() {
       return this.lastInflator || (!this.mysticGate && !this.towerHasNoImpure);
