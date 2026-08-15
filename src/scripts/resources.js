@@ -77,6 +77,9 @@ export const legacyIconMap = {
   moonBadge: 'moonBadge',
   moonFolklore: 'moonFolklore',
   eternalBottle: 'eternalBottle',
+  realDrop: 'realDrop',
+  blessingFlute: 'blessingFlute',
+  blessingDrum: 'blessingDrum',
 };
 
 export function getLegacyIconURL(icon) {
